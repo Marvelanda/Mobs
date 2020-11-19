@@ -5,13 +5,16 @@ import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import PlacesList from './Components/PlacesList/PlacesList';
 
+import MainPage from './Components/MainPage/MainPage';
+import Profile from './Components/Profile/Profile';
+
 function App() {
   return (
     <Router>
       <Header />
       <Switch>
         <Route exact path='/'>
-          <div className='text-center'>Главная</div>
+          <MainPage />
         </Route>
         <Route exact path='/signin'>
           <Signin />
@@ -21,6 +24,9 @@ function App() {
         </Route>
         <Route exact path='/list'>
           <PlacesList />
+        </Route>
+        <Route exact path='/profile'>
+          <Profile />
         </Route>
       </Switch>
     </Router>
