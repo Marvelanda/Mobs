@@ -1,35 +1,11 @@
 .container {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 82vh;
   background-blend-mode: hue;
   background-size: cover;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  margin-top: 29px;
-  padding: 0 20px 25px;
-  border: 2px solid rgba(0, 0, 0, 0.363);
-  box-shadow: 13px -10px 0px 0px rgb(255, 255, 255);
-  background-color: rgb(221, 221, 221);
-}
-
-.description-clue {
-  margin-bottom: 5px;
-}
-
-.input-clue {
-  margin-right: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-
-input::placeholder {
-  color: #474747;
-  font-family: 'PT Sans', sans-serif;
 }
 
 .description-checkbox > input[type='checkbox'] {
@@ -44,7 +20,7 @@ input::placeholder {
   width: 1em;
   height: 1em;
   border: 1px solid #2b2a2a;
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   margin-right: 0.5em;
   background-repeat: no-repeat;
   background-position: center center;
@@ -53,8 +29,10 @@ input::placeholder {
 }
 
 .description-checkbox > input:checked + span::before {
+  background-image: url('../../img/checked.jpg');
 }
 
 .description-checkbox {
+  margin-top: 10px;
   margin-left: -13px;
 }

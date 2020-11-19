@@ -12,20 +12,19 @@
 }
 
 .navigation-list {
+  width: 800px;
   display: flex;
   list-style: none;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .navigation-list__item a {
-  font-family: 'Libre Baskerville', serif;
+  font-family: 'Almendra', serif;
   font-style: normal;
   font-weight: normal;
   font-size: 21px;
   line-height: 15px;
   color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
   margin-right: 47px;
   align-self: center;
 }
