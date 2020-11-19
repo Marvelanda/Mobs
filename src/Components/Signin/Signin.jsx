@@ -2,25 +2,25 @@ import style from './style.module.css';
 
 function Signin() {
   return (
-    <div className={style.container}>
-      <form className={style.form}>
-        <div className={style['input-clue']}>
-          <p className={style['description-clue']}>Введите имя</p>
+    <div className={`${style.container}`}>
+      <form className='form animate__animated animate__backInLeft'>
+        <div className='input-clue text'>
+          <p className='description-clue'>Введите имя</p>
 
           <input type='text' placeholder='Name' />
         </div>
-        <div className={style['input-clue']}>
-          <p className={style['description-clue']}>Введите e-mail</p>
+        <div className='input-clue text'>
+          <p className='description-clue'>Введите e-mail</p>
 
           <input type='email' placeholder='Email' />
         </div>
-        <div className={style['input-clue']}>
-          <p className={style['description-clue']}>Введите пароль</p>
+        <div className='input-clue text'>
+          <p className='description-clue'>Введите пароль</p>
 
           <input type='password' placeholder='Password' />
         </div>
         <label
-          className={`${style['description-clue']} ${style['description-checkbox']}`}
+          className={`description-clue ${style['description-checkbox']} text`}
         >
           <input type='checkbox' required />
           <span>Я согласен на обработку персональных данных</span>
