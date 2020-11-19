@@ -25,6 +25,7 @@ const PlaceSchema = new mongoose.Schema({
   rating: Number,
   review: String,
   visitors: Number,
+  geometry: Array
 });
 
 export default mongoose.model('Place', PlaceSchema);

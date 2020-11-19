@@ -17,6 +17,10 @@ function Header() {
           <li className={`${style['navigation-list__item']}`}>
             <Link to='/signup'>Войти</Link>
           </li>
+
+          <li className={`${style['navigation-list__item']}`}>
+            <Link to='/list'>Список мест</Link>
+          </li>
         </ul>
       </nav>
     </div>

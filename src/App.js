@@ -3,6 +3,7 @@ import Header from './Components/Header/Header';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
+import PlacesList from './Components/PlacesList/PlacesList';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
         </Route>
         <Route exact path='/signup'>
           <Signup />
+        </Route>
+        <Route exact path='/list'>
+          <PlacesList />
         </Route>
       </Switch>
     </Router>
