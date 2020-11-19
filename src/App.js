@@ -7,14 +7,12 @@ import Signup from './Components/Signup/Signup';
 import MainPage from './Components/MainPage/MainPage';
 import Profile from './Components/Profile/Profile';
 
-
 function App() {
   return (
     <Router>
       <Header />
       <Switch>
         <Route exact path='/'>
-          <div className='text-center'>Главная</div>
           <MainPage />
         </Route>
         <Route exact path='/signin'>

@@ -28,4 +28,4 @@ app.use('/auth', authRouter);
 app.use('/list', listRouter);
 
 
-app.listen(process.env.port ?? 3001);
+app.listen(process.env.port ?? 8080);
