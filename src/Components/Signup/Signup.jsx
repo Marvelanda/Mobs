@@ -40,31 +40,29 @@ function Signup() {
   };
 
   return (
-    <div className='d-flex justify-content-center mt-5'>
-      <form className='d-flex flex-column align-items-center'>
-        <p>Please enter your email</p>
-        <div className='form-group'>
+    <div className={`${style.container}`}>
+      <form
+        className={`${style.form} form animate__animated animate__backInLeft`}
+      >
+        <div className='input-clue text'>
+          <p className='description-clue'>Введите e-mail</p>
           <input
             onChange={emailHandler}
             type='email'
             value={email}
             placeholder='Email address'
-            name='email'
-            className='form-control'
           />
         </div>
-        <p>Please enter your password</p>
-        <div className='form-group'>
+        <div className='input-clue text'>
+          <p className='description-clue'>Введите пароль</p>
           <input
             onChange={passwordHandler}
             type='password'
             value={password}
             placeholder='Password'
-            name='password'
-            className='form-control'
           />
         </div>
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' className='button'>
           Sign up
         </button>
       </form>
