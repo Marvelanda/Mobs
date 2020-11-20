@@ -21,10 +21,9 @@ const newFive = getRandomFive(myArray);
       <div className={style.map}>
         <div className={`${style.map}`}>
           <Map
-
             className={`${style.map} ${style.myMaps} `}
             defaultState={{
-              center: [55.684758, 37.738521],
+              center: [55.75222, 37.61556],
               zoom: 11,
               behaviors: [
                 'drag',
@@ -47,8 +46,8 @@ const newFive = getRandomFive(myArray);
 
             {newFive.map((el, i) => (
               <Placemark
-                 className="placeMark"
-                 onClick={() => history.push('/signin')}
+                className='placeMark'
+                onClick={() => history.push('/signin')}
                 onMouseEnter={() => setIsOpen(() => !isOpen)}
                 onMouseLeave={() => setIsOpen(() => !isOpen)}
                 key={i}
@@ -61,7 +60,6 @@ const newFive = getRandomFive(myArray);
                 }}
               />
             ))}
-
           </Map>
         </div>
       </div>

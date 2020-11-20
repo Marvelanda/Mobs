@@ -8,6 +8,7 @@ import PlacesList from './Components/PlacesList/PlacesList';
 import MainPage from './Components/MainPage/MainPage';
 import Profile from './Components/Profile/Profile';
 import Footer from './Components/Footer/Footer';
+import DetailedPlace from './Components/DetailedPlace/DetailedPlace';
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
         </Route>
         <Route exact path='/list'>
           <PlacesList />
+        </Route>
+        <Route exact path='/restaurant'>
+          <DetailedPlace />
         </Route>
         <Route exact path='/profile'>
           <Profile />
