@@ -1,20 +1,59 @@
+import { useState } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
 import style from './style.module.css';
+import Modal from './Modal';
+import { useHistory } from 'react-router-dom';
+import image from '../../img/5003977.jpeg';
 
 function MainPage() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isPushed, setIsPushed] = useState(false);
+  const history = useHistory();
   return (
-    <YMaps>
-      <div className={style.map}>
-        My awesome application with maps!
+    <>
+      <YMaps>
         <div
-          className={`${style.map} ${style.myMaps} animate__animated animate__fadeInDown`}
+          onMouseDown={() => setIsPushed((prev) => !prev)}
+          className={`${style.map}`}
         >
           <Map
-            style={{ width: 1000, height: 800 }}
-            defaultState={{ center: [55.684758, 37.738521], zoom: 13 }}
+            className={`${style.map} ${style.myMaps} `}
+            defaultState={{
+              center: [55.684758, 37.738521],
+              zoom: 12,
+              behaviors: [
+                'drag',
+                'dblClickZoom',
+                'rightMouseButtonMagnifier',
+                'multiTouch',
+              ],
+            }}
+            // modules={['geoObject.addon.balloon']}
           >
-            <ZoomControl options={{ float: 'right' }} />
+            <ZoomControl options={{ float: 'left' }} />
+            <Modal open={isOpen}>
+              <h2>Coyote Ugly</h2>
+
+              <p className={style.description}>Часы работы:</p>
+              <p className={style.description}>С 19:00 до 04:00</p>
+              <img src={image} alt='foto' width='250px' />
+            </Modal>
             <Placemark
+              onClick={() => history.push('/signin')}
+              onMouseEnter={() => setIsOpen(() => !isOpen)}
+              onMouseLeave={() => setIsOpen(() => !isOpen)}
+              // properties={{
+              //   balloonContentHeader: 'Coyote Ugly',
+              //   balloonContentBody: [
+              //     '<div className=`background`>',
+              //     'Часы работы:</br>',
+              //     ' С 19:00 до 04:00</div>',
+              //   ].join(' '),
+              //   balloonContentLayout: BalloonContentLayout(
+              //     ymaps.templateLayoutFactory,
+              //     <Balloon />
+              //   ),
+              // }}
               geometry={[55.684758, 37.738521]}
               options={{
                 iconLayout: 'default#image',
@@ -26,8 +65,8 @@ function MainPage() {
             />
           </Map>
         </div>
-      </div>
-    </YMaps>
+      </YMaps>
+    </>
   );
 }
 
