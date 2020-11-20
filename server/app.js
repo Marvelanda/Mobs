@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose  from "mongoose";
-import dotenv from 'dotenv';
 import connectMongo from 'connect-mongo';
 import mainRouter from './routes/main.js';
 import authRouter from './routes/auth.js';
 import listRouter from './routes/placesList.js';
+import dotenv from "dotenv";
 
 dotenv.config();
 

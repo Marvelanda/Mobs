@@ -22,9 +22,24 @@ const PlaceSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  info: {
+    address: {
+      type: String,
+      required: true,
+    },
+    tel: {
+      type: String,
+      required: true,
+    },
+    workingHours: {
+      type: String,
+      required: true,
+    }
+  },
   rating: Number,
-  review: String,
+  review: Array,
   visitors: Number,
+  geometry: Array
 });
 
 export default mongoose.model('Place', PlaceSchema);
