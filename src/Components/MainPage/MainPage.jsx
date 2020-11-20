@@ -19,7 +19,7 @@ console.log(newFive);
         >
           <Map
             style={{ width: 1000, height: 800 }}
-            defaultState={{ center: [55.76, 37.64], zoom: 10 }}
+            defaultState={{ center: [55.76, 37.62], zoom: 11 }}
           >
             <ZoomControl options={{ float: 'right' }} />
             {
