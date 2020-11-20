@@ -7,6 +7,7 @@ import PlacesList from './Components/PlacesList/PlacesList';
 
 import MainPage from './Components/MainPage/MainPage';
 import Profile from './Components/Profile/Profile';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Profile />
         </Route>
       </Switch>
+      <Footer></Footer>
     </Router>
   );
 }

@@ -1,29 +1,76 @@
+import { useState } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
 import style from './style.module.css';
+import { getRandomFive, myArray } from '../../helpers/randomFive';
+import Modal from './Modal';
+import { useHistory } from 'react-router-dom';
+import image from '../../img/5003977.jpeg';
+
+const newFive = getRandomFive(myArray);
 
 function MainPage() {
+  const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
+
+  const question =
+    'https://psv4.userapi.com/c856532/u17278978/docs/d1/ca429eca48f4/new_qsymb.gif?extra=Qig3hBJor4aZYSnBga7yMDgjgyVEwkLHZVlt7CNaRHNFrDfsOcvhIDGsG3-D6RdVlSxALtlNWFXrYWY2N-puzrktvNnrST6lfDvWcJjr0Ostb7D9Gr1vBnXpTVlZLeA6usdwPzkTBjk5uzSInFRYIg';
+  const coin =
+    'https://psv4.userapi.com/c856224/u17278978/docs/d15/a0d04a1fa2d9/ezgif_com-gif-maker_1.gif?extra=tSnENC1OUQQ6tfX7CS-qFADOz_GQNg-2my74cpBIGk8Tpt-gTltXkAYAwoMPhYz7BFR0rzIqQJXY_Ig9t8NWo8IA4OxJqrKhop8E3DGTV_AF_3BuUvhib75gohD-HQYP-3Rpv71qkWwq_yz5ZrrXMg';
+
+<!-- 
+function MainPage() {
+  const question = 'https://psv4.userapi.com/c856532/u17278978/docs/d1/ca429eca48f4/new_qsymb.gif?extra=Qig3hBJor4aZYSnBga7yMDgjgyVEwkLHZVlt7CNaRHNFrDfsOcvhIDGsG3-D6RdVlSxALtlNWFXrYWY2N-puzrktvNnrST6lfDvWcJjr0Ostb7D9Gr1vBnXpTVlZLeA6usdwPzkTBjk5uzSInFRYIg'
+  const coin = 'https://psv4.userapi.com/c856224/u17278978/docs/d15/a0d04a1fa2d9/ezgif_com-gif-maker_1.gif?extra=tSnENC1OUQQ6tfX7CS-qFADOz_GQNg-2my74cpBIGk8Tpt-gTltXkAYAwoMPhYz7BFR0rzIqQJXY_Ig9t8NWo8IA4OxJqrKhop8E3DGTV_AF_3BuUvhib75gohD-HQYP-3Rpv71qkWwq_yz5ZrrXMg'
+
+
+  const newFive = getRandomFive(myArray) -->
+
   return (
     <YMaps>
       <div className={style.map}>
-        My awesome application with maps!
-        <div
-          className={`${style.map} ${style.myMaps} animate__animated animate__fadeInDown`}
-        >
+        <div className={`${style.map}`}>
           <Map
-            style={{ width: 1000, height: 800 }}
-            defaultState={{ center: [55.684758, 37.738521], zoom: 13 }}
+
+            className={`${style.map} ${style.myMaps} `}
+            defaultState={{
+              center: [55.684758, 37.738521],
+              zoom: 11,
+              behaviors: [
+                'drag',
+                'dblClickZoom',
+                'CtrlZoom',
+                'rightMouseButtonMagnifier',
+                'multiTouch',
+              ],
+            }}
           >
+            <Modal open={isOpen}>
+              <h2>Coyote Ugly</h2>
+
+              <p className={style.description}>Часы работы:</p>
+              <p className={style.description}>С 19:00 до 04:00</p>
+              <img src={image} alt='foto' width='250px' />
+            </Modal>
+
             <ZoomControl options={{ float: 'right' }} />
-            <Placemark
-              geometry={[55.684758, 37.738521]}
-              options={{
-                iconLayout: 'default#image',
-                iconImageHref:
-                  'https://psv4.userapi.com/c856424/u17278978/docs/d10/aa7b8c36443d/qsymb-unscreen.gif?extra=xp4TcXt4hEbEHagyQRgBy9EbMbpdTWLszKUCVJQ1C1_kTyfQX3vGMvrhQ9LFJCQLaHpwf3zl3UZOxnbIPWv8QkWLZ0HjEe-djBNBRSsLbcPkpVLb_0onm63CXTDLfmjniLmzmYLOA0kHEeDiAl1P_w',
-                iconImageSize: [96, 90],
-                iconImageOffset: [-5, -38],
-              }}
-            />
+
+            {newFive.map((el, i) => (
+              <Placemark
+                 className="placeMark"
+                 onClick={() => history.push('/signin')}
+                onMouseEnter={() => setIsOpen(() => !isOpen)}
+                onMouseLeave={() => setIsOpen(() => !isOpen)}
+                key={i}
+                geometry={el}
+                options={{
+                  iconLayout: 'default#image',
+                  iconImageHref: coin,
+                  iconImageSize: [96, 90],
+                  iconImageOffset: [-5, -38],
+                }}
+              />
+            ))}
+
           </Map>
         </div>
       </div>
