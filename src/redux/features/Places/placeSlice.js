@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import {GETPLACESSAGA} from '../../types/placesTypes'
 
 export const placeSlice = createSlice({
-  name: 'plases',
+  name: 'places',
   initialState: [],
   reducers: {
-    getPlacesListReducer: (state, action) => {
+    placesReducer: (state, action) => {
       state = action.payload
     }
   },

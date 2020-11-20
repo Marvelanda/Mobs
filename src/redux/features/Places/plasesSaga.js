@@ -1,4 +1,4 @@
-import {put, take, takeEvery, call} from 'redux-saga/effects'
+import {put, takeEvery, call} from 'redux-saga/effects'
 import { getPlacesList } from './placeSlice'
 import {GETPLACESSAGA} from '../../types/placesTypes'
 
