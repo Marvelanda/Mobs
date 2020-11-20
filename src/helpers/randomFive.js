@@ -1,9 +1,9 @@
 
 export const myArray = [
   [55.684758, 37.738521],
-  [55.684758, 37.11],
+  [55.68, 37.5],
   [55.833436, 37.715175],
-  [55.687086, 37.529789],
+  [55.787086, 37.529789],
   [55.80, 37.40],
   [55.70, 37.40],
   [55.81, 37.65],
@@ -18,14 +18,24 @@ export const myArray = [
 
 ]
 
+function randomizeIndex() {
+  return Math.floor(Math.random() * myArray.length);
+}
+
 export function getRandomFive(myArray) {
   let randomFiveArray = [];
+  let indexArray = [];
    for (let i = 0; i < 5; i += 1) {
-     randomFiveArray.push(myArray[Math.floor(Math.random() * myArray.length)])
+    let randIndex = randomizeIndex();
+    while (indexArray.some((el) => el === randIndex)) {
+      randIndex = randomizeIndex();
+    }
+    indexArray.push(randIndex);
+    randomFiveArray.push(myArray[randIndex])
    }
    return randomFiveArray
 }
 
-
+console.log(getRandomFive(myArray));
 
 
