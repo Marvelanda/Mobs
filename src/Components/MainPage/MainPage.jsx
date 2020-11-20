@@ -25,12 +25,13 @@ console.log(newFive);
             {
               newFive.map((el, i) => (
                 <Placemark
+                className="placeMark"
                 key={i}
                   geometry={el}
                   options={{
                     iconLayout: 'default#image',
                     iconImageHref:
-                      coin,
+                      question,
                     iconImageSize: [96, 90],
                     iconImageOffset: [-5, -38],
                   }}
