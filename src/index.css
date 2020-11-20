@@ -40,7 +40,7 @@ a {
 }
 
 .text {
-  color: white;
+  color: rgb(75, 39, 158);
   text-align: center;
   font-family: 'Almendra', serif;
 }
@@ -52,8 +52,7 @@ a {
   margin-top: 29px;
   padding: 30px 20px 25px;
   border: 2px solid rgba(0, 0, 0, 0.363);
-
-  background-color: #7f443a;
+  background-color: #c8a9d6;
 }
 
 .description-clue {
@@ -61,7 +60,7 @@ a {
 }
 
 input {
-  background-color: #b18179;
+  background-color: #d1bbe0;
   border-radius: 2px;
   padding: 5px 40px;
 }
@@ -73,6 +72,10 @@ input {
 }
 
 input::placeholder {
-  color: rgba(255, 255, 255, 0.644);
+  color: rgb(75, 39, 158);
   text-align: center;
+}
+
+.background {
+  background-color: white;
 }

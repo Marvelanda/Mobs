@@ -1,5 +1,18 @@
+import { useState } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
 import style from './style.module.css';
+
+import Modal from './Modal';
+import { useHistory } from 'react-router-dom';
+import image from '../../img/5003977.jpeg';
+
+function MainPage() {
+  const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
+  return (
+    <>
+      <YMaps>
+
 import {getRandomFive, myArray} from '../../helpers/randomFive'
 
 function MainPage() {
@@ -14,17 +27,40 @@ console.log(newFive);
     <YMaps>
       <div className={style.map}>
         My awesome application with maps!
+
         <div
-          className={`${style.map} ${style.myMaps} animate__animated animate__fadeInDown`}
+          onMouseDown={() => setIsPushed((prev) => !prev)}
+          className={`${style.map}`}
         >
           <Map
-            style={{ width: 1000, height: 800 }}
-            defaultState={{ center: [55.76, 37.64], zoom: 10 }}
+            className={`${style.map} ${style.myMaps} `}
+            defaultState={{
+              center: [55.684758, 37.738521],
+              zoom: 12,
+              behaviors: [
+                'drag',
+                'dblClickZoom',
+                'rightMouseButtonMagnifier',
+                'multiTouch',
+              ],
+            }}
           >
+            <Modal open={isOpen}>
+              <h2>Coyote Ugly</h2>
+
+              <p className={style.description}>Часы работы:</p>
+              <p className={style.description}>С 19:00 до 04:00</p>
+              <img src={image} alt='foto' width='250px' />
+            </Modal>
+
+          
             <ZoomControl options={{ float: 'right' }} />
             {
               newFive.map((el, i) => (
                 <Placemark
+                                onClick={() => history.push('/signin')}
+              onMouseEnter={() => setIsOpen(() => !isOpen)}
+              onMouseLeave={() => setIsOpen(() => !isOpen)}
                 key={i}
                   geometry={el}
                   options={{
@@ -39,8 +75,8 @@ console.log(newFive);
             }
           </Map>
         </div>
-      </div>
-    </YMaps>
+      </YMaps>
+    </>
   );
 }
 
