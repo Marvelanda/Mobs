@@ -1,5 +1,10 @@
 .header {
-  background-color: black;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
+  position: fixed;
+  top: 20px;
+  z-index: 999999;
+  width: 100vw;
 }
 
 .header-container {
@@ -24,7 +29,7 @@
   font-weight: normal;
   font-size: 21px;
   line-height: 15px;
-  color: #ffffff;
+  color: #000000;
   margin-right: 47px;
   align-self: center;
 }
