@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Place() {
+  
   return (
     <>
     <div className='placeCard'>

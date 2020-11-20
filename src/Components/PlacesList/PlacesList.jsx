@@ -1,9 +1,29 @@
-import React from 'react'
-import Place from '../Place/Place'
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  getPlacesListSaga,
+} from '../../redux/features/Places/placeSlice';
+import Place from '../Place/Place';
 
 function PlacesList() {
+
+  const plases = useSelector(state => state.plases);
+
+  useEffect(() => {
+    getPlacesListSaga();
+  }, [])
+
+
   return (
-    <Place />
+    <ul className="placesList">
+    {
+      plases && plases.map((el) => {
+        return(
+          <Place key={el._id} {...el} />
+        )
+      })
+    }
+    </ul>
   )
 }
 
