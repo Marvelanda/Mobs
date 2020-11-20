@@ -1,13 +1,9 @@
-import {
-  applyMiddleware
-} from 'redux';
-import initialState from './initialState';
 import rootReducer from './reducers/rootReducer';
 import createSagaMiddleware from 'redux-saga';
 import {
   configureStore
 } from '@reduxjs/toolkit';
-import placesWatcher from './features/Places/plasesSaga';
+import placesWatcher from './features/Places/placesSaga';
 
 const rootSagaMiddleware = createSagaMiddleware();
 

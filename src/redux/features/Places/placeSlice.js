@@ -1,17 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
-import {GETPLACESSAGA} from '../../types/placesTypes'
+import {
+  createSlice
+} from '@reduxjs/toolkit';
+import {
+  GETPLACESSAGA
+} from '../../types/placesTypes'
 
 export const placeSlice = createSlice({
   name: 'places',
-  initialState: [],
+  initialState: {
+    places: []
+  },
   reducers: {
     placesReducer: (state, action) => {
-      state = action.payload
+      state.places = action.payload
     }
   },
 });
 
-export const {getPlacesList} = placeSlice.actions
+export const {
+  placesReducer
+} = placeSlice.actions
 
 export const getPlacesListSaga = () => {
   return {
