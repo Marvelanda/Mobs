@@ -1,8 +1,9 @@
-import {put, take, takeEvery, call} from 'redux-saga/effects'
-import { getPlacesList } from './placeSlice'
+import {put, takeEvery, call} from 'redux-saga/effects'
+import { placesReducer } from './placeSlice'
 import {GETPLACESSAGA} from '../../types/placesTypes'
 
-async function getPlases () {
+async function getPlaces () {
+  console.log('>>>>>>>>>>>>>>>.Send request SAGA');
   const resp = await fetch('http://localhost:8080/list');
   const data = await resp.json();
   return data;
@@ -10,9 +11,9 @@ async function getPlases () {
 
 
 function* placesWorker () {
-  const newList = yield call(getPlases)
-
-  yield put(getPlacesList(newList))
+  const newList = yield call(getPlaces)
+console.log(newList);
+  yield put(placesReducer(newList))
 }
 
 function* placesWatcher () {

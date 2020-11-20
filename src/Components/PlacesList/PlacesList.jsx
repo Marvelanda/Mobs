@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getPlacesListSaga,
 } from '../../redux/features/Places/placeSlice';
 import Place from '../Place/Place';
 
 function PlacesList() {
+  const dispatch = useDispatch();
 
-  const plases = useSelector(state => state.plases);
+  const places = useSelector(state => state.places.places);
+  console.log(places);
 
-  useEffect(() => {
-    getPlacesListSaga();
-  }, [])
+ useEffect(() => {
+  dispatch(getPlacesListSaga())
+ }, [])
 
 
   return (
     <ul className="placesList">
     {
-      plases && plases.map((el) => {
+      places && places.map((el) => {
         return(
-          <Place key={el._id} {...el} />
+          <Place key={el._id} {...el} /> 
         )
       })
     }
