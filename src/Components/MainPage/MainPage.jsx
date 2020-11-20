@@ -17,23 +17,14 @@ function MainPage() {
   const coin =
     'https://psv4.userapi.com/c856224/u17278978/docs/d15/a0d04a1fa2d9/ezgif_com-gif-maker_1.gif?extra=tSnENC1OUQQ6tfX7CS-qFADOz_GQNg-2my74cpBIGk8Tpt-gTltXkAYAwoMPhYz7BFR0rzIqQJXY_Ig9t8NWo8IA4OxJqrKhop8E3DGTV_AF_3BuUvhib75gohD-HQYP-3Rpv71qkWwq_yz5ZrrXMg';
 
-<!-- 
-function MainPage() {
-  const question = 'https://psv4.userapi.com/c856532/u17278978/docs/d1/ca429eca48f4/new_qsymb.gif?extra=Qig3hBJor4aZYSnBga7yMDgjgyVEwkLHZVlt7CNaRHNFrDfsOcvhIDGsG3-D6RdVlSxALtlNWFXrYWY2N-puzrktvNnrST6lfDvWcJjr0Ostb7D9Gr1vBnXpTVlZLeA6usdwPzkTBjk5uzSInFRYIg'
-  const coin = 'https://psv4.userapi.com/c856224/u17278978/docs/d15/a0d04a1fa2d9/ezgif_com-gif-maker_1.gif?extra=tSnENC1OUQQ6tfX7CS-qFADOz_GQNg-2my74cpBIGk8Tpt-gTltXkAYAwoMPhYz7BFR0rzIqQJXY_Ig9t8NWo8IA4OxJqrKhop8E3DGTV_AF_3BuUvhib75gohD-HQYP-3Rpv71qkWwq_yz5ZrrXMg'
-
-
-  const newFive = getRandomFive(myArray) -->
-
   return (
     <YMaps>
       <div className={style.map}>
         <div className={`${style.map}`}>
           <Map
-
             className={`${style.map} ${style.myMaps} `}
             defaultState={{
-              center: [55.684758, 37.738521],
+              center: [55.75222, 37.61556],
               zoom: 11,
               behaviors: [
                 'drag',
@@ -56,8 +47,8 @@ function MainPage() {
 
             {newFive.map((el, i) => (
               <Placemark
-                 className="placeMark"
-                 onClick={() => history.push('/signin')}
+                className='placeMark'
+                onClick={() => history.push('/signin')}
                 onMouseEnter={() => setIsOpen(() => !isOpen)}
                 onMouseLeave={() => setIsOpen(() => !isOpen)}
                 key={i}
@@ -70,7 +61,6 @@ function MainPage() {
                 }}
               />
             ))}
-
           </Map>
         </div>
       </div>

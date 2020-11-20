@@ -1,14 +1,10 @@
 body {
   margin: 0;
+  background-color: black;
 }
 
 * {
   box-sizing: border-box;
-}
-
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
 }
 
 p,
@@ -46,6 +42,7 @@ a {
 }
 
 .form {
+  margin-top: 120px;
   border-radius: 2px;
   display: flex;
   flex-direction: column;
