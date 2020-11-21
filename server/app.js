@@ -5,6 +5,7 @@ import connectMongo from 'connect-mongo';
 import mainRouter from './routes/main.js';
 import authRouter from './routes/auth.js';
 import placesRouter from './routes/placesList.js';
+import adminRouter from './routes/admin.js'
 
 import dotenv from 'dotenv';
 
@@ -28,5 +29,6 @@ app.use(express.json());
 app.use('/', mainRouter);
 app.use('/auth', authRouter);
 app.use('/places', placesRouter);
+app.use('/admin', adminRouter);
 
 app.listen(process.env.port ?? 8080);

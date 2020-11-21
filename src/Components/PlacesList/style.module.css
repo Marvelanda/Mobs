@@ -1,0 +1,80 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+
+
+
+
+
+.container {
+  height: 20%;
+  background-color: rgb(134, 134, 134);
+  display: flex;
+}
+
+.heading {
+  text-align: center;
+  font-size: 50px;
+  color: blueviolet;
+}
+
+.container:first-of-type {
+  margin-top: 100px;
+  height: 35%;
+}
+
+.container:last-of-type {
+  flex-direction: column;
+}
+
+.reviews_container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+input {
+  width: 400px;
+  height: 200px;
+}
+
+.items {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.items:first-of-type {
+  margin-left: 0px;
+}
+
+.items:nth-child(-n + 3) {
+  height: 100%;
+  width: 36%;
+  background-color: black;
+}
+
+.items:nth-last-child(n + 1) {
+  height: 98%;
+  width: 50%;
+  background-color: black;
+}
+
+.subcontainer {
+  margin-top: 5px;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.subitems {
+  background-color: aliceblue;
+  width: 45%;
+  height: 45%;
+}
+
+.subitems:nth-of-type(odd) {
+  margin-left: 5px;
+}

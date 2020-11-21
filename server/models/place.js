@@ -10,7 +10,6 @@ const PlaceSchema = new mongoose.Schema({
   },
   placeUrl: {
     type: String,
-    required: true,
     unique: true,
   },
   placePhotoUrl: {
@@ -36,6 +35,7 @@ const PlaceSchema = new mongoose.Schema({
       required: true,
     }
   },
+  category: String,
   rating: Number,
   review: Array,
   visitors: Number,

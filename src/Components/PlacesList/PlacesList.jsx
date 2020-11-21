@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlacesListSaga } from '../../redux/features/Places/placeSlice';
 import Place from '../Place/Place';
+import style from './style.module.css'
 
 function PlacesList() {
   const dispatch = useDispatch();
@@ -13,12 +14,14 @@ function PlacesList() {
   }, []);
 
   return (
-    <ul className='placesList'>
-      {places &&
-        places.map((el) => {
-          return <Place key={el._id} {...el} />;
-        })}
-    </ul>
+    <div className={style.list}>
+      <ul className='placesList'>
+        {places &&
+          places.map((el) => {
+            return <Place key={el._id} {...el} />;
+          })}
+      </ul>
+    </div>
   );
 }
 

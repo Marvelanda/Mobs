@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GETPLACESSAGA, ADDPLACESREVIEW } from '../../types/placesTypes';
+import { GETPLACESSAGA, ADDPLACESREVIEW, ADDNEWPLACE } from '../../types/placesTypes';
 
 export const placeSlice = createSlice({
   name: 'places',
@@ -12,6 +12,15 @@ export const placeSlice = createSlice({
     },
 
     addPlaceReview: (state, action) => {
+      const place = state.places.find((item) => {
+        return item._id === action.payload.id;
+      });
+      place.review.push({
+        [action.payload.response.author]: action.payload.response.review,
+      });
+    },
+
+    addNewPlace: (state, action) => {
       const place = state.places.find((item) => {
         return item._id === action.payload.id;
       });
@@ -37,5 +46,22 @@ export const addPlaceReviewSaga = (review, id) => {
     review,
   };
 };
+
+export const addNewPlaceSaga = (placeName, urlName, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description) => {
+  return {
+    type: ADDNEWPLACE,
+    placeName,
+    urlName,
+    placePhotoUrl,
+    address,
+    phone,
+    workingHours,
+    category,
+    rating,
+    geometry,
+    description
+  };
+};
+
 
 export default placeSlice.reducer;

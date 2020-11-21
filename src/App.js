@@ -9,6 +9,7 @@ import MainPage from './Components/MainPage/MainPage';
 import Profile from './Components/Profile/Profile';
 import Footer from './Components/Footer/Footer';
 import DetailedPlace from './Components/DetailedPlace/DetailedPlace';
+import AdminPanel from './Components/AdminPanel/AdminPanel';
 
 function App() {
   return (
@@ -17,6 +18,9 @@ function App() {
       <Switch>
         <Route exact path='/'>
           <MainPage />
+        </Route>
+        <Route exact path='/admin'>
+          <AdminPanel />
         </Route>
         <Route exact path='/signin'>
           <Signin />
