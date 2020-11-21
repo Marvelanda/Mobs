@@ -1,19 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function Place() {
-  
+function Place({ placeName, _id }) {
   return (
-    <>
-      <div className='placeCard'>
-        <div className='photo'></div>
-        <div className='placeName'></div>
-        <div className='disscription'></div>
-        <div className='rating'></div>
-        <div className='reviews'></div>
-        <div className='visitors'></div>
-        <div className='placeUrl'></div>
+    <li className='placeCard text'>
+      <div className='photo'></div>
+      <div className='placeName'>
+        <Link to={`/places/${_id}`}>{placeName}</Link>
       </div>
-    </>
+      <div className='disscription'></div>
+      <div className='rating'></div>
+      <div className='reviews'></div>
+      <div className='visitors'></div>
+      <div className='placeUrl'></div>
+    </li>
   );
 }
 

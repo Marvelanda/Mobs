@@ -41,9 +41,7 @@ function Signup() {
 
   return (
     <div className={`${style.container}`}>
-      <form
-        className={`${style.form} form animate__animated animate__backInLeft`}
-      >
+      <form className={`${style.form} form animate__animated animate__fadeIn`}>
         <div className='input-clue text'>
           <p className='description-clue'>Введите e-mail</p>
           <input

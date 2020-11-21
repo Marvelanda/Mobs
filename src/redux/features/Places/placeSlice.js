@@ -1,30 +1,41 @@
-import {
-  createSlice
-} from '@reduxjs/toolkit';
-import {
-  GETPLACESSAGA
-} from '../../types/placesTypes'
+import { createSlice } from '@reduxjs/toolkit';
+import { GETPLACESSAGA, ADDPLACESREVIEW } from '../../types/placesTypes';
 
 export const placeSlice = createSlice({
   name: 'places',
   initialState: {
-    places: []
+    places: [],
   },
   reducers: {
     placesReducer: (state, action) => {
-      state.places = action.payload
-    }
+      state.places = action.payload;
+    },
+
+    addPlaceReview: (state, action) => {
+      const place = state.places.find((item) => {
+        return item._id === action.payload.id;
+      });
+      place.review.push({
+        [action.payload.response.author]: action.payload.response.review,
+      });
+    },
   },
 });
 
-export const {
-  placesReducer
-} = placeSlice.actions
+export const { placesReducer, addPlaceReview } = placeSlice.actions;
 
 export const getPlacesListSaga = () => {
   return {
-    type: GETPLACESSAGA
-  }
-}
+    type: GETPLACESSAGA,
+  };
+};
 
-export default placeSlice.reducer
+export const addPlaceReviewSaga = (review, id) => {
+  return {
+    type: ADDPLACESREVIEW,
+    id,
+    review,
+  };
+};
+
+export default placeSlice.reducer;
