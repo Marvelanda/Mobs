@@ -1,24 +1,40 @@
-import {put, takeEvery, call} from 'redux-saga/effects'
-import { placesReducer } from './placeSlice'
-import {GETPLACESSAGA} from '../../types/placesTypes'
+import { put, takeEvery, call } from 'redux-saga/effects';
+import { placesReducer, addPlaceReview } from './placeSlice';
+import { GETPLACESSAGA, ADDPLACESREVIEW } from '../../types/placesTypes';
 
-async function getPlaces () {
-  console.log('>>>>>>>>>>>>>>>.Send request SAGA');
-  const resp = await fetch('http://localhost:8080/list');
+async function getPlaces() {
+  const resp = await fetch('http://localhost:8080/places');
   const data = await resp.json();
   return data;
 }
 
-
-function* placesWorker () {
-  const newList = yield call(getPlaces)
-console.log(newList);
-  yield put(placesReducer(newList))
+export function* placesWorker() {
+  const newList = yield call(getPlaces);
+  yield put(placesReducer(newList));
 }
 
-function* placesWatcher () {
-  yield takeEvery(GETPLACESSAGA, placesWorker)
+export function* placesWatcher() {
+  yield takeEvery(GETPLACESSAGA, placesWorker);
 }
 
+async function addReview(review, id) {
+  const resp = await fetch(`http://localhost:8080/places/${id}/reviews`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ review }),
+  });
+  const data = await resp.json();
+  return data;
+}
 
-export default placesWatcher
+export function* addReviewWorker({ review, id }) {
+  const response = yield call(() => addReview(review, id));
+  console.log(response);
+  yield put(addPlaceReview({ response, id }));
+}
+
+export function* addReviewWatcher() {
+  yield takeEvery(ADDPLACESREVIEW, addReviewWorker);
+}

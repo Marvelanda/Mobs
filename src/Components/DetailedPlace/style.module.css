@@ -8,16 +8,33 @@
 
 .container {
   height: 20%;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(134, 134, 134);
   display: flex;
+}
+
+.heading {
+  text-align: center;
+  font-size: 50px;
+  color: blueviolet;
 }
 
 .container:first-of-type {
   margin-top: 100px;
+  height: 35%;
 }
 
 .container:last-of-type {
-  height: 40%;
+  flex-direction: column;
+}
+
+.reviews_container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+input {
+  width: 400px;
+  height: 200px;
 }
 
 .items {

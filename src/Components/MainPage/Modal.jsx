@@ -1,16 +1,19 @@
 import ReactDom from 'react-dom';
 import style from './style.module.css';
 
-const Modal = ({ open, children }) => {
-  if (!open) return false;
+const Modal = ({ open, children, onClose }) => {
+  if (!open) return null;
 
   return ReactDom.createPortal(
     <>
-      <div className={style.modal}>
-        <div className={style.modalContentWr}>
-          <div className='text'>{children}</div>
+      {open && (
+        <div className={style.modal}>
+          <div className={style.modalContentWr}>
+            <div onClick={onClose} className={style.closeButton}></div>
+            <div className='text'>{children}</div>
+          </div>
         </div>
-      </div>
+      )}
     </>,
     document.getElementById('portal')
   );

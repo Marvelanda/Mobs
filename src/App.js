@@ -1,6 +1,6 @@
 import Header from './Components/Header/Header';
 
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import PlacesList from './Components/PlacesList/PlacesList';
@@ -24,10 +24,10 @@ function App() {
         <Route exact path='/signup'>
           <Signup />
         </Route>
-        <Route exact path='/list'>
+        <Route exact path='/places'>
           <PlacesList />
         </Route>
-        <Route exact path='/restaurant'>
+        <Route exact path='/places/:id'>
           <DetailedPlace />
         </Route>
         <Route exact path='/profile'>
