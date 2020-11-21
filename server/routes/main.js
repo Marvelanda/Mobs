@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
       geometryArr.push(el.geometry);
     });
     const fivePlaces = getRandomFive(geometryArr);
+    console.log(fivePlaces);
     res.status(200).json(fivePlaces);
   } catch (error) {
     res.sendStatus(503);

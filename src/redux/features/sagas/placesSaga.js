@@ -1,5 +1,5 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { placesReducer, addPlaceReview } from './placeSlice';
+import { placesReducer, addPlaceReview } from '../Places/placeSlice';
 import { GETPLACESSAGA, ADDPLACESREVIEW } from '../../types/placesTypes';
 
 async function getPlaces() {
