@@ -6,29 +6,23 @@ import Modal from './Modal';
 import { useHistory } from 'react-router-dom';
 import image from '../../img/5003977.jpeg';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getFivePlacesSaga,
-} from '../../redux/features/Places/fivePlacesSlice';
-import { question, coin } from './placemarks'
+import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
+import { question, coin } from './placemarks';
 
 // const newFive = getRandomFive(myArray);
 
 function MainPage() {
-  
   const dispatch = useDispatch();
 
-  const fivePlaces = useSelector(state => state.fivePlaces.fivePlaces);
-  console.log('>>>>>>>>>>>', fivePlaces);
+  const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   useEffect(() => {
-    console.log('!!!!!!!!!!!!1');
-    dispatch(getFivePlacesSaga())
-  }, [])
+    dispatch(getFivePlacesSaga());
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [modalClass, setClass] = useState('');
   const history = useHistory();
-
 
   const onClose = () => {
     setClass('animate__animated animate__rollOut');
