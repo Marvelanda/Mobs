@@ -1,9 +1,10 @@
+import style from './style.module.css';
+
 function Review({ author, review }) {
   return (
-    <div className='text'>
-      <div>
-        {author}: {review}
-      </div>
+    <div className={`${style.reviews_container}`}>
+      <p>{author}:</p>
+      <p>{review}</p>
     </div>
   );
 }
