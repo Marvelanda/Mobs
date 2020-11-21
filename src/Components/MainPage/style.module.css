@@ -37,7 +37,6 @@
   text-align: center;
   vertical-align: middle;
   background-color: rgba(255, 255, 255, 0.6);
-
   font-family: Arial;
 }
 
@@ -49,4 +48,13 @@
   font-size: 20px;
   color: black;
   margin-bottom: 15px;
+}
+
+.closeButton {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  width: 25px;
+  height: 25px;
+  background-image: url('../../img/cancel.svg');
 }

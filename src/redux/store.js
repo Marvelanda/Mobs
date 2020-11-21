@@ -1,17 +1,17 @@
-import rootReducer from './reducers/rootReducer';
+import placeReducer from './features/Places/placeSlice';
 import createSagaMiddleware from 'redux-saga';
-import {
-  configureStore
-} from '@reduxjs/toolkit';
-import placesWatcher from './features/Places/placesSaga';
+import { configureStore } from '@reduxjs/toolkit';
+import rootSaga from './features/rootSagas';
 
 const rootSagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    places: placeReducer,
+  },
   middleware: [rootSagaMiddleware],
 });
 
-rootSagaMiddleware.run(placesWatcher);
+rootSagaMiddleware.run(rootSaga);
 
 export default store;
