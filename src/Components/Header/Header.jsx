@@ -19,7 +19,7 @@ function Header() {
           </li>
 
           <li className={`${style['navigation-list__item']}`}>
-            <Link to='/list'>Список мест</Link>
+            <Link to='/places'>Список мест</Link>
             <Link to='/profile'>Профиль</Link>
           </li>
         </ul>

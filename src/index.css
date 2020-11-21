@@ -76,3 +76,13 @@ input::placeholder {
 .background {
   background-color: white;
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 50px;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

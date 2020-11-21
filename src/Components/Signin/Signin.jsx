@@ -3,7 +3,7 @@ import style from './style.module.css';
 function Signin() {
   return (
     <div className={`${style.container}`}>
-      <form className='form animate__animated animate__backInLeft'>
+      <form className='form animate__animated animate__fadeIn'>
         <div className='input-clue text'>
           <p className='description-clue'>Введите имя</p>
 

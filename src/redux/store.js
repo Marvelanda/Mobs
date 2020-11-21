@@ -1,14 +1,14 @@
-import rootReducer from './reducers/rootReducer';
+import placeReducer from './features/Places/placeSlice';
 import createSagaMiddleware from 'redux-saga';
-import {
-  configureStore
-} from '@reduxjs/toolkit';
-import {rootSaga} from './features/sagas/rootSaga';
+import { configureStore } from '@reduxjs/toolkit';
+import rootSaga from './features/rootSagas';
 
 const rootSagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    places: placeReducer,
+  },
   middleware: [rootSagaMiddleware],
 });
 
