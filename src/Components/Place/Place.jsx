@@ -1,17 +1,17 @@
 import React from 'react';
 
-function Place() {
+function Place({placePhotoUrl}, {placeName}, {description}, {rating}, {review}, {visitors}, {placeUrl} ) {
   
   return (
     <>
       <div className='placeCard'>
-        <div className='photo'></div>
-        <div className='placeName'></div>
-        <div className='disscription'></div>
-        <div className='rating'></div>
-        <div className='reviews'></div>
-        <div className='visitors'></div>
-        <div className='placeUrl'></div>
+        <div className='photo'>{placePhotoUrl}</div>
+        <div className='placeName'>{placeName}</div>
+        <div className='discription'>{description}</div>
+        <div className='rating'>{rating}</div>
+        <div className='reviews'>{review}</div>
+        <div className='visitors'>{visitors}</div>
+        <div className='placeUrl'>{placeUrl}</div>
       </div>
     </>
   );
