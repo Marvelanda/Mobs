@@ -1,26 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
 import style from './style.module.css';
 import { getRandomFive, myArray } from '../../helpers/randomFive';
 import Modal from './Modal';
 import { useHistory } from 'react-router-dom';
 import image from '../../img/5003977.jpeg';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  getFivePlacesSaga,
+} from '../../redux/features/Places/fivePlacesSlice';
+import { question, coin } from './placemarks'
 
-const newFive = getRandomFive(myArray);
-  
-  function MainPage() {
-    const question = 'https://psv4.userapi.com/c856532/u17278978/docs/d1/ca429eca48f4/new_qsymb.gif?extra=Qig3hBJor4aZYSnBga7yMDgjgyVEwkLHZVlt7CNaRHNFrDfsOcvhIDGsG3-D6RdVlSxALtlNWFXrYWY2N-puzrktvNnrST6lfDvWcJjr0Ostb7D9Gr1vBnXpTVlZLeA6usdwPzkTBjk5uzSInFRYIg'
-    const coin = 'https://psv4.userapi.com/c856224/u17278978/docs/d15/a0d04a1fa2d9/ezgif_com-gif-maker_1.gif?extra=tSnENC1OUQQ6tfX7CS-qFADOz_GQNg-2my74cpBIGk8Tpt-gTltXkAYAwoMPhYz7BFR0rzIqQJXY_Ig9t8NWo8IA4OxJqrKhop8E3DGTV_AF_3BuUvhib75gohD-HQYP-3Rpv71qkWwq_yz5ZrrXMg'
-    
-    const [isOpen, setIsOpen] = useState(false);
-    const history = useHistory();
-
-
+// const newFive = getRandomFive(myArray);
 
 function MainPage() {
-  const question = 'https://psv4.userapi.com/c856532/u17278978/docs/d1/ca429eca48f4/new_qsymb.gif?extra=Qig3hBJor4aZYSnBga7yMDgjgyVEwkLHZVlt7CNaRHNFrDfsOcvhIDGsG3-D6RdVlSxALtlNWFXrYWY2N-puzrktvNnrST6lfDvWcJjr0Ostb7D9Gr1vBnXpTVlZLeA6usdwPzkTBjk5uzSInFRYIg'
-  const coin = 'https://psv4.userapi.com/c856224/u17278978/docs/d15/a0d04a1fa2d9/ezgif_com-gif-maker_1.gif?extra=tSnENC1OUQQ6tfX7CS-qFADOz_GQNg-2my74cpBIGk8Tpt-gTltXkAYAwoMPhYz7BFR0rzIqQJXY_Ig9t8NWo8IA4OxJqrKhop8E3DGTV_AF_3BuUvhib75gohD-HQYP-3Rpv71qkWwq_yz5ZrrXMg'
   
+  const dispatch = useDispatch();
+
+  const fivePlaces = useSelector(state => state.fivePlacesArray);
+  console.log('>>>>>>>>>>>', fivePlaces);
+
+  useEffect(() => {
+    console.log('!!!!!!!!!!!!1');
+    dispatch(getFivePlacesSaga())
+  }, [])
+
   const [isOpen, setIsOpen] = useState(false);
   const history = useHistory();
 
@@ -52,7 +56,7 @@ function MainPage() {
 
             <ZoomControl options={{ float: 'right' }} />
 
-            {newFive.map((el, i) => (
+            {fivePlaces.map((el, i) => (
               <Placemark
                 className='placeMark'
                 onClick={() => history.push('/signin')}
@@ -62,7 +66,7 @@ function MainPage() {
                 geometry={el}
                 options={{
                   iconLayout: 'default#image',
-                  iconImageHref: coin,
+                  iconImageHref: question,
                   iconImageSize: [96, 90],
                   iconImageOffset: [-5, -38],
                 }}

@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import {
   configureStore
 } from '@reduxjs/toolkit';
-import placesWatcher from './features/Places/placesSaga';
+import {rootSaga} from './features/sagas/rootSaga';
 
 const rootSagaMiddleware = createSagaMiddleware();
 
@@ -12,6 +12,6 @@ const store = configureStore({
   middleware: [rootSagaMiddleware],
 });
 
-rootSagaMiddleware.run(placesWatcher);
+rootSagaMiddleware.run(rootSaga);
 
 export default store;
