@@ -1,20 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { addNewPlaceSaga } from '../../redux/features/Places/placeSlice';
-import style from './style.module.css'
+import style from './style.module.css';
 
 function AdminPanel() {
+  const [placeName, setPlaceName] = useState('');
+  const [urlName, setUrlName] = useState('');
+  const [placePhotoUrl, setPhotoUrl] = useState('');
+  const [address, setAddress] = useState('');
+  const [phone, setPhone] = useState('');
+  const [workingHours, setWorkingHours] = useState('');
+  const [category, setCategory] = useState('');
+  const [rating, setRating] = useState('');
+  const [geometry, setGeometry] = useState('');
+  const [description, setDescription] = useState('');
 
-  const [placeName, setPlaceName] = useState('')
-  const [urlName, setUrlName] = useState('')
-  const [placePhotoUrl, setPhotoUrl] = useState('')
-  const [address, setAddress] = useState('')
-  const [phone, setPhone] = useState('')
-  const [workingHours, setWorkingHours] = useState('')
-  const [category, setCategory] = useState('')
-  const [rating, setRating] = useState('')
-  const [geometry, setGeometry] = useState('')
-  const [description, setDescription] = useState('')
+  const history = useHistory();
 
   const handlerName = (e) => {
     setPlaceName(e.target.value);
@@ -52,7 +54,22 @@ function AdminPanel() {
   const addPlace = (e) => {
     e.preventDefault();
     console.log('>>>>>>>>>>>>>>addNew to SAGA', placeName);
-    dispatch(addNewPlaceSaga(placeName, urlName, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description));
+    dispatch(
+      addNewPlaceSaga(
+        placeName,
+        urlName,
+        placePhotoUrl,
+        address,
+        phone,
+        workingHours,
+        category,
+        rating,
+        geometry,
+        description
+      )
+    );
+
+    history.push('/places');
     // setPlaceName('');
     // setUrlName('');
     // setPhotoUrl('');
@@ -65,34 +82,85 @@ function AdminPanel() {
     // setDescription('');
   };
 
-
-
   return (
     <div className={style.container}>
       <form onSubmit={addPlace} className={style.form}>
         <h2>Добавить новое заведение</h2>
         <p>Название</p>
-        <input type="text" placeholder='Название' required onChange={handlerName} value={placeName}/>
+        <input
+          type='text'
+          placeholder='Название'
+          required
+          onChange={handlerName}
+          value={placeName}
+        />
         <p>Сайт</p>
-        <input type="text" placeholder='url' onChange={handlerUrlName} value={urlName} />
+        <input
+          type='text'
+          placeholder='url'
+          onChange={handlerUrlName}
+          value={urlName}
+        />
         <p>Фото</p>
-        <input type="text" placeholder='url' onChange={handlerPhotoUrl} value={placePhotoUrl} />
+        <input
+          type='text'
+          placeholder='url'
+          onChange={handlerPhotoUrl}
+          value={placePhotoUrl}
+        />
         <p>Контакты</p>
-        <input type="text" placeholder='адресс' required onChange={handlerAddress} value={address} />
-        <input type="text" placeholder='телефон' onChange={handlerPhone} value={phone} />
-        <input type="text" placeholder='часы работы' onChange={handlerWorkingHours} value={workingHours} />
+        <input
+          type='text'
+          placeholder='адресс'
+          required
+          onChange={handlerAddress}
+          value={address}
+        />
+        <input
+          type='text'
+          placeholder='телефон'
+          onChange={handlerPhone}
+          value={phone}
+        />
+        <input
+          type='text'
+          placeholder='часы работы'
+          onChange={handlerWorkingHours}
+          value={workingHours}
+        />
         <p>Категория</p>
-        <input type="text" placeholder='категория' onChange={handlerCategory} value={category} />
+        <input
+          type='text'
+          placeholder='категория'
+          onChange={handlerCategory}
+          value={category}
+        />
         <p>Рейтинг</p>
-        <input type="text" placeholder='рейтинг' onChange={handlerRating} value={rating} />
+        <input
+          type='text'
+          placeholder='рейтинг'
+          onChange={handlerRating}
+          value={rating}
+        />
         <p>Координаты</p>
-        <input type="text" placeholder='координаты' onChange={handlerGeometry} value={geometry} />
+        <input
+          type='text'
+          placeholder='координаты'
+          onChange={handlerGeometry}
+          value={geometry}
+        />
         <p>Описание</p>
-        <input type="text" placeholder='Описание' className={style.description} onChange={handlerDescription} value={description} />
-        <input type="submit" value="Добавить"/>
+        <input
+          type='text'
+          placeholder='Описание'
+          className={style.description}
+          onChange={handlerDescription}
+          value={description}
+        />
+        <input type='submit' value='Добавить' />
       </form>
     </div>
-  )
+  );
 }
 
-export default AdminPanel
+export default AdminPanel;
