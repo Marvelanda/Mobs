@@ -24,7 +24,7 @@ const PlaceSchema = new mongoose.Schema({
       type: String,
       required: true,
     },
-    tel: {
+    phone: {
       type: String,
     },
     workingHours: {

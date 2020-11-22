@@ -31,8 +31,9 @@ router.post('/:id/reviews', async (req, res) => {
 });
 
   router.put('/new', async (req, res) => {
-    const { placeName, placeUrl, placePhotoUrl, address, tel: phone, workingHours, category, rating, geometry, description } = req.body;
-    const addNewPlace = new Place({placeName, placeUrl, placePhotoUrl, info:{address, tel: phone, workingHours}, category, rating, geometry, description});
+    const { placeName, placeUrl, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description } = req.body;
+    console.log(req.body);
+    const addNewPlace = new Place({placeName, placeUrl, placePhotoUrl, info:{address, phone, workingHours}, category, rating, geometry, description});
     try {
       await addNewPlace.save();
       const places = await Place.find();
