@@ -1,5 +1,6 @@
 .section {
-  background-color: black;
+  background-image: url('../../img/22fc202843aec437eaf85816416c0e73.jpg');
+  background-size: cover;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -7,8 +8,6 @@
 }
 
 .container {
-  height: 20%;
-  background-color: rgb(134, 134, 134);
   display: flex;
 }
 
@@ -16,6 +15,13 @@
   text-align: center;
   font-size: 50px;
   color: blueviolet;
+  margin-bottom: 15px;
+}
+
+.images {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .container:first-of-type {
@@ -24,54 +30,44 @@
 }
 
 .container:last-of-type {
+  padding: 25px 0;
+  margin-top: 5px;
+  width: 100vw;
   flex-direction: column;
+  align-items: center;
 }
 
-.reviews_container {
-  display: flex;
-  justify-content: space-evenly;
+.blur {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(2px);
 }
 
-input {
-  width: 400px;
-  height: 200px;
-}
-
-.items {
+.description {
   margin-left: 5px;
   margin-top: 5px;
+  height: 98%;
+  width: 50%;
 }
 
 .items:first-of-type {
   margin-left: 0px;
 }
 
-.items:nth-child(-n + 3) {
-  height: 100%;
-  width: 36%;
-  background-color: black;
-}
-
-.items:nth-last-child(n + 1) {
-  height: 98%;
-  width: 50%;
-  background-color: black;
-}
-
-.subcontainer {
-  margin-top: 5px;
-  display: flex;
+.reviews_container {
   width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  margin-top: 3px;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px 0;
 }
 
-.subitems {
-  background-color: aliceblue;
-  width: 45%;
-  height: 45%;
+.reviews_container h2 {
+  margin-right: 100px;
 }
 
-.subitems:nth-of-type(odd) {
-  margin-left: 5px;
+.reviews_container button {
+  margin-top: 0;
+  margin-left: 100px;
 }

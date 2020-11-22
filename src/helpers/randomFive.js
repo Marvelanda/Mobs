@@ -35,6 +35,6 @@ export function getRandomFive(myArray) {
    return randomFiveArray
 }
 
-console.log(getRandomFive(myArray));
+// console.log(getRandomFive(myArray));
 
 

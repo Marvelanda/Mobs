@@ -1,0 +1,6 @@
+.reviews_container {
+  width: 1000px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
