@@ -1,6 +1,14 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { placesReducer, addPlaceReview, addNewPlace } from '../Places/placeSlice';
-import { GETPLACESSAGA, ADDPLACESREVIEW, ADDNEWPLACE } from '../../types/placesTypes';
+import {
+  placesReducer,
+  addPlaceReview,
+  addNewPlace,
+} from '../Places/placeSlice';
+import {
+  GETPLACESSAGA,
+  ADDPLACESREVIEW,
+  ADDNEWPLACE,
+} from '../../types/placesTypes';
 
 async function getPlaces() {
   const resp = await fetch('http://localhost:8080/places');
@@ -39,23 +47,72 @@ export function* addReviewWatcher() {
   yield takeEvery(ADDPLACESREVIEW, addReviewWorker);
 }
 
-async function addPlace(placeName, placeUrl, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description) {
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ADD NEW PLACE FROM SAGA', address);
+async function addPlace(
+  placeName,
+  placeUrl,
+  placePhotoUrl,
+  address,
+  phone,
+  workingHours,
+  category,
+  rating,
+  geometry,
+  description
+) {
+  console.log(
+    '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ADD NEW PLACE FROM SAGA',
+    address
+  );
   const resp = await fetch(`http://localhost:8080/places/new`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ placeName, placeUrl, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description }),
+    body: JSON.stringify({
+      placeName,
+      placeUrl,
+      placePhotoUrl,
+      address,
+      tel: phone,
+      workingHours,
+      category,
+      rating,
+      geometry,
+      description,
+    }),
   });
   const data = await resp.json();
   console.log(data);
   return data;
 }
 
-export function* addNewPlaceWorker({placeName, placeUrl, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description}) {
-  const response = yield call(() => addPlace(placeName, placeUrl, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description));
-  console.log('>>>>>>>>>>>>>>>>.addnewplaceWorker',response);
+export function* addNewPlaceWorker({
+  placeName,
+  placeUrl,
+  placePhotoUrl,
+  address,
+  phone,
+  workingHours,
+  category,
+  rating,
+  geometry,
+  description,
+}) {
+  const response = yield call(() =>
+    addPlace(
+      placeName,
+      placeUrl,
+      placePhotoUrl,
+      address,
+      phone,
+      workingHours,
+      category,
+      rating,
+      geometry,
+      description
+    )
+  );
+  console.log('>>>>>>>>>>>>>>>>.addnewplaceWorker', response);
   yield put(addNewPlace(response));
 }
 

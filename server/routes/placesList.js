@@ -30,18 +30,39 @@ router.post('/:id/reviews', async (req, res) => {
   }
 });
 
-  router.put('/new', async (req, res) => {
-    const { placeName, placeUrl, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description } = req.body;
-    console.log(req.body);
-    const addNewPlace = new Place({placeName, placeUrl, placePhotoUrl, info:{address, phone, workingHours}, category, rating, geometry, description});
-    try {
-      await addNewPlace.save();
-      const places = await Place.find();
-      console.log(places);
-      res.status(200).json(places);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+router.put('/new', async (req, res) => {
+  const {
+    placeName,
+    placeUrl,
+    placePhotoUrl,
+    address,
+    tel: phone,
+    workingHours,
+    category,
+    rating,
+    geometry,
+    description,
+  } = req.body;
+
+  console.log(placeName);
+  const addNewPlace = new Place({
+    placeName,
+    placeUrl,
+    placePhotoUrl,
+    info: { address, tel: phone, workingHours },
+    category,
+    rating,
+    geometry,
+    description,
+  });
+  try {
+    await addNewPlace.save();
+    const places = await Place.find();
+    console.log(places);
+    res.status(200).json(places);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-export default router
+export default router;
