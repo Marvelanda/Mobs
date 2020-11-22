@@ -1,5 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { GETPLACESSAGA, ADDPLACESREVIEW } from '../../types/placesTypes';
+import {
+  GETPLACESSAGA,
+  ADDPLACESREVIEW,
+  ADDNEWPLACE,
+} from '../../types/placesTypes';
 
 export const placeSlice = createSlice({
   name: 'places',
@@ -19,10 +23,18 @@ export const placeSlice = createSlice({
         [action.payload.response.author]: action.payload.response.review,
       });
     },
+
+    addNewPlace: (state, action) => {
+      state.places = action.payload;
+    },
   },
 });
 
-export const { placesReducer, addPlaceReview } = placeSlice.actions;
+export const {
+  placesReducer,
+  addPlaceReview,
+  addNewPlace,
+} = placeSlice.actions;
 
 export const getPlacesListSaga = () => {
   return {
@@ -35,6 +47,34 @@ export const addPlaceReviewSaga = (review, id) => {
     type: ADDPLACESREVIEW,
     id,
     review,
+  };
+};
+
+export const addNewPlaceSaga = (
+  placeName,
+  placeUrl,
+  placePhotoUrl,
+  address,
+  phone,
+  workingHours,
+  category,
+  rating,
+  geometry,
+  description
+) => {
+  console.log('>>>>>>>>>>>>>>>> in action addnewplacesaga', address);
+  return {
+    type: ADDNEWPLACE,
+    placeName,
+    placeUrl,
+    placePhotoUrl,
+    address,
+    phone,
+    workingHours,
+    category,
+    rating,
+    geometry,
+    description,
   };
 };
 
