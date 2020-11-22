@@ -59,10 +59,7 @@ async function addPlace(
   geometry,
   description
 ) {
-  console.log(
-    '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ADD NEW PLACE FROM SAGA',
-    address
-  );
+  
   const resp = await fetch(`http://localhost:8080/places/new`, {
     method: 'PUT',
     headers: {
@@ -82,7 +79,6 @@ async function addPlace(
     }),
   });
   const data = await resp.json();
-  console.log(data);
   return data;
 }
 
@@ -112,11 +108,9 @@ export function* addNewPlaceWorker({
       description
     )
   );
-  console.log('>>>>>>>>>>>>>>>>.addnewplaceWorker', response);
   yield put(addNewPlace(response));
 }
 
 export function* addNewPlaceWatcher() {
   yield takeEvery(ADDNEWPLACE, addNewPlaceWorker);
-  console.log('............Watcher in work');
 }
