@@ -9,6 +9,7 @@ import MainPage from './Components/MainPage/MainPage';
 import Profile from './Components/Profile/Profile';
 import Footer from './Components/Footer/Footer';
 import DetailedPlace from './Components/DetailedPlace/DetailedPlace';
+import AddNewPlace from './Components/AddNewPlace/AddNewPlace';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route exact path='/places'>
           <PlacesList />
+        </Route>
+        <Route exact path='/places/new'>
+          <AddNewPlace />
         </Route>
         <Route exact path='/places/:id'>
           <DetailedPlace />

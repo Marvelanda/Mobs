@@ -10,17 +10,14 @@ const PlaceSchema = new mongoose.Schema({
   },
   placeUrl: {
     type: String,
-    required: true,
     unique: true,
   },
   placePhotoUrl: {
     type: String,
-    required: true,
     unique: true,
   },
   description: {
     type: String,
-    required: true,
   },
   info: {
     address: {
@@ -29,13 +26,12 @@ const PlaceSchema = new mongoose.Schema({
     },
     tel: {
       type: String,
-      required: true,
     },
     workingHours: {
       type: String,
-      required: true,
     }
   },
+  category: String,
   rating: Number,
   review: Array,
   visitors: Number,

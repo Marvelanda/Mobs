@@ -28,16 +28,19 @@ router.post('/:id/reviews', async (req, res) => {
     await place.save();
     res.status(200).json({ author: 'Ya', review });
   }
-  // try {
-
-  //   if (list.length) {
-  //     res.status(200).json(list);
-  //   } else {
-  //     res.sendStatus('List is empty');
-  //   }
-  // } catch (error) {
-  //   res.sendStatus(503);
-  // }
 });
 
-export default router;
+  router.put('/new', async (req, res) => {
+    const { placeName, placeUrl, placePhotoUrl, address, tel: phone, workingHours, category, rating, geometry, description } = req.body;
+    const addNewPlace = new Place({placeName, placeUrl, placePhotoUrl, info:{address, tel: phone, workingHours}, category, rating, geometry, description});
+    try {
+      await addNewPlace.save();
+      const places = await Place.find();
+      console.log(places);
+      res.status(200).json(places);
+    } catch (error) {
+      res.sendStatus(500);
+    }
+});
+
+export default router
