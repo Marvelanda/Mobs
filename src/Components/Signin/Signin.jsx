@@ -1,31 +1,70 @@
+import { useState } from 'react';
 import style from './style.module.css';
+import { useDispatch } from "react-redux";
+import { newUserName } from '../../redux/features/Places/authSlice'
 
 function Signin() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [username, setUserName] = useState('')
+  const [exist, setExist] = useState(false)
+
+  const dispatch = useDispatch()
+  
+  const  doFetch = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await fetch('http://localhost:8080/auth/signin', {
+        method: 'POST',
+        body: JSON.stringify({ username, password, email }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const json = await response.json();
+      setExist(json.exist)
+      if(json.done) {
+        dispatch(newUserName(username))
+        sessionStorage.setItem('user', json.userid)
+      }
+      console.log(json);
+    } catch (error) {
+      console.error('Ошибка:', error);
+    }
+  }
+
   return (
     <div className={`${style.container}`}>
       <form className='form animate__animated animate__fadeIn'>
         <div className='input-clue text'>
           <p className='description-clue'>Введите имя</p>
 
-          <input type='text' placeholder='Name' />
+          <input type='text' placeholder='Name' onChange={(e)=> {
+            setUserName(e.target.value)
+          }} />
         </div>
         <div className='input-clue text'>
           <p className='description-clue'>Введите e-mail</p>
 
-          <input type='email' placeholder='Email' />
+          <input type='email' placeholder='Email' onChange={(e) => {
+            setEmail(e.target.value)
+          }}/>
         </div>
         <div className='input-clue text'>
           <p className='description-clue'>Введите пароль</p>
 
-          <input type='password' placeholder='Password' />
+          <input type='password' placeholder='Password' onChange={(e) => {
+            setPassword(e.target.value)
+          }} />
         </div>
         <label
           className={`description-clue ${style['description-checkbox']} text`}
         >
           <input type='checkbox' required />
+          {exist ? <p>Такой email или имя пользователя существует!!!</p> : ''}
           <span>Я согласен на обработку персональных данных</span>
         </label>
-        <button type='submit' className='button'>
+        <button type='submit' className='button' onClick={doFetch}>
           Зарегистрироваться
         </button>
       </form>
