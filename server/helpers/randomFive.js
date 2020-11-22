@@ -25,7 +25,7 @@ export function getRandomFive(myArray) {
   console.log(filteredArr);
   let randomFiveArray = [];
   let indexArray = [];
-  for (let i = 0; i < 5; i += 1) {
+  for (let i = 0; i < 3; i += 1) {
     let randIndex = randomizeIndex(filteredArr);
     while (indexArray.some((el) => el === randIndex)) {
       randIndex = randomizeIndex(filteredArr);
