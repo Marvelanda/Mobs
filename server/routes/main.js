@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
     const list = await Place.find().lean().exec();
     const geometryArr = [];
     list.forEach((el) => {
-      geometryArr.push(el.geometry);
+      geometryArr.push(el);
     });
     const fivePlaces = getRandomFive(geometryArr);
     res.status(200).json(fivePlaces);
