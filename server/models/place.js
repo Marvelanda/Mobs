@@ -33,6 +33,7 @@ const PlaceSchema = new mongoose.Schema({
   },
   category: String,
   rating: Number,
+  secrecy: Number,
   review: Array,
   visitors: Number,
   geometry: Array

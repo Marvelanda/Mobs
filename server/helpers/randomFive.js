@@ -16,21 +16,24 @@ const myArray = [
   [55.73, 37.75],
 ];
 
-function randomizeIndex() {
-  return Math.floor(Math.random() * myArray.length);
+function randomizeIndex(filteredArr) {
+  return Math.floor(Math.random() * filteredArr.length);
 }
 
 export function getRandomFive(myArray) {
+  const filteredArr = myArray.filter((el) => el.secrecy === 1) 
+  console.log(filteredArr);
   let randomFiveArray = [];
   let indexArray = [];
   for (let i = 0; i < 5; i += 1) {
-    let randIndex = randomizeIndex();
+    let randIndex = randomizeIndex(filteredArr);
     while (indexArray.some((el) => el === randIndex)) {
-      randIndex = randomizeIndex();
+      randIndex = randomizeIndex(filteredArr);
     }
     indexArray.push(randIndex);
-    randomFiveArray.push(myArray[randIndex]);
+    randomFiveArray.push(filteredArr[randIndex]);
   }
+  console.log(randomFiveArray);
   return randomFiveArray;
 }
 

@@ -6,13 +6,11 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   try {
     const list = await Place.find().lean().exec();
-    const geometryArr = [];
-    list.forEach((el) => {
-      geometryArr.push(el);
-    });
-    const fivePlaces = getRandomFive(geometryArr);
+    const fivePlaces = getRandomFive(list);
+    console.log(fivePlaces);
     res.status(200).json(fivePlaces);
   } catch (error) {
+    console.log(error.message);
     res.sendStatus(503);
   }
 });
