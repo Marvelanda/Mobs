@@ -18,6 +18,7 @@ a {
 }
 
 .button {
+  cursor: pointer;
   font-family: 'Bernier';
   font-weight: normal;
   font-size: 15px;
