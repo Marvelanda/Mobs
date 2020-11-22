@@ -9,6 +9,7 @@
 }
 
 .description-checkbox > input[type='checkbox'] {
+  width: 1px;
   position: relative;
   z-index: -1;
   opacity: 0;

@@ -1,18 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import style from './style.module.css';
 
-function Place({ placeName, _id }) {
+function Place({ placePhotoUrl, placeName, _id }) {
   return (
-    <li className='placeCard text'>
-      <div className='photo'></div>
-      <div className='placeName'>
+    <li className={style['list-item']}>
+      <h2 className='text'>
         <Link to={`/places/${_id}`}>{placeName}</Link>
-      </div>
-      <div className='disscription'></div>
-      <div className='rating'></div>
-      <div className='reviews'></div>
-      <div className='visitors'></div>
-      <div className='placeUrl'></div>
+      </h2>
+      <img className={style.img} src={placePhotoUrl} alt='foto' />
     </li>
   );
 }
