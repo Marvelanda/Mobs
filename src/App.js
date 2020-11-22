@@ -10,6 +10,7 @@ import Profile from './Components/Profile/Profile';
 import Footer from './Components/Footer/Footer';
 import DetailedPlace from './Components/DetailedPlace/DetailedPlace';
 import AddNewPlace from './Components/AddNewPlace/AddNewPlace';
+import AddReview from './Components/Review/AddReview';
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
         </Route>
         <Route exact path='/profile'>
           <Profile />
+        </Route>
+        <Route exact path='/places/:id/reviews'>
+          <AddReview />
         </Route>
       </Switch>
       <Footer></Footer>
