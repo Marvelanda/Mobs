@@ -53,7 +53,7 @@ function AdminPanel() {
 
   const addPlace = (e) => {
     e.preventDefault();
-    console.log('>>>>>>>>>>>>>>addNew to SAGA', placeName);
+
     dispatch(
       addNewPlaceSaga(
         placeName,
@@ -70,16 +70,16 @@ function AdminPanel() {
     );
 
     history.push('/places');
-    // setPlaceName('');
-    // setUrlName('');
-    // setPhotoUrl('');
-    // setAddress('');
-    // setPhone('');
-    // setWorkingHours('');
-    // setCategory('');
-    // setRating('');
-    // setGeometry('');
-    // setDescription('');
+    setPlaceName('');
+    setUrlName('');
+    setPhotoUrl('');
+    setAddress('');
+    setPhone('');
+    setWorkingHours('');
+    setCategory('');
+    setRating('');
+    setGeometry('');
+    setDescription('');
   };
 
   return (

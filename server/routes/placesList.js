@@ -44,7 +44,6 @@ router.put('/new', async (req, res) => {
     description,
   } = req.body;
 
-  console.log(placeName);
   const addNewPlace = new Place({
     placeName,
     placeUrl,
@@ -58,11 +57,10 @@ router.put('/new', async (req, res) => {
   try {
     await addNewPlace.save();
     const places = await Place.find();
-    console.log(places);
     res.status(200).json(places);
   } catch (error) {
     console.log(error);
   }
-});
+})
 
 export default router;
