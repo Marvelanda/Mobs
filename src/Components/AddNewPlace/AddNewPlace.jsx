@@ -51,18 +51,21 @@ function AdminPanel() {
 
   const addPlace = (e) => {
     e.preventDefault();
+    console.log('>>>>>>>>>>>>>>addNew to SAGA', placeName);
     dispatch(addNewPlaceSaga(placeName, urlName, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description));
-    setPlaceName('');
-    setUrlName('');
-    setPhotoUrl('');
-    setAddress('');
-    setPhone('');
-    setWorkingHours('');
-    setCategory('');
-    setRating('');
-    setGeometry('');
-    setDescription('');
+    // setPlaceName('');
+    // setUrlName('');
+    // setPhotoUrl('');
+    // setAddress('');
+    // setPhone('');
+    // setWorkingHours('');
+    // setCategory('');
+    // setRating('');
+    // setGeometry('');
+    // setDescription('');
   };
+
+
 
   return (
     <div className={style.container}>
@@ -79,11 +82,11 @@ function AdminPanel() {
         <input type="text" placeholder='телефон' onChange={handlerPhone} value={phone} />
         <input type="text" placeholder='часы работы' onChange={handlerWorkingHours} value={workingHours} />
         <p>Категория</p>
-        <input type="text" placeholder='категория' required onChange={handlerCategory} value={category} />
+        <input type="text" placeholder='категория' onChange={handlerCategory} value={category} />
         <p>Рейтинг</p>
         <input type="text" placeholder='рейтинг' onChange={handlerRating} value={rating} />
         <p>Координаты</p>
-        <input type="text" placeholder='координаты' required onChange={handlerGeometry} value={geometry} />
+        <input type="text" placeholder='координаты' onChange={handlerGeometry} value={geometry} />
         <p>Описание</p>
         <input type="text" placeholder='Описание' className={style.description} onChange={handlerDescription} value={description} />
         <input type="submit" value="Добавить"/>

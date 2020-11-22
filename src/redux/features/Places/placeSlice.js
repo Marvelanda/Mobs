@@ -21,17 +21,12 @@ export const placeSlice = createSlice({
     },
 
     addNewPlace: (state, action) => {
-      const place = state.places.find((item) => {
-        return item._id === action.payload.id;
-      });
-      place.review.push({
-        [action.payload.response.author]: action.payload.response.review,
-      });
+      state.places = action.payload
     },
   },
 });
 
-export const { placesReducer, addPlaceReview } = placeSlice.actions;
+export const { placesReducer, addPlaceReview, addNewPlace } = placeSlice.actions;
 
 export const getPlacesListSaga = () => {
   return {
@@ -47,11 +42,12 @@ export const addPlaceReviewSaga = (review, id) => {
   };
 };
 
-export const addNewPlaceSaga = (placeName, urlName, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description) => {
+export const addNewPlaceSaga = (placeName, placeUrl, placePhotoUrl, address, phone, workingHours, category, rating, geometry, description) => {
+  console.log('>>>>>>>>>>>>>>>> in action addnewplacesaga', address);
   return {
     type: ADDNEWPLACE,
     placeName,
-    urlName,
+    placeUrl,
     placePhotoUrl,
     address,
     phone,

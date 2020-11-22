@@ -14,12 +14,10 @@ const PlaceSchema = new mongoose.Schema({
   },
   placePhotoUrl: {
     type: String,
-    required: true,
     unique: true,
   },
   description: {
     type: String,
-    required: true,
   },
   info: {
     address: {
@@ -28,11 +26,9 @@ const PlaceSchema = new mongoose.Schema({
     },
     tel: {
       type: String,
-      required: true,
     },
     workingHours: {
       type: String,
-      required: true,
     }
   },
   category: String,
