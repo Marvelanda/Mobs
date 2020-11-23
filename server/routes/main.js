@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
   } else {
     const list = await Place.find().lean().exec();
     const fivePlaces = getRandomFive(list);
-    console.log('Random', fivePlaces);
+
     res.status(200).json(fivePlaces);
   }
 });

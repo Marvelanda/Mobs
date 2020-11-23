@@ -10,7 +10,7 @@ router.post('/signup', async (req, res) => {
   const UserByUsername = await User.findOne({ username: req.body.username });
   const UserByEmail = await User.findOne({ email: req.body.email });
   const list = await Place.find().lean().exec();
-  console.log(req.body.fivePlaces);
+
   if (UserByUsername || UserByEmail) {
     res.json({ exist: true, done: false });
   } else {
