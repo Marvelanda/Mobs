@@ -38,6 +38,8 @@ const PlaceSchema = new mongoose.Schema({
   secrecy: Number,
   visitors: Number,
   geometry: Array,
+  latitude: Number,
+  longitude: Number
 });
 
 PlaceSchema.methods.getReviews = async function () {

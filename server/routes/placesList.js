@@ -115,6 +115,7 @@ router.put('/new', async (req, res) => {
 });
 
 router.post('/check', async (req, res) => {
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..');
   const {
     latitude,
     longitude
@@ -128,30 +129,25 @@ router.post('/check', async (req, res) => {
   const minLong = Number((+fixLong - 0.01).toFixed(6));
   const maxLong = Number((+fixLong + 0.01).toFixed(6));
 
-  console.log(latitude.toFixed(6), minLat, maxLat);
-
   if (req.body) {
-    const placeLat = await Place.find({
-      $elemMatch: {
-        'geometry[0]': {
+    const place = await Place.find({
+        latitude: {
           $gte: minLat,
           $lte: maxLat
         },
-        'geometry[1]': {
+        longitude: {
           $gte: minLong,
           $lte: maxLong
         },
-      }
     });
-    // const placeLong = await Place.find({
-    //   geometry: { $elemMatch: {
-    //     $gte: minLong,
-    //     $lte: maxLong
-    //   }
-    // }})
-    console.log(placeLat);
+    console.log(place);
 
-
+  //   if(place.length === 1){
+      
+  //     res.sendStatus(200)
+  //   }
+  // } else{
+  //   res.send('Не можем точно определить ваше местоположение')
   }
 
 

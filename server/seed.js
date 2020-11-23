@@ -25,6 +25,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.684758, 37.738521],
+    latitude: 55.684758,
+    longitude: 37.738521,
   });
 
   const m2 = new Place({
@@ -43,6 +45,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.68, 37.5],
+    latitude: 55.68,
+    longitude: 37.5,
   });
 
   const m3 = new Place({
@@ -61,6 +65,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.833436, 37.715175],
+    latitude: 55.833436,
+    longitude: 37.715175,
   });
 
   const m4 = new Place({
@@ -79,6 +85,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.787086, 37.529789],
+    latitude: 55.787086,
+    longitude: 37.529789,
   });
 
   const m5 = new Place({
@@ -96,6 +104,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.8, 37.4],
+    latitude: 55.8,
+    longitude: 37.5,
   });
 
   const m6 = new Place({
@@ -114,6 +124,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.7, 37.4],
+    latitude: 55.7,
+    longitude: 37.4,
   });
 
   const m7 = new Place({
@@ -132,6 +144,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.81, 37.65],
+    latitude: 55.81,
+    longitude: 37.65,
   });
 
   const m8 = new Place({
@@ -150,6 +164,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.73, 37.65],
+    latitude: 55.73,
+    longitude: 37.65,
   });
 
   const m9 = new Place({
@@ -167,6 +183,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.81, 37.75],
+    latitude: 55.81,
+    longitude: 37.75,
   });
 
   const m10 = new Place({
@@ -185,6 +203,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.76, 37.64],
+    latitude: 55.76,
+    longitude: 37.64,
   });
 
   const m11 = new Place({
@@ -203,6 +223,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.8, 37.8],
+    latitude: 55.8,
+    longitude: 37.8,
   });
 
   const m12 = new Place({
@@ -221,6 +243,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.847, 37.6],
+    latitude: 55.847,
+    longitude: 37.6,
   });
 
   const m13 = new Place({
@@ -238,7 +262,9 @@ async function seedPlaces() {
     secrecy: 1,
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
-    geometry: [55.751574, 37.573856],
+    geometry: [55.709084, 37.593211],
+    latitude: 55.709084,
+    longitude: 37.593211,
   });
 
   const m14 = new Place({
@@ -256,6 +282,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.661574, 37.573856],
+    latitude: 55.661574,
+    longitude: 37.573856,
   });
 
   const m15 = new Place({
@@ -274,6 +302,8 @@ async function seedPlaces() {
     review: [{ visitor777: 'норм заведение' }, { visitor111: 'дешовое бухло' }],
     visitors: 50,
     geometry: [55.73, 37.75],
+    latitude: 55.73,
+    longitude: 37.75,
   });
   const placeArr = [
     m1,
