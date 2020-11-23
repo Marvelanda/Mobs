@@ -18,14 +18,21 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id/reviews', async (req, res) => {
-  const place = await Place.findOne({ _id: req.params.id });
+  const place = await Place.findOne({
+    _id: req.params.id
+  });
   const reviews = await place.getReviews();
 
   res.json(reviews);
 });
 
 router.post('/:id/reviews', async (req, res) => {
-  const { review, stars, pecularities, userId } = req.body;
+  const {
+    review,
+    stars,
+    pecularities,
+    userId
+  } = req.body;
 
   if (review) {
     const newReview = new Review({
@@ -62,7 +69,11 @@ router.put('/new', async (req, res) => {
     placeName,
     placeUrl,
     placePhotoUrl,
-    info: { address, tel: phone, workingHours },
+    info: {
+      address,
+      tel: phone,
+      workingHours
+    },
     category,
     rating,
     geometry,
@@ -77,7 +88,49 @@ router.put('/new', async (req, res) => {
   }
 });
 
-router.post('/check', (req, res) => {
+router.post('/check', async (req, res) => {
+  const {
+    latitude,
+    longitude
+  } = req.body;
+
+  const fixLat = latitude.toFixed(6)
+  const minLat = Number((+fixLat - 0.01).toFixed(6));
+  const maxLat = Number((+fixLat + 0.01).toFixed(6));
+
+  const fixLong = longitude.toFixed(6)
+  const minLong = Number((+fixLong - 0.01).toFixed(6));
+  const maxLong = Number((+fixLong + 0.01).toFixed(6));
+
+  console.log(latitude.toFixed(6), minLat, maxLat);
+
+  if (req.body) {
+    const placeLat = await Place.find({
+      $elemMatch: {
+        'geometry[0]': {
+          $gte: minLat,
+          $lte: maxLat
+        },
+        'geometry[1]': {
+          $gte: minLong,
+          $lte: maxLong
+        },
+      }
+    });
+    // const placeLong = await Place.find({
+    //   geometry: { $elemMatch: {
+    //     $gte: minLong,
+    //     $lte: maxLong
+    //   }
+    // }})
+    console.log(placeLat);
+
+
+  }
+
+
+
+
   res.send('ответ по ручке checkPlace').end();
 })
 
