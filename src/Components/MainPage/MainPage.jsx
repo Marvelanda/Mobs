@@ -13,12 +13,12 @@ import { Link } from 'react-router-dom';
 function MainPage() {
   const dispatch = useDispatch();
 
-  useSelector((state) => state.auth.userName);
+  const user = useSelector((state) => state.auth.userName);
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   useEffect(() => {
     dispatch(getFivePlacesSaga());
-  }, []);
+  }, [user]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [modalClass, setClass] = useState('');

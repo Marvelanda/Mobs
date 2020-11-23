@@ -6,6 +6,10 @@ import { useSelector } from 'react-redux';
 function Header() {
   const user = useSelector((state) => state.auth.userName);
 
+  const logout = () => {
+    localStorage.clear();
+  };
+
   return (
     <div className={`${style.header}`}>
       <nav className={`container ${style['header-container']}`}>
@@ -26,8 +30,12 @@ function Header() {
               <li key='profile' className={`${style['navigation-list__item']}`}>
                 <Link to='/profile'>Профиль</Link>
               </li>
-              <li key='logout' className={`${style['navigation-list__item']}`}>
-                <Link to='/logout'>Выйти</Link>
+              <li
+                key='logout'
+                onClick={logout}
+                className={`${style['navigation-list__item']}`}
+              >
+                <Link to='/'>Выйти</Link>
               </li>
             </>
           ) : (
