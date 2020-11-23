@@ -1,8 +1,9 @@
 import style from './style.module.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlacesListSaga } from '../../redux/features/Places/placeSlice';
 import { getReviewsListSaga } from '../../redux/features/Places/reviewSlice';
+import { sharePlaceSaga } from '../../redux/features/Places/sharePlaceSlice';
 import { Link, useParams } from 'react-router-dom';
 import Review from '../Review/Review';
 import SwiperCore, {
@@ -26,6 +27,9 @@ function DetailedPlace() {
   const dispatch = useDispatch();
   const { id } = useParams();
 
+  // Для формы-делёжки с другом
+  const [value, setValue] = useState('');
+
   const place = useSelector((state) => state.places.places).find((item) => {
     return item._id === id;
   });
@@ -39,6 +43,14 @@ function DetailedPlace() {
   useEffect(() => {
     dispatch(getReviewsListSaga(id));
   }, []);
+
+  // для формы-делёжки
+  const submitHandler = (e, place) => {
+    e.preventDefault();
+    if (value.trim()) {
+      dispatch(sharePlaceSaga(value.trim(), place))
+    }
+  }
 
   return (
     <div className={style.section}>
@@ -99,6 +111,10 @@ function DetailedPlace() {
               <p>{place.placeUrl}</p>
               <h3>Часы работы:</h3>
               <p>{place.info.workingHours}</p>
+              <form onSubmit={submitHandler}>
+                <input onChange={(e) => setValue(e.target.value)} placeholder="Введите username друга"></input>
+                <button type="submit">Поделиться местом</button>
+              </form>
             </div>
           </div>
           <div className={`${style.container}`}>

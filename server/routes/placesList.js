@@ -1,6 +1,7 @@
 import express from 'express';
 import Place from '../models/place.js';
 import Review from '../models/review.js';
+import User from '../models/user.js'
 
 const router = express.Router();
 
@@ -43,6 +44,19 @@ router.post('/:id/reviews', async (req, res) => {
     res.status(200).json(newReview);
   }
 });
+
+router.patch('/:id/share', async (req,res) => {
+  const { username } = req.body;
+  try {
+    const user = await User.findOne({username});
+    user.places.push(req.params.id)
+    await user.save()
+    res.status(200).json({message: 'Теперь это заведение доступно вашему другу'})
+  } catch(error) {
+    res.status(400).json({message: 'Пользователя с таким username не существует'})
+  }
+
+})
 
 router.put('/new', async (req, res) => {
   const {

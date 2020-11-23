@@ -5,6 +5,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import rootSaga from './features/sagas/rootSagas';
 import authReducer from './features/Places/authSlice';
 import reviewsReducer from './features/Places/reviewSlice';
+import shareStatusReducer from './features/Places/sharePlaceSlice'
 const rootSagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
@@ -13,6 +14,7 @@ const store = configureStore({
     fivePlaces: fivePlaceReducer,
     auth: authReducer,
     reviews: reviewsReducer,
+    sharedPlace: shareStatusReducer,
   },
   middleware: [rootSagaMiddleware],
 });
