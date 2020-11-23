@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 
-import { placesWatcher, addNewPlaceWatcher } from './placesSaga';
+import { placesWatcher, addNewPlaceWatcher, ratingWatcher } from './placesSaga';
 import { reviewsWatcher, addReviewWatcher } from './reviewsSaga';
 import { fivePlacesWatcher } from './fivePlacesSaga';
 
@@ -11,6 +11,7 @@ export default function* rootSaga() {
     fivePlacesWatcher(),
     addNewPlaceWatcher(),
     reviewsWatcher(),
+    ratingWatcher(),
   ]);
 
   // code after all-effect

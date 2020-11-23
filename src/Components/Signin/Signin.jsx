@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import store from '../../redux/store';
 import style from './style.module.css';
 
 function Signin() {
@@ -22,7 +23,8 @@ function Signin() {
       const json = await response.json();
       setExist(json.auth);
       if (json.auth) {
-        sessionStorage.setItem('user', json.userid);
+        localStorage.setItem('user', json.userid);
+
         history.push('/places');
       }
       console.log(json);

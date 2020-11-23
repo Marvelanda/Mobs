@@ -1,6 +1,14 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { placesReducer, addNewPlace } from '../Places/placeSlice';
-import { GETPLACESSAGA, ADDNEWPLACE } from '../../types/placesTypes';
+import {
+  placesReducer,
+  addNewPlace,
+  addPlaceRating,
+} from '../Places/placeSlice';
+import {
+  GETPLACESSAGA,
+  ADDNEWPLACE,
+  ADDPLACERATING,
+} from '../../types/placesTypes';
 
 async function getPlaces() {
   const resp = await fetch('http://localhost:8080/places');
@@ -16,6 +24,7 @@ export function* placesWorker() {
 export function* placesWatcher() {
   yield takeEvery(GETPLACESSAGA, placesWorker);
 }
+
 async function addPlace(
   placeName,
   placeUrl,
@@ -81,4 +90,25 @@ export function* addNewPlaceWorker({
 
 export function* addNewPlaceWatcher() {
   yield takeEvery(ADDNEWPLACE, addNewPlaceWorker);
+}
+
+async function addRating(id, stars) {
+  const resp = await fetch(`http://localhost:8080/places/${id}/ratings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ stars }),
+  });
+  const data = await resp.json();
+  return data;
+}
+
+export function* ratingWorker({ id, stars }) {
+  const response = yield call(() => addRating(id, stars));
+  yield put(addPlaceRating(response));
+}
+
+export function* ratingWatcher() {
+  yield takeEvery(ADDPLACERATING, ratingWorker);
 }

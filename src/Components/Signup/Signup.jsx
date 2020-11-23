@@ -25,7 +25,7 @@ function Signup() {
       setExist(json.exist);
       if (json.done) {
         dispatch(newUserName(username));
-        sessionStorage.setItem('user', json.userid);
+        localStorage.setItem('user', json.userid);
       }
       console.log(json);
     } catch (error) {

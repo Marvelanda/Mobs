@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { addPlaceReviewSaga } from '../../redux/features/Places/placeSlice';
+import { addPlaceReviewSaga } from '../../redux/features/Places/reviewSlice';
 import StarRatingComponent from 'react-star-rating-component';
 import style from './style.module.css';
 
 function AddReview() {
   const [review, setReview] = useState('');
   const [pecularities, setPecularities] = useState('');
-  const [stars, setStars] = useState(0);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -26,7 +25,7 @@ function AddReview() {
 
   const addReview = (evt) => {
     evt.preventDefault();
-    dispatch(addPlaceReviewSaga(review, stars, pecularities, id));
+    dispatch(addPlaceReviewSaga(review, pecularities, id));
     setReview('');
     history.push(`/places/${id}`);
   };
@@ -34,16 +33,6 @@ function AddReview() {
   return (
     <div className={`${style.container}`}>
       <form className='form' onSubmit={addReview}>
-        <p>Общая оценка заведения:</p>
-        <div className='stars'>
-          <StarRatingComponent
-            name='rating'
-            starCount={5}
-            editing={true}
-            starColor={'yellow'}
-            onStarClick={(nextValue, prevValue, name) => setStars(nextValue)}
-          />
-        </div>
         <p>Ваш отзыв:</p>
         <textarea
           className={style.textarea}
