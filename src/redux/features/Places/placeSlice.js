@@ -4,6 +4,7 @@ import {
   GETPLACESSAGA,
   ADDPLACESREVIEW,
   ADDNEWPLACE,
+  CHECKPLACE,
 } from '../../types/placesTypes';
 
 export const placeSlice = createSlice({
@@ -28,6 +29,11 @@ export const placeSlice = createSlice({
     addNewPlace: (state, action) => {
       state.places = action.payload;
     },
+
+    checkPlace: (state, action) => {
+      state.places = action.payload;
+    },
+
   },
 });
 
@@ -35,6 +41,7 @@ export const {
   placesReducer,
   addPlaceReview,
   addNewPlace,
+  checkPlace,
   addPlacePecularity,
 } = placeSlice.actions;
 
@@ -79,6 +86,12 @@ export const addNewPlaceSaga = (
     geometry,
 
     description,
+  };
+};
+
+export const checkPlaceSaga = () => {
+  return {
+    type: CHECKPLACE,
   };
 };
 

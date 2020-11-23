@@ -89,4 +89,8 @@ router.put('/new', async (req, res) => {
   }
 });
 
+router.post('/check', (req, res) => {
+  res.send('ответ по ручке checkPlace').end();
+})
+
 export default router;

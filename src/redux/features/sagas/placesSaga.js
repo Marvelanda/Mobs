@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { placesReducer, addNewPlace } from '../Places/placeSlice';
-import { GETPLACESSAGA, ADDNEWPLACE } from '../../types/placesTypes';
+import { placesReducer, addNewPlace, checkPlace } from '../Places/placeSlice';
+import { GETPLACESSAGA, ADDNEWPLACE, CHECKPLACE } from '../../types/placesTypes';
 
 async function getPlaces() {
   const resp = await fetch('http://localhost:8080/places');
@@ -81,4 +81,29 @@ export function* addNewPlaceWorker({
 
 export function* addNewPlaceWatcher() {
   yield takeEvery(ADDNEWPLACE, addNewPlaceWorker);
+}
+
+
+async function checkUserPlace() {
+  
+
+  const resp = await fetch(`http://localhost:8080/places/check`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ }),
+  });
+  
+  const data = await resp.text();
+  return console.log(data);
+}
+
+export function* checkPlaceWorker() {
+  const response = yield call(() => checkUserPlace());
+  yield put(checkPlace(response));
+}
+
+export function* checkPlaceWatcher() {
+  yield takeEvery(CHECKPLACE, checkPlaceWorker);
 }
