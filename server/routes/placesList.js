@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id/reviews', async (req, res) => {
-  const place = await Place.findOne({ _id: req.params.id });
+  const place = await Place.findById(req.params.id);
   const reviews = await place.getReviews();
 
   res.json(reviews);
@@ -42,6 +42,18 @@ router.post('/:id/reviews', async (req, res) => {
 
     res.status(200).json(newReview);
   }
+});
+
+router.post('/:id/ratings', async (req, res) => {
+  const { stars } = req.body;
+
+  const place = await Place.findById(req.params.id);
+  place.votesSum = place.votesSum + stars;
+  place.votesNumber = place.votesNumber + 1;
+  place.rating = (place.votesSum / place.votesNumber).toFixed(2);
+  await place.save();
+
+  res.status(200).json({ rating: place.rating, id: place._id });
 });
 
 router.put('/new', async (req, res) => {
