@@ -10,12 +10,12 @@ router.post('/', async (req, res) => {
   if (userId) {
     const user = await User.findById(userId);
 
-    res.status(200).json(user.geometry);
+    return res.status(200).json(user.places);
   } else {
     const list = await Place.find().lean().exec();
     const fivePlaces = getRandomFive(list);
 
-    res.status(200).json(fivePlaces);
+    return res.status(200).json(fivePlaces);
   }
 });
 
