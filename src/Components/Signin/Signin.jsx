@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom'
-import { getUser } from '../../redux/features/Places/authSlice'
+
+import { useHistory } from 'react-router-dom';
+import { getUser } from '../../redux/features/Places/authSlice';
 
 import style from './style.module.css';
 
 function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const [anotherTry, setAnotherTry] = useState(true)
 
   const dispatch = useDispatch()
@@ -65,10 +67,10 @@ function Signin() {
         {anotherTry ? (
           ''
         ) : (
-            <p>
-              Такого пользователя не существует или вы ввели неверные данные :---O
-            </p>
-          )}
+          <p>
+            Такого пользователя не существует или вы ввели неверные данные :---O
+          </p>
+        )}
         <button type='submit' className='button' onClick={doFetch}>
           Войти
         </button>

@@ -1,6 +1,7 @@
 import express from 'express';
 import Place from '../models/place.js';
 import Review from '../models/review.js';
+import User from '../models/user.js'
 
 const router = express.Router();
 
@@ -25,7 +26,7 @@ router.get('/:id/reviews', async (req, res) => {
 });
 
 router.post('/:id/reviews', async (req, res) => {
-  const { review, stars, pecularities, userId } = req.body;
+  const { review, pecularities, userId } = req.body;
 
   if (review) {
     const newReview = new Review({
@@ -44,6 +45,23 @@ router.post('/:id/reviews', async (req, res) => {
   }
 });
 
+router.patch('/:id/share', async (req,res) => {
+  const { username } = req.body;
+  const { id } = req.params;
+  try {
+    const user = await User.findOne({username});
+    const result = user.places.find(item => item == id)
+    if (result) {
+      return res.status(400).json({message: 'Пользователю уже доступно данное заведение'})
+    }
+    user.places.push(id)
+    await user.save()
+    res.status(200).json({message: 'Теперь это заведение доступно вашему другу'})
+  } catch(error) {
+    res.status(400).json({message: 'Пользователя с таким username не существует'})
+  }
+
+})
 router.post('/:id/ratings', async (req, res) => {
   const { stars } = req.body;
 
@@ -91,6 +109,6 @@ router.put('/new', async (req, res) => {
 
 router.post('/check', (req, res) => {
   res.send('ответ по ручке checkPlace').end();
-})
+});
 
 export default router;

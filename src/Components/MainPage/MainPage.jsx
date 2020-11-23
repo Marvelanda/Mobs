@@ -10,13 +10,12 @@ import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
 import { question, coin } from './placemarks';
 import { Link } from 'react-router-dom';
 
-// const newFive = getRandomFive(myArray);
-
 function MainPage() {
   const dispatch = useDispatch();
 
+  useSelector((state) => state.auth.userName);
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
-  console.log(fivePlaces);
+
   useEffect(() => {
     dispatch(getFivePlacesSaga());
   }, []);
@@ -26,9 +25,6 @@ function MainPage() {
   const [modalInfo, setModalInfo] = useState({});
 
   const history = useHistory();
-
-  //ВМЕСТО АВТОРИЗАЦИИ
-  let isAuth = true;
 
   const onClose = () => {
     setClass('animate__animated animate__rollOut');
@@ -60,7 +56,7 @@ function MainPage() {
             }}
           >
             <Modal open={isOpen} onClose={onClose}>
-              {isAuth ? (
+              {localStorage.length ? (
                 <div className={modalClass}>
                   <h2>{modalInfo.placeName}</h2>
                   <p className={style.description}>Часы работы:</p>
@@ -72,11 +68,11 @@ function MainPage() {
               ) : (
                 <div className={modalClass}>
                   <h2>
-                    <Link to='/signup'>Войдите</Link>
+                    <Link to='/signin'>Войдите</Link>
                   </h2>
                   <h2>или</h2>
                   <h2>
-                    <Link to='/signin'> зарегистрируйтесь</Link>
+                    <Link to='/signup'> зарегистрируйтесь</Link>
                   </h2>
                 </div>
               )}
@@ -92,7 +88,7 @@ function MainPage() {
                 geometry={el.geometry}
                 options={{
                   iconLayout: 'default#image',
-                  iconImageHref: isAuth ? coin : question,
+                  iconImageHref: localStorage.length ? coin : question,
                   iconImageSize: [96, 90],
                   iconImageOffset: [-5, -38],
                 }}
