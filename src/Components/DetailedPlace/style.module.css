@@ -26,10 +26,11 @@
 
 .container:first-of-type {
   margin-top: 100px;
-  height: 35%;
+  height: 40%;
 }
 
 .container:last-of-type {
+  margin: 0 auto;
   padding: 25px 0;
   margin-top: 5px;
   width: 100vw;
@@ -70,4 +71,8 @@
 .reviews_container button {
   margin-top: 0;
   margin-left: 100px;
+}
+
+.center {
+  margin: 0 auto;
 }

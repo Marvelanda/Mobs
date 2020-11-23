@@ -7,21 +7,32 @@ function Header() {
       <nav className={`container ${style['header-container']}`}>
         <ul className={`${style['navigation-list']}`}>
           <li className={`${style['navigation-list__item']}`}>
-            <Link to='/'>Главная страница </Link>
+            <Link key='main' to='/'>
+              Главная страница
+            </Link>
           </li>
-
-          <li className={`${style['navigation-list__item']}`}>
-            <Link to='/signin'>Регистрация</Link>
-          </li>
-
-          <li className={`${style['navigation-list__item']}`}>
-            <Link to='/signup'>Войти</Link>
-          </li>
-
-          <li className={`${style['navigation-list__item']}`}>
-            <Link to='/places'>Список мест</Link>
-            <Link to='/profile'>Профиль</Link>
-          </li>
+          {sessionStorage.user ? (
+            <>
+              <li
+                key='placesList'
+                className={`${style['navigation-list__item']}`}
+              >
+                <Link to='/places'>Список мест</Link>
+              </li>
+              <li key='profile' className={`${style['navigation-list__item']}`}>
+                <Link to='/profile'>Профиль</Link>
+              </li>
+            </>
+          ) : (
+            <>
+              <li key='signup' className={`${style['navigation-list__item']}`}>
+                <Link to='/signup'>Регистрация</Link>
+              </li>
+              <li key='signin' className={`${style['navigation-list__item']}`}>
+                <Link to='/signin'>Войти</Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
     </div>

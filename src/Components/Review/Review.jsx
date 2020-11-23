@@ -1,11 +1,12 @@
 import style from './style.module.css';
 
-function Review({ author, review }) {
+function Review({ author, review, pecularities }) {
   return (
-    <div className={`${style.reviews_container}`}>
+    <li className={`${style.reviews_container}`}>
       <p>{author}:</p>
       <p>{review}</p>
-    </div>
+      <p>Особенности: {pecularities}</p>
+    </li>
   );
 }
 export default Review;

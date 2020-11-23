@@ -42,6 +42,7 @@ export const {
   addPlaceReview,
   addNewPlace,
   checkPlace,
+  addPlacePecularity,
 } = placeSlice.actions;
 
 export const getPlacesListSaga = () => {
@@ -50,11 +51,13 @@ export const getPlacesListSaga = () => {
   };
 };
 
-export const addPlaceReviewSaga = (review, id) => {
+export const addPlaceReviewSaga = (review, stars, pecularities, id) => {
   return {
     type: ADDPLACESREVIEW,
-    id,
     review,
+    stars,
+    pecularities,
+    id,
   };
 };
 

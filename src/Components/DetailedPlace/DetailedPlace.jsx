@@ -1,10 +1,8 @@
 import style from './style.module.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getPlacesListSaga,
-  addPlaceReviewSaga,
-} from '../../redux/features/Places/placeSlice';
+import { getPlacesListSaga } from '../../redux/features/Places/placeSlice';
+import { getReviewsListSaga } from '../../redux/features/Places/reviewSlice';
 import { Link, useParams } from 'react-router-dom';
 import Review from '../Review/Review';
 import SwiperCore, {
@@ -25,7 +23,6 @@ import StarRatingComponent from 'react-star-rating-component';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
 
 function DetailedPlace() {
-  const [review, setReview] = useState('');
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -33,19 +30,15 @@ function DetailedPlace() {
     return item._id === id;
   });
 
+  const reviews = useSelector((state) => state.reviews.reviews);
+
   useEffect(() => {
     dispatch(getPlacesListSaga());
   }, []);
 
-  const handlerReview = (evt) => {
-    setReview(evt.target.value);
-  };
-
-  const addReview = (evt) => {
-    evt.preventDefault();
-    dispatch(addPlaceReviewSaga(review, id));
-    setReview('');
-  };
+  useEffect(() => {
+    dispatch(getReviewsListSaga(id));
+  }, []);
 
   return (
     <div className={style.section}>
@@ -115,32 +108,24 @@ function DetailedPlace() {
                 <button className='button'>Написать отзыв</button>
               </Link>
             </div>
-
-            {/* <form onSubmit={addReview}>
-              <input
-                className={style.input}
-                type='text'
-                onChange={handlerReview}
-                value={review}
-              />
-              <button className='button' type='submit'>
-                Добавить отзыв
-              </button>
-            </form> */}
           </div>
           <div className={`${style.container} ${style.blur}`}>
-            {!!place.review.length &&
-              place.review.map((item) => {
-                const singleReview = Object.entries(item);
-
-                return (
-                  <Review
-                    key={singleReview[0][1]}
-                    author={singleReview[0][0]}
-                    review={singleReview[0][1]}
-                  />
-                );
-              })}
+            <ul className={style.center}>
+              {reviews.length ? (
+                reviews.map((item) => {
+                  return (
+                    <Review
+                      key={item._id}
+                      author={item.author}
+                      review={item.review}
+                      pecularities={item.pecularities}
+                    />
+                  );
+                })
+              ) : (
+                <li>No reviews</li>
+              )}
+            </ul>
           </div>
         </>
       )}

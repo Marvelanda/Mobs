@@ -7,6 +7,8 @@ function Profile() {
       <h3 className='text'>Доступные локации:</h3>
       <ul></ul>
       <CheckUserPlace />
+      <h3 className='text'>Имя:</h3>
+      <p className='text'>Ваш рейтинг:</p>
     </div>
   );
 }
