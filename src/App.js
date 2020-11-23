@@ -12,6 +12,7 @@ import DetailedPlace from './Components/DetailedPlace/DetailedPlace';
 import AddNewPlace from './Components/AddNewPlace/AddNewPlace';
 import AddReview from './Components/Review/AddReview';
 import NotFound from './Components/NotFound/NotFound';
+import Signout from './Components/Signout/Signout';
 
 function App() {
   return (
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route exact path='/signup'>
           <Signup />
+        </Route>
+        <Route exact path='/signout'>
+          <Signout />
         </Route>
         <Route exact path='/places'>
           <PlacesList />

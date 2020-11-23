@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from './style.module.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { newUserName } from '../../redux/features/Places/authSlice';
 
 function Signup() {
@@ -11,12 +11,14 @@ function Signup() {
 
   const dispatch = useDispatch();
 
+  const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
+
   const doFetch = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/auth/signin', {
+      const response = await fetch('http://localhost:8080/auth/signup', {
         method: 'POST',
-        body: JSON.stringify({ username, password, email }),
+        body: JSON.stringify({ username, password, email, fivePlaces }),
         headers: {
           'Content-Type': 'application/json',
         },

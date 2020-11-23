@@ -1,8 +1,11 @@
 import style from './style.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function Header() {
+  const user = useSelector((state) => state.auth.userName);
+
   return (
     <div className={`${style.header}`}>
       <nav className={`container ${style['header-container']}`}>
@@ -22,6 +25,9 @@ function Header() {
               </li>
               <li key='profile' className={`${style['navigation-list__item']}`}>
                 <Link to='/profile'>Профиль</Link>
+              </li>
+              <li key='logout' className={`${style['navigation-list__item']}`}>
+                <Link to='/logout'>Выйти</Link>
               </li>
             </>
           ) : (
