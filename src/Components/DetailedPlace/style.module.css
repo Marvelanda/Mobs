@@ -1,5 +1,5 @@
 .section {
-  background-image: url('../../img/22fc202843aec437eaf85816416c0e73.jpg');
+  background-color: rgb(0, 0, 0);
   background-size: cover;
   height: 100vh;
   width: 100vw;
@@ -75,4 +75,23 @@
 
 .center {
   margin: 0 auto;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-right: 50px;
+}
+
+.rating {
+  font-size: 20px;
+}
+
+.stars {
+  font-size: 30px;
+}
+
+.rating-container button {
+  margin: 0;
 }

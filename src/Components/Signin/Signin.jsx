@@ -1,34 +1,24 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom'
+import {getUser} from '../../redux/features/Places/authSlice'
+
 import style from './style.module.css';
 
 function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [exist, setExist] = useState(true);
-
+  const dispatch = useDispatch()
   const history = useHistory();
+  const user = useSelector((state)=>state.auth.username)
 
   const doFetch = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:8080/auth/signup', {
-        method: 'POST',
-        body: JSON.stringify({ password, email }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const json = await response.json();
-      setExist(json.auth);
-      if (json.auth) {
-        sessionStorage.setItem('user', json.userid);
-        history.push('/places');
-      }
-      console.log(json);
-    } catch (error) {
-      console.error('Ошибка:', error);
-    }
+
+    dispatch(getUser(email, password))
+
   };
 
   const emailHandler = (evt) => {
@@ -63,10 +53,10 @@ function Signin() {
         {exist ? (
           ''
         ) : (
-          <p>
-            Такого пользователя не существует или вы ввели неверные данные :---O
-          </p>
-        )}
+            <p>
+              Такого пользователя не существует или вы ввели неверные данные :---O
+            </p>
+          )}
         <button type='submit' className='button' onClick={doFetch}>
           Войти
         </button>

@@ -24,8 +24,9 @@ function MainPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [modalClass, setClass] = useState('');
   const [modalInfo, setModalInfo] = useState({});
+
   const history = useHistory();
-  
+
   //ВМЕСТО АВТОРИЗАЦИИ
   let isAuth = true;
 
@@ -58,23 +59,29 @@ function MainPage() {
               ],
             }}
           >
-            
             <Modal open={isOpen} onClose={onClose}>
-              { isAuth ? 
+              {isAuth ? (
                 <div className={modalClass}>
                   <h2>{modalInfo.placeName}</h2>
                   <p className={style.description}>Часы работы:</p>
-              <p className={style.description}>{modalInfo.info?.workingHours}</p>
+                  <p className={style.description}>
+                    {modalInfo.info?.workingHours}
+                  </p>
                   <img src={modalInfo.placePhotoUrl} alt='foto' width='250px' />
-                </div> :
-                <div className={modalClass}>
-                  <h2><Link to='/signup'>Войдите</Link></h2>
-                  <h2>или</h2>
-                  <h2><Link to='/signin'> зарегистрируйтесь</Link></h2>
                 </div>
-              }
+              ) : (
+                <div className={modalClass}>
+                  <h2>
+                    <Link to='/signup'>Войдите</Link>
+                  </h2>
+                  <h2>или</h2>
+                  <h2>
+                    <Link to='/signin'> зарегистрируйтесь</Link>
+                  </h2>
+                </div>
+              )}
             </Modal>
-             
+
             <ZoomControl options={{ float: 'right' }} />
 
             {fivePlaces.map((el, i) => (

@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id/reviews', async (req, res) => {
-  const place = await Place.findOne({ _id: req.params.id });
+  const place = await Place.findById(req.params.id);
   const reviews = await place.getReviews();
 
   res.json(reviews);
@@ -47,9 +47,14 @@ router.post('/:id/reviews', async (req, res) => {
 
 router.patch('/:id/share', async (req,res) => {
   const { username } = req.body;
+  const { id } = req.params;
   try {
     const user = await User.findOne({username});
-    user.places.push(req.params.id)
+    const result = user.places.find(item => item == id)
+    if (result) {
+      return res.status(400).json({message: 'Пользователю уже доступно данное заведение'})
+    }
+    user.places.push(id)
     await user.save()
     res.status(200).json({message: 'Теперь это заведение доступно вашему другу'})
   } catch(error) {
@@ -57,6 +62,17 @@ router.patch('/:id/share', async (req,res) => {
   }
 
 })
+router.post('/:id/ratings', async (req, res) => {
+  const { stars } = req.body;
+
+  const place = await Place.findById(req.params.id);
+  place.votesSum = place.votesSum + stars;
+  place.votesNumber = place.votesNumber + 1;
+  place.rating = (place.votesSum / place.votesNumber).toFixed(2);
+  await place.save();
+
+  res.status(200).json({ rating: place.rating, id: place._id });
+});
 
 router.put('/new', async (req, res) => {
   const {
@@ -90,5 +106,9 @@ router.put('/new', async (req, res) => {
     console.log(error);
   }
 });
+
+router.post('/check', (req, res) => {
+  res.send('ответ по ручке checkPlace').end();
+})
 
 export default router;
