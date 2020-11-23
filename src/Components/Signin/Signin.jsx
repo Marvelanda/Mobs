@@ -1,7 +1,9 @@
 import { useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import {getUser} from '../../redux/features/Places/authSlice'
+
 import style from './style.module.css';
 
 function Signin() {
@@ -14,7 +16,9 @@ function Signin() {
 
   const doFetch = async (e) => {
     e.preventDefault();
+
     dispatch(getUser(email, password))
+
   };
 
   const emailHandler = (evt) => {

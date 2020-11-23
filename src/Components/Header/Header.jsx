@@ -1,5 +1,6 @@
 import style from './style.module.css';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function Header() {
   return (
@@ -11,7 +12,7 @@ function Header() {
               Главная страница
             </Link>
           </li>
-          {sessionStorage.user ? (
+          {localStorage.length ? (
             <>
               <li
                 key='placesList'
