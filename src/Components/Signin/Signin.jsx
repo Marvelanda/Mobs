@@ -20,7 +20,7 @@ function Signin() {
   const doFetch = async (e) => {
     e.preventDefault();
     dispatch(getUser(email, password))
-    if (localStorage.length) {
+    if (user) {
       setAnotherTry(true)
     
     } else {
@@ -29,10 +29,10 @@ function Signin() {
   };
 
   useEffect(() => {
-    if (localStorage.length !==0) {
+    if (user) {
       history.push('/')
     }
-  }, [localStorage.length])
+  }, [user])
 
 
   const emailHandler = (evt) => {
