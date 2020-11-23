@@ -1,10 +1,17 @@
 import { all } from 'redux-saga/effects';
 
-import { placesWatcher, addReviewWatcher, addNewPlaceWatcher } from './placesSaga';
-import { fivePlacesWatcher } from "./fivePlacesSaga";
+import { placesWatcher, addNewPlaceWatcher } from './placesSaga';
+import { reviewsWatcher, addReviewWatcher } from './reviewsSaga';
+import { fivePlacesWatcher } from './fivePlacesSaga';
 
 export default function* rootSaga() {
-  yield all([placesWatcher(), addReviewWatcher(), fivePlacesWatcher(), addNewPlaceWatcher()]);
+  yield all([
+    placesWatcher(),
+    addReviewWatcher(),
+    fivePlacesWatcher(),
+    addNewPlaceWatcher(),
+    reviewsWatcher(),
+  ]);
 
   // code after all-effect
 }

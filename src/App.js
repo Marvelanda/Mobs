@@ -11,6 +11,7 @@ import Footer from './Components/Footer/Footer';
 import DetailedPlace from './Components/DetailedPlace/DetailedPlace';
 import AddNewPlace from './Components/AddNewPlace/AddNewPlace';
 import AddReview from './Components/Review/AddReview';
+import NotFound from './Components/NotFound/NotFound';
 
 function App() {
   return (
@@ -40,6 +41,9 @@ function App() {
         </Route>
         <Route exact path='/places/:id/reviews'>
           <AddReview />
+        </Route>
+        <Route path=''>
+          <NotFound />
         </Route>
       </Switch>
       <Footer></Footer>

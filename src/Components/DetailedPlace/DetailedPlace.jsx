@@ -2,6 +2,7 @@ import style from './style.module.css';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPlacesListSaga } from '../../redux/features/Places/placeSlice';
+import { getReviewsListSaga } from '../../redux/features/Places/reviewSlice';
 import { Link, useParams } from 'react-router-dom';
 import Review from '../Review/Review';
 import SwiperCore, {
@@ -29,8 +30,14 @@ function DetailedPlace() {
     return item._id === id;
   });
 
+  const reviews = useSelector((state) => state.reviews.reviews);
+
   useEffect(() => {
     dispatch(getPlacesListSaga());
+  }, []);
+
+  useEffect(() => {
+    dispatch(getReviewsListSaga(id));
   }, []);
 
   return (
@@ -103,20 +110,22 @@ function DetailedPlace() {
             </div>
           </div>
           <div className={`${style.container} ${style.blur}`}>
-            <div className={style.center}>
-              {!!place.review.length &&
-                place.review.map((item) => {
-                  const singleReview = Object.entries(item);
-
+            <ul className={style.center}>
+              {reviews.length ? (
+                reviews.map((item) => {
                   return (
                     <Review
-                      key={singleReview[0][1]}
-                      author={singleReview[0][0]}
-                      review={singleReview[0][1]}
+                      key={item._id}
+                      author={item.author}
+                      review={item.review}
+                      pecularities={item.pecularities}
                     />
                   );
-                })}{' '}
-            </div>
+                })
+              ) : (
+                <li>No reviews</li>
+              )}
+            </ul>
           </div>
         </>
       )}
