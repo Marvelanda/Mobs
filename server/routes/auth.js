@@ -22,15 +22,24 @@ router.post('/signin', async (req, res) => {
 });
 
 router.post('/signup', async (req, res) => {
-  const UserByEmail = await User.findOne({ email: req.body.email });
-  const userPassword = UserByEmail.password;
-  if (
-    UserByEmail.email == req.body.email &&
-    (await bcrypt.compare(req.body.password, userPassword))
-  ) {
-    res.json({ auth: true, userid: UserByEmail.id });
+  if (req.body.email && req.body.password) {
+    const UserByEmail = await User.findOne({ email: req.body.email });
+    if (UserByEmail) {
+      const userPassword = UserByEmail.password;
+      if (
+        UserByEmail.email == req.body.email &&
+        (await bcrypt.compare(req.body.password, userPassword))
+      ) {
+        res.json({ auth: true, userid: UserByEmail.id });
+      } else {
+        res.json({ auth: false });
+      }
+    } else {
+      res.json({ auth: false })
+    }
+
   } else {
-    res.json({ auth: false });
+    res.json({ auth: false })
   }
 });
 
