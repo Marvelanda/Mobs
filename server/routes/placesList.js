@@ -5,9 +5,12 @@ import User from '../models/user.js'
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
+  const { userID } = req.body;
   try {
-    const list = await Place.find();
+    const userInfo = await User.findById(userID).populate('places');
+    const list = userInfo.places;
+    console.log(list);
     if (list.length) {
       res.status(200).json(list);
     } else {
