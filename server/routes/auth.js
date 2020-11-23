@@ -2,9 +2,9 @@ import express from 'express';
 import User from '../models/user.js';
 import Place from '../models/place.js';
 import bcrypt from 'bcrypt';
+import { getRandomFive } from '../helpers/randomFive.js';
 
 const router = express.Router();
-import { getRandomFive } from '../helpers/randomFive.js';
 
 router.post('/signup', async (req, res) => {
   const UserByUsername = await User.findOne({ username: req.body.username });
@@ -18,7 +18,7 @@ router.post('/signup', async (req, res) => {
       email: req.body.email,
       username: req.body.username,
       password: await bcrypt.hash(req.body.password, 10),
-      geometry: req.body.fivePlaces,
+      places: req.body.fivePlaces,
     });
     await newUser.save();
 
