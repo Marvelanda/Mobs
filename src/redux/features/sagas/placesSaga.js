@@ -12,14 +12,20 @@ import {
   CHECKPLACE,
 } from '../../types/placesTypes';
 
-async function getPlaces() {
-  const resp = await fetch('http://localhost:8080/places');
+async function getPlaces(userID) {
+  const resp = await fetch('http://localhost:8080/places', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userID }),
+  });
   const data = await resp.json();
   return data;
 }
 
-export function* placesWorker() {
-  const newList = yield call(getPlaces);
+export function* placesWorker({ userID }) {
+  const newList = yield call(getPlaces, userID);
   yield put(placesReducer(newList));
 }
 

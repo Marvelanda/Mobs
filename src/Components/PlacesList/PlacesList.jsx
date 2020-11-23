@@ -8,9 +8,11 @@ function PlacesList() {
   const dispatch = useDispatch();
 
   const places = useSelector((state) => state.places.places);
+  const userID = localStorage.getItem('user')
+  
 
   useEffect(() => {
-    dispatch(getPlacesListSaga());
+    dispatch(getPlacesListSaga(userID));
   }, []);
 
   return (

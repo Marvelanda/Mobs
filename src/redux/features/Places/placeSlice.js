@@ -44,9 +44,10 @@ export const {
   checkPlace,
 } = placeSlice.actions;
 
-export const getPlacesListSaga = () => {
+export const getPlacesListSaga = (userID) => {
   return {
     type: GETPLACESSAGA,
+    userID,
   };
 };
 
