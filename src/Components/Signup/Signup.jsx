@@ -1,89 +1,83 @@
 import { useState } from 'react';
 import style from './style.module.css';
+import { useDispatch } from 'react-redux';
+import { newUserName } from '../../redux/features/Places/authSlice';
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [exist, setExist] = useState(true)
-  // const dispatch = useDispatch();
+  const [username, setUserName] = useState('');
+  const [exist, setExist] = useState(false);
 
-  // const changeStatus = () => {
-  //   dispatch(AC.changeStatus());
-  // };
+  const dispatch = useDispatch();
 
-  // const history = useHistory();
-
-  // const sendForm = (evt) => {
-  //   evt.preventDefault();
-  //   fetch(`${process.env.REACT_APP_URL}/users/signup`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ email, password }),
-  //   })
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       if (data.status === 'ok') {
-  //         changeStatus();
-  //         history.push('/');
-  //       }
-  //     });
-  // };
-
-  const  doFetch = async (e) => {
-    e.preventDefault()
+  const doFetch = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/auth/signup', {
+      const response = await fetch('http://localhost:8080/auth/signin', {
         method: 'POST',
-        body: JSON.stringify({ password, email }),
+        body: JSON.stringify({ username, password, email }),
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       });
       const json = await response.json();
-      setExist(json.auth)
-      if(json.auth) {
-        sessionStorage.setItem('user', json.userid)
+      setExist(json.exist);
+      if (json.done) {
+        dispatch(newUserName(username));
+        sessionStorage.setItem('user', json.userid);
       }
       console.log(json);
     } catch (error) {
       console.error('Ошибка:', error);
     }
-  }
-
-  const emailHandler = (evt) => {
-    setEmail(evt.target.value);
-  };
-
-  const passwordHandler = (evt) => {
-    setPassword(evt.target.value);
   };
 
   return (
     <div className={`${style.container}`}>
-      <form className={`${style.form} form animate__animated animate__fadeIn`}>
+      <form className='form animate__animated animate__fadeIn'>
+        <div className='input-clue text'>
+          <p className='description-clue'>Введите имя</p>
+
+          <input
+            type='text'
+            placeholder='Name'
+            onChange={(e) => {
+              setUserName(e.target.value);
+            }}
+          />
+        </div>
         <div className='input-clue text'>
           <p className='description-clue'>Введите e-mail</p>
+
           <input
-            onChange={emailHandler}
             type='email'
-            value={email}
-            placeholder='Email address'
+            placeholder='Email'
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
         </div>
         <div className='input-clue text'>
           <p className='description-clue'>Введите пароль</p>
+
           <input
-            onChange={passwordHandler}
             type='password'
-            value={password}
             placeholder='Password'
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
         </div>
-        {exist ? '' : <p>Такого пользователя не существует или вы ввели неверные данные :---O</p>}
+        <label
+          className={`description-clue ${style['description-checkbox']} text`}
+        >
+          <input type='checkbox' required />
+          {exist ? <p>Такой email или имя пользователя существует!!!</p> : ''}
+          <span>Я согласен на обработку персональных данных</span>
+        </label>
         <button type='submit' className='button' onClick={doFetch}>
-          Sign up
+          Зарегистрироваться
         </button>
       </form>
     </div>

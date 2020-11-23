@@ -1,5 +1,6 @@
 import express from 'express';
 import Place from '../models/place.js';
+import Review from '../models/review.js';
 
 const router = express.Router();
 
@@ -16,17 +17,30 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id/reviews', async (req, res) => {
+  const place = await Place.findOne({ _id: req.params.id });
+  const reviews = await place.getReviews();
+
+  res.json(reviews);
+});
+
 router.post('/:id/reviews', async (req, res) => {
-  const { review } = req.body;
-  const place = await Place.findById(req.params.id);
+  const { review, stars, pecularities, userId } = req.body;
 
   if (review) {
-    place.review.push({
-      ['Ya']: review,
+    const newReview = new Review({
+      author: userId,
+      placeName: req.params.id,
+      review,
+      pecularities,
     });
+    try {
+      await newReview.save();
+    } catch (err) {
+      console.log(err);
+    }
 
-    await place.save();
-    res.status(200).json({ author: 'Ya', review });
+    res.status(200).json(newReview);
   }
 });
 
@@ -61,6 +75,6 @@ router.put('/new', async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-})
+});
 
 export default router;

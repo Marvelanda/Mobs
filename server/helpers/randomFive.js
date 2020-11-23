@@ -21,8 +21,8 @@ function randomizeIndex(filteredArr) {
 }
 
 export function getRandomFive(myArray) {
-  const filteredArr = myArray.filter((el) => el.secrecy === 1) 
-  console.log(filteredArr);
+  const filteredArr = myArray.filter((el) => el.secrecy === 1);
+
   let randomFiveArray = [];
   let indexArray = [];
   for (let i = 0; i < 3; i += 1) {
@@ -33,10 +33,6 @@ export function getRandomFive(myArray) {
     indexArray.push(randIndex);
     randomFiveArray.push(filteredArr[randIndex]);
   }
-  console.log(randomFiveArray);
+
   return randomFiveArray;
 }
-
-
-
-

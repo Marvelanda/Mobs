@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { addPlaceReviewSaga } from '../../redux/features/Places/placeSlice';
 import StarRatingComponent from 'react-star-rating-component';
@@ -14,6 +14,8 @@ function AddReview() {
   const history = useHistory();
   const { id } = useParams();
 
+  const user = useSelector((state) => state.auth.userName);
+
   const handlerReview = (evt) => {
     setReview(evt.target.value);
   };
@@ -24,7 +26,7 @@ function AddReview() {
 
   const addReview = (evt) => {
     evt.preventDefault();
-    dispatch(addPlaceReviewSaga(review, id));
+    dispatch(addPlaceReviewSaga(review, stars, pecularities, id));
     setReview('');
     history.push(`/places/${id}`);
   };

@@ -8,32 +8,6 @@
   background-size: cover;
 }
 
-.description-checkbox > input[type='checkbox'] {
-  width: 1px;
-  position: relative;
-  z-index: -1;
-  opacity: 0;
-}
-
-.description-checkbox > span::before {
-  content: '';
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  border: 1px solid #2b2a2a;
-  background-color: white;
-  margin-right: 0.5em;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 50% 50%;
-  border-radius: 1px;
-}
-
-.description-checkbox > input:checked + span::before {
-  background-image: url('../../img/checked.jpg');
-}
-
-.description-checkbox {
-  margin-top: 10px;
-  margin-left: -13px;
+.form {
+  padding: 80px 60px;
 }
