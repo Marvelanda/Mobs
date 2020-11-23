@@ -1,7 +1,10 @@
 import style from './style.module.css';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPlacesListSaga } from '../../redux/features/Places/placeSlice';
+import {
+  getPlacesListSaga,
+  addPlaceRatingSaga,
+} from '../../redux/features/Places/placeSlice';
 import { getReviewsListSaga } from '../../redux/features/Places/reviewSlice';
 import { Link, useParams } from 'react-router-dom';
 import Review from '../Review/Review';
@@ -23,6 +26,7 @@ import StarRatingComponent from 'react-star-rating-component';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
 
 function DetailedPlace() {
+  const [stars, setStars] = useState(0);
   const dispatch = useDispatch();
   const { id } = useParams();
 
@@ -40,6 +44,11 @@ function DetailedPlace() {
     dispatch(getReviewsListSaga(id));
   }, []);
 
+  const starsHandler = () => {
+    dispatch(addPlaceRatingSaga(id, stars));
+    setStars(0);
+  };
+
   return (
     <div className={style.section}>
       {place && (
@@ -47,14 +56,26 @@ function DetailedPlace() {
           <div className={style.container}>
             <div className={`${style.description} ${style.blur}`}>
               <h1 className={`${style.heading}`}>{place.placeName}</h1>
-              <div className={`${style.heading}`}>
-                <StarRatingComponent
-                  name='rating'
-                  starCount={5}
-                  editing={false}
-                  value={place.rating}
-                  starColor={'yellow'}
-                />
+
+              <div className={style['rating-container']}>
+                <p className={style.rating}>Рейтинг: {place.rating} </p>
+                <div className={style.stars}>
+                  <StarRatingComponent
+                    name='rating'
+                    starCount={5}
+                    editing={true}
+                    value={stars}
+                    starColor={'yellow'}
+                    onStarClick={(nextValue, prevValue, name) =>
+                      setStars(nextValue)
+                    }
+                    onStarHover={(nextValue, prevValue, name) =>
+                      setStars(nextValue)
+                    }
+                  />
+                </div>
+
+                <button onClick={starsHandler}>Поставить оценку</button>
               </div>
 
               <div className={style.images}>
