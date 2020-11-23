@@ -25,7 +25,7 @@ router.get('/:id/reviews', async (req, res) => {
 });
 
 router.post('/:id/reviews', async (req, res) => {
-  const { review, stars, pecularities, userId } = req.body;
+  const { review, pecularities, userId } = req.body;
 
   if (review) {
     const newReview = new Review({
@@ -91,6 +91,6 @@ router.put('/new', async (req, res) => {
 
 router.post('/check', (req, res) => {
   res.send('ответ по ручке checkPlace').end();
-})
+});
 
 export default router;
