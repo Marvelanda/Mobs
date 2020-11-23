@@ -14,7 +14,7 @@ function Signup() {
   const doFetch = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/auth/signin', {
+      const response = await fetch('http://localhost:8080/auth/signup', {
         method: 'POST',
         body: JSON.stringify({ username, password, email }),
         headers: {

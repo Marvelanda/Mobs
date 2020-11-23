@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
-router.post('/signin', async (req, res) => {
+router.post('/signup', async (req, res) => {
   const UserByUsername = await User.findOne({ username: req.body.username });
   const UserByEmail = await User.findOne({ email: req.body.email });
   if (UserByUsername || UserByEmail) {
@@ -21,7 +21,7 @@ router.post('/signin', async (req, res) => {
   }
 });
 
-router.post('/signup', async (req, res) => {
+router.post('/signin', async (req, res) => {
   if (req.body.email && req.body.password) {
     const UserByEmail = await User.findOne({ email: req.body.email });
     if (UserByEmail) {
