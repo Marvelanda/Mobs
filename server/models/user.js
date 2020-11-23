@@ -24,12 +24,18 @@ const UserSchema = new mongoose.Schema({
     match: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
   },
   places: [
-    { 
-      type: mongoose.Schema.Types.ObjectId, 
+    {
+      type: mongoose.Schema.Types.ObjectId,
       ref: 'Place',
-    }
+    },
   ],
-  rate: Number,
+  visitedPlaces: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Place',
+    },
+  ],
+  rating: Number,
 });
 
 export default mongoose.model('User', UserSchema);
