@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { act } from 'react-dom/test-utils';
 
 import {
   GETPLACESSAGA,
-  ADDPLACESREVIEW,
+  ADDPLACERATING,
   ADDNEWPLACE,
   CHECKPLACE,
 } from '../../types/placesTypes';
@@ -17,13 +18,12 @@ export const placeSlice = createSlice({
       state.places = action.payload;
     },
 
-    addPlaceReview: (state, action) => {
+    addPlaceRating: (state, action) => {
       const place = state.places.find((item) => {
         return item._id === action.payload.id;
       });
-      place.review.push({
-        [action.payload.response.author]: action.payload.response.review,
-      });
+
+      place.rating = action.payload.rating;
     },
 
     addNewPlace: (state, action) => {
@@ -39,25 +39,23 @@ export const placeSlice = createSlice({
 
 export const {
   placesReducer,
-  addPlaceReview,
   addNewPlace,
+  addPlaceRating,
   checkPlace,
-  addPlacePecularity,
 } = placeSlice.actions;
 
-export const getPlacesListSaga = () => {
+export const getPlacesListSaga = (userID) => {
   return {
     type: GETPLACESSAGA,
+    userID,
   };
 };
 
-export const addPlaceReviewSaga = (review, stars, pecularities, id) => {
+export const addPlaceRatingSaga = (id, stars) => {
   return {
-    type: ADDPLACESREVIEW,
-    review,
-    stars,
-    pecularities,
+    type: ADDPLACERATING,
     id,
+    stars,
   };
 };
 
@@ -84,7 +82,6 @@ export const addNewPlaceSaga = (
     category,
     rating,
     geometry,
-
     description,
   };
 };

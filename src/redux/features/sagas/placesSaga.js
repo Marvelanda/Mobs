@@ -1,21 +1,38 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { placesReducer, addNewPlace, checkPlace } from '../Places/placeSlice';
-import { GETPLACESSAGA, ADDNEWPLACE, CHECKPLACE } from '../../types/placesTypes';
+import {
+  placesReducer,
+  addNewPlace,
+  addPlaceRating,
+  checkPlace,
+} from '../Places/placeSlice';
+import {
+  GETPLACESSAGA,
+  ADDNEWPLACE,
+  ADDPLACERATING,
+  CHECKPLACE,
+} from '../../types/placesTypes';
 
-async function getPlaces() {
-  const resp = await fetch('http://localhost:8080/places');
+async function getPlaces(userID) {
+  const resp = await fetch('http://localhost:8080/places', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ userID }),
+  });
   const data = await resp.json();
   return data;
 }
 
-export function* placesWorker() {
-  const newList = yield call(getPlaces);
+export function* placesWorker({ userID }) {
+  const newList = yield call(getPlaces, userID);
   yield put(placesReducer(newList));
 }
 
 export function* placesWatcher() {
   yield takeEvery(GETPLACESSAGA, placesWorker);
 }
+
 async function addPlace(
   placeName,
   placeUrl,
@@ -83,9 +100,28 @@ export function* addNewPlaceWatcher() {
   yield takeEvery(ADDNEWPLACE, addNewPlaceWorker);
 }
 
+async function addRating(id, stars) {
+  const resp = await fetch(`http://localhost:8080/places/${id}/ratings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ stars }),
+  });
+  const data = await resp.json();
+  return data;
+}
 
-async function checkUserPlace(latitude, longitude) {
+export function* ratingWorker({ id, stars }) {
+  const response = yield call(() => addRating(id, stars));
+  yield put(addPlaceRating(response));
+}
+export function* ratingWatcher() {
+  yield takeEvery(ADDPLACERATING, ratingWorker);
+}
+  
 
+async function checkUserPlace(latitude, longitude ) {
   const resp = await fetch(`http://localhost:8080/places/check`, {
     method: 'POST',
     headers: {
@@ -93,8 +129,6 @@ async function checkUserPlace(latitude, longitude) {
     },
     body: JSON.stringify({ latitude, longitude }),
   });
-  const data = await resp.text();
-  return console.log(data);
 }
 
 export function* checkPlaceWorker({latitude, longitude}) {

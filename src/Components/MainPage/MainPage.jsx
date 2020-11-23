@@ -10,24 +10,21 @@ import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
 import { question, coin } from './placemarks';
 import { Link } from 'react-router-dom';
 
-// const newFive = getRandomFive(myArray);
-
 function MainPage() {
   const dispatch = useDispatch();
 
+  const user = useSelector((state) => state.auth.userName);
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
-  console.log(fivePlaces);
+
   useEffect(() => {
     dispatch(getFivePlacesSaga());
-  }, []);
+  }, [user]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [modalClass, setClass] = useState('');
   const [modalInfo, setModalInfo] = useState({});
+
   const history = useHistory();
-  
-  //ВМЕСТО АВТОРИЗАЦИИ
-  let isAuth = true;
 
   const onClose = () => {
     setClass('animate__animated animate__rollOut');
@@ -58,23 +55,29 @@ function MainPage() {
               ],
             }}
           >
-            
             <Modal open={isOpen} onClose={onClose}>
-              { isAuth ? 
+              {localStorage.length ? (
                 <div className={modalClass}>
                   <h2>{modalInfo.placeName}</h2>
                   <p className={style.description}>Часы работы:</p>
-              <p className={style.description}>{modalInfo.info?.workingHours}</p>
+                  <p className={style.description}>
+                    {modalInfo.info?.workingHours}
+                  </p>
                   <img src={modalInfo.placePhotoUrl} alt='foto' width='250px' />
-                </div> :
-                <div className={modalClass}>
-                  <h2><Link to='/signup'>Войдите</Link></h2>
-                  <h2>или</h2>
-                  <h2><Link to='/signin'> зарегистрируйтесь</Link></h2>
                 </div>
-              }
+              ) : (
+                <div className={modalClass}>
+                  <h2>
+                    <Link to='/signin'>Войдите</Link>
+                  </h2>
+                  <h2>или</h2>
+                  <h2>
+                    <Link to='/signup'> зарегистрируйтесь</Link>
+                  </h2>
+                </div>
+              )}
             </Modal>
-             
+
             <ZoomControl options={{ float: 'right' }} />
 
             {fivePlaces.map((el, i) => (
@@ -85,7 +88,7 @@ function MainPage() {
                 geometry={el.geometry}
                 options={{
                   iconLayout: 'default#image',
-                  iconImageHref: isAuth ? coin : question,
+                  iconImageHref: localStorage.length ? coin : question,
                   iconImageSize: [96, 90],
                   iconImageOffset: [-5, -38],
                 }}

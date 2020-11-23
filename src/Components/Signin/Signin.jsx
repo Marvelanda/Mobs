@@ -1,35 +1,39 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useHistory } from 'react-router-dom';
+import { getUser } from '../../redux/features/Places/authSlice';
+
 import style from './style.module.css';
 
 function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [exist, setExist] = useState(true);
 
+  const [anotherTry, setAnotherTry] = useState(true)
+
+  const dispatch = useDispatch()
   const history = useHistory();
+  const user = useSelector((state) => state.auth.userName)
 
   const doFetch = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:8080/auth/signup', {
-        method: 'POST',
-        body: JSON.stringify({ password, email }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const json = await response.json();
-      setExist(json.auth);
-      if (json.auth) {
-        sessionStorage.setItem('user', json.userid);
-        history.push('/places');
-      }
-      console.log(json);
-    } catch (error) {
-      console.error('Ошибка:', error);
+    dispatch(getUser(email, password))
+    if (user) {
+      setAnotherTry(true)
+    
+    } else {
+      setAnotherTry(false)
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      history.push('/')
+    }
+  }, [user])
+
 
   const emailHandler = (evt) => {
     setEmail(evt.target.value);
@@ -60,7 +64,7 @@ function Signin() {
             placeholder='Password'
           />
         </div>
-        {exist ? (
+        {anotherTry ? (
           ''
         ) : (
           <p>

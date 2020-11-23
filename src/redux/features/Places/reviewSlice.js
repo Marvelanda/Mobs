@@ -27,11 +27,10 @@ export const getReviewsListSaga = (id) => {
   };
 };
 
-export const addPlaceReviewSaga = (review, stars, pecularities, id) => {
+export const addPlaceReviewSaga = (review, pecularities, id) => {
   return {
     type: ADDPLACESREVIEW,
     review,
-    stars,
     pecularities,
     id,
   };
