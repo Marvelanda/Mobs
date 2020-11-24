@@ -17,7 +17,7 @@ function Signin() {
   const history = useHistory();
   const user = useSelector((state) => state.auth.status);
   const error = useSelector((state) => state.auth.error);
-  console.log(error);
+
   const doFetch = async (e) => {
     e.preventDefault();
     dispatch(getUser(email, password));

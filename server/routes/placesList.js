@@ -61,18 +61,24 @@ router.post('/:id/reviews', async (req, res) => {
 });
 
 router.patch('/:id/share', async (req, res) => {
-  const { username } = req.body;
+  const { friend, user } = req.body;
   const { id } = req.params;
+  const findUser = await User.findById(user);
+
   try {
-    const user = await User.findOne({ username });
-    const result = user.places.find((item) => item == id);
+    const usersFriend = await User.findOne({ username: friend });
+    const result = usersFriend.places.find((item) => item == id);
     if (result) {
       return res
         .status(400)
         .json({ message: 'Пользователю уже доступно данное заведение' });
     }
-    user.places.push(id);
-    await user.save();
+    usersFriend.places.push(id);
+    await usersFriend.save();
+
+    findUser.points += 10;
+
+    await findUser.save();
     res
       .status(200)
       .json({ message: 'Теперь это заведение доступно вашему другу' });
@@ -82,6 +88,7 @@ router.patch('/:id/share', async (req, res) => {
       .json({ message: 'Пользователя с таким username не существует' });
   }
 });
+
 router.post('/:id/ratings', async (req, res) => {
   const { stars } = req.body;
 
