@@ -13,10 +13,13 @@ export const placeSlice = createSlice({
   initialState: {
     places: [],
     message: '',
+    visited: [],
   },
   reducers: {
     placesReducer: (state, action) => {
-      state.places = action.payload;
+      state.places = action.payload.list;
+      state.visited = action.payload.visited;
+      console.log(state.visited);
     },
 
     addPlaceRating: (state, action) => {
@@ -32,9 +35,7 @@ export const placeSlice = createSlice({
     },
 
     checkPlace: (state, action) => {
-
       state.message = action.payload.message;
-
     },
   },
 });
