@@ -1,20 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {GETUSER} from '../../types/users'
-
+import { GETUSER } from '../../types/users';
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState: {
     userName: '',
+    status: false,
+    error: '',
   },
   reducers: {
     newUserName: (state, action) => {
-      state.userName = action.payload
-    }
+      console.log(action.payload);
+      state.userName = action.payload.userName;
+      state.status = action.payload.status;
+      state.error = action.payload.error;
+    },
+
+    setStatus: (state, action) => {
+      state.status = true;
+    },
+
+    logoutUser: (state, action) => {
+      state.userName = '';
+      state.status = false;
+    },
   },
 });
 
-export const getUser = (email, password) => { 
+export const getUser = (email, password) => {
   return {
     type: GETUSER,
     email,
@@ -31,7 +44,6 @@ export const getUser = (email, password) => {
 //   };
 // };
 
-
-export const { newUserName } = authSlice.actions;
+export const { newUserName, logoutUser, setStatus } = authSlice.actions;
 
 export default authSlice.reducer;

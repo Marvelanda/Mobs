@@ -1,14 +1,26 @@
 import style from './style.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser, setStatus } from '../../redux/features/Places/authSlice';
 
 function Header() {
-  const user = useSelector((state) => state.auth.userName);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.status);
+  const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   const logout = () => {
     localStorage.clear();
+    dispatch(logoutUser());
   };
+
+  useEffect(() => {
+    if (localStorage.length !== 0) {
+      dispatch(setStatus());
+    }
+  }, []);
+
+  console.log(user);
 
   return (
     <div className={`${style.header}`}>
@@ -19,7 +31,7 @@ function Header() {
               Главная страница
             </Link>
           </li>
-          {localStorage.length ? (
+          {user ? (
             <>
               <li
                 key='placesList'

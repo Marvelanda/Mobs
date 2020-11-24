@@ -1,7 +1,7 @@
 import express from 'express';
 import Place from '../models/place.js';
 import Review from '../models/review.js';
-import User from '../models/user.js'
+import User from '../models/user.js';
 
 const router = express.Router();
 
@@ -10,7 +10,7 @@ router.post('/', async (req, res) => {
   try {
     const userInfo = await User.findById(userID).populate('places');
     const list = userInfo.places;
-    console.log(list);
+
     if (list.length) {
       res.status(200).json(list);
     } else {
@@ -48,23 +48,28 @@ router.post('/:id/reviews', async (req, res) => {
   }
 });
 
-router.patch('/:id/share', async (req,res) => {
+router.patch('/:id/share', async (req, res) => {
   const { username } = req.body;
   const { id } = req.params;
   try {
-    const user = await User.findOne({username});
-    const result = user.places.find(item => item == id)
+    const user = await User.findOne({ username });
+    const result = user.places.find((item) => item == id);
     if (result) {
-      return res.status(400).json({message: 'Пользователю уже доступно данное заведение'})
+      return res
+        .status(400)
+        .json({ message: 'Пользователю уже доступно данное заведение' });
     }
-    user.places.push(id)
-    await user.save()
-    res.status(200).json({message: 'Теперь это заведение доступно вашему другу'})
-  } catch(error) {
-    res.status(400).json({message: 'Пользователя с таким username не существует'})
+    user.places.push(id);
+    await user.save();
+    res
+      .status(200)
+      .json({ message: 'Теперь это заведение доступно вашему другу' });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: 'Пользователя с таким username не существует' });
   }
-
-})
+});
 router.post('/:id/ratings', async (req, res) => {
   const { stars } = req.body;
 
