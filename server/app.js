@@ -4,11 +4,11 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import connectMongo from 'connect-mongo';
-import cookieParser from 'cookie-parser'
+// import cookieParser from 'cookie-parser'
 import mainRouter from './routes/main.js';
 import authRouter from './routes/auth.js';
 import placesRouter from './routes/placesList.js';
-import session from 'express-session';
+// import session from 'express-session';
 // import sessionFileStore from 'session-file-store';
 
 import dotenv from 'dotenv';
@@ -52,10 +52,10 @@ const app = express();
 //   cookie: { secure: false, maxAge: 99999999999 },
 // }));
 
-app.use((req, res, next) => {
-  res.locals.user = req.session.user;
-  next();
-});
+// app.use((req, res, next) => {
+//   res.locals.user = req.session.user;
+//   next();
+// });
 
 app.use(express.static('public'));
 app.use(cors());

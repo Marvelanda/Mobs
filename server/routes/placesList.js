@@ -6,10 +6,9 @@ import User from '../models/user.js';
 
 const router = express.Router();
 
-router.post('/', isAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   const { userID } = req.body;
   try {
-    
     const userInfo = await User.findById(userID).populate('places');
     const list = userInfo.places;
 
@@ -105,7 +104,7 @@ router.put('/new', async (req, res) => {
     info: {
       address,
       tel: phone,
-      workingHours
+      workingHours,
     },
     category,
     rating,
@@ -123,42 +122,36 @@ router.put('/new', async (req, res) => {
 
 router.post('/check', async (req, res) => {
   console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..');
-  const {
-    latitude,
-    longitude
-  } = req.body;
+  const { latitude, longitude } = req.body;
 
-  const fixLat = latitude.toFixed(6)
+  const fixLat = latitude.toFixed(6);
   const minLat = Number((+fixLat - 0.01).toFixed(6));
   const maxLat = Number((+fixLat + 0.01).toFixed(6));
 
-  const fixLong = longitude.toFixed(6)
+  const fixLong = longitude.toFixed(6);
   const minLong = Number((+fixLong - 0.01).toFixed(6));
   const maxLong = Number((+fixLong + 0.01).toFixed(6));
 
   if (req.body) {
     const place = await Place.find({
-        latitude: {
-          $gte: minLat,
-          $lte: maxLat
-        },
-        longitude: {
-          $gte: minLong,
-          $lte: maxLong
-        },
+      latitude: {
+        $gte: minLat,
+        $lte: maxLat,
+      },
+      longitude: {
+        $gte: minLong,
+        $lte: maxLong,
+      },
     });
     console.log(place);
 
-  //   if(place.length === 1){
-      
-  //     res.sendStatus(200)
-  //   }
-  // } else{
-  //   res.send('Не можем точно определить ваше местоположение')
+    //   if(place.length === 1){
+
+    //     res.sendStatus(200)
+    //   }
+    // } else{
+    //   res.send('Не можем точно определить ваше местоположение')
   }
-
-
-
 
   res.send('ответ по ручке checkPlace').end();
 });
