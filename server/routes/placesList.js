@@ -7,14 +7,18 @@ import Raiting from '../models/raiting.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
+<<<<<<< HEAD
   const { id } = req.session.user;
 console.log(req.session.user);
+=======
+>>>>>>> 21611749112e8f1af44ff0a90ea7005bdeea71ce
   try {
     const userInfo = await User.findById(req.session.user).populate('places');
     const list = userInfo.places;
+    const visited = userInfo.visitedPlaces;
 
     if (list.length) {
-      res.status(200).json(list);
+      res.status(200).json({ list, visited });
     } else {
       res.sendStatus('List is empty');
     }
@@ -31,9 +35,10 @@ router.get('/:id/reviews', async (req, res) => {
 });
 
 router.post('/:id/reviews', async (req, res) => {
-  const { review, pecularities, id } = req.body;
-  const user = await User.findById(id);
+  const { review, pecularities } = req.body;
+  const user = await User.findById(req.session.user);
   const findReview = await user.findReview(req.params.id);
+  const place = await Place.findById(req.params.id);
 
   if (findReview) {
     await Review.findOneAndDelete({ _id: findReview._id });
@@ -44,7 +49,7 @@ router.post('/:id/reviews', async (req, res) => {
 
   if (review) {
     const newReview = new Review({
-      author: id,
+      author: req.session.user,
       placeName: req.params.id,
       review,
       pecularities,
@@ -61,10 +66,9 @@ router.post('/:id/reviews', async (req, res) => {
 });
 
 router.patch('/:id/share', async (req, res) => {
-  const { friend, user } = req.body;
+  const { friend } = req.body;
   const { id } = req.params;
-  console.log('>>>>>>>>>>>>>', friend, user, id);
-  const findUser = await User.findById(user);
+  const findUser = await User.findById(req.session.user);
 
   try {
     const usersFriend = await User.findOne({ username: friend });
