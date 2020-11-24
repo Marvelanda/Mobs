@@ -35,10 +35,10 @@ export const getUser = (email, password) => {
   };
 };
 
-export const addUser = (username, email, password, fivePlaces) => {
+export const addUser = (userName, email, password, fivePlaces) => {
   return {
     type: ADDUSER,
-    username,
+    userName,
     email,
     password,
     fivePlaces,

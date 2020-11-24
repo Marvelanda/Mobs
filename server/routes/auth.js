@@ -15,16 +15,16 @@ const serializeUser = (user) => {
 };
 
 router.post('/signup', async (req, res) => {
-  const UserByUsername = await User.findOne({ username: req.body.username });
+  const UserByUsername = await User.findOne({ username: req.body.userName });
   const UserByEmail = await User.findOne({ email: req.body.email });
 
   if (UserByUsername || UserByEmail) {
-    
+
     res.json({ exist: true, done: false });
   } else {
     let newUser = new User({
       email: req.body.email,
-      username: req.body.username,
+      username: req.body.userName,
       password: await bcrypt.hash(req.body.password, 10),
       places: req.body.fivePlaces,
     });
@@ -32,7 +32,7 @@ router.post('/signup', async (req, res) => {
 
     // req.session.user = serializeUser(newUser);
     const againNewUser = await User.findOne({ email: req.body.email });
-    res.json({ exist: false, done: true, userid: againNewUser.id });
+    res.json({ exist: false, done: true, userid: againNewUser.id, status: true,  });
   }
 });
 

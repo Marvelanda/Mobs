@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './style.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../redux/features/Places/authSlice';
+import { useHistory } from 'react-router-dom';
 
 
 function Signup() {
@@ -11,13 +12,19 @@ function Signup() {
   const [exist, setExist] = useState(false);
   const user = useSelector((state) => state.auth.userName)
   const dispatch = useDispatch();
-
+  const history = useHistory()
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   const doFetch = async (e) => {
     e.preventDefault();
     dispatch(addUser(email, username, password, fivePlaces))
   };
+
+  useEffect(() => {
+    if (user) {
+      history.push('/');
+    }
+  }, [user]);
 
   return (
     <div className={`${style.container}`}>

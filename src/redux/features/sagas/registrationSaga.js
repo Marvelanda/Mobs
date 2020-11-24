@@ -2,11 +2,11 @@ import { put, takeEvery, call } from 'redux-saga/effects';
 import { newUserName } from '../Places/authSlice';
 import { ADDUSER } from '../../types/users';
 
-async function addUser(username, email, password, fivePlaces) {
+async function addUser(userName, email, password, fivePlaces) {
   try {
     const response = await fetch('http://localhost:8080/auth/signup', {
       method: 'POST',
-      body: JSON.stringify({ username, password, email, fivePlaces }),
+      body: JSON.stringify({ userName, password, email, fivePlaces }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -23,11 +23,18 @@ async function addUser(username, email, password, fivePlaces) {
   }
 }
 
-export function* registrationWorker({ email, username, password, fivePlaces }) {
-  const user = yield call(addUser, email, username, password, fivePlaces);
+export function* registrationWorker({ email, userName, password, fivePlaces }) {
+  const user = yield call(addUser, email, userName, password, fivePlaces);
   console.log(user);
-  yield put(newUserName(user.userid));
+  yield put(
+    newUserName({
+      userName: user.userid,
+      status: user.status,
+      error: user.error,
+    })
+  );
 }
+
 
 export function* registrationWatcher() {
   yield takeEvery(ADDUSER, registrationWorker);
