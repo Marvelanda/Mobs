@@ -10,6 +10,7 @@ async function addUser(userName, email, password, fivePlaces) {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     });
     const json = await response.json();
 
@@ -17,7 +18,7 @@ async function addUser(userName, email, password, fivePlaces) {
       localStorage.setItem('user', json.userid);
     }
     console.log(json);
-    return json
+    return json;
   } catch (error) {
     console.error('Ошибка:', error);
   }
@@ -34,7 +35,6 @@ export function* registrationWorker({ email, userName, password, fivePlaces }) {
     })
   );
 }
-
 
 export function* registrationWatcher() {
   yield takeEvery(ADDUSER, registrationWorker);

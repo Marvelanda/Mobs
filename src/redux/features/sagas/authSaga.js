@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
-import { newUserName } from '../Places/authSlice';
-import { GETUSER} from '../../types/users';
+import { newUserName, logoutUser } from '../Places/authSlice';
+import { GETUSER, REMOVEUSER } from '../../types/users';
 
 async function getUser(email, password) {
   try {
@@ -10,11 +10,11 @@ async function getUser(email, password) {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     });
     const json = await response.json();
 
     if (json.status) {
-
       localStorage.setItem('user', json.userid);
     }
     return json;
@@ -39,4 +39,29 @@ export function* userWatcher() {
   yield takeEvery(GETUSER, userWorker);
 }
 
+async function fetchLogout() {
+  try {
+    const response = await fetch('http://localhost:8080/auth/logout', {
+      method: 'GET',
+      credentials: 'include',
+    });
+    const json = await response.json();
+    return json;
+  } catch (error) {
+    console.error('Ошибка:', error);
+  }
+}
 
+export function* logoutWorker() {
+  const user = yield call(fetchLogout);
+  console.log(user);
+  yield put(
+    logoutUser({
+      status: user.status,
+    })
+  );
+}
+
+export function* logoutWatcher() {
+  yield takeEvery(REMOVEUSER, logoutWorker);
+}

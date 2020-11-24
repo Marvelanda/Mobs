@@ -1,5 +1,4 @@
 import express from 'express';
-import isAuth from '../middleware/auth.js';
 import Place from '../models/place.js';
 import Review from '../models/review.js';
 import User from '../models/user.js';
@@ -7,14 +6,14 @@ import Raiting from '../models/raiting.js';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-  const { id } = req.body;
+router.get('/', async (req, res) => {
   try {
-    const userInfo = await User.findById(id).populate('places');
+    const userInfo = await User.findById(req.session.user).populate('places');
     const list = userInfo.places;
+    const visited = userInfo.visitedPlaces;
 
     if (list.length) {
-      res.status(200).json(list);
+      res.status(200).json({ list, visited });
     } else {
       res.sendStatus('List is empty');
     }
@@ -31,9 +30,10 @@ router.get('/:id/reviews', async (req, res) => {
 });
 
 router.post('/:id/reviews', async (req, res) => {
-  const { review, pecularities, id } = req.body;
-  const user = await User.findById(id);
+  const { review, pecularities } = req.body;
+  const user = await User.findById(req.session.user);
   const findReview = await user.findReview(req.params.id);
+  const place = await Place.findById(req.params.id);
 
   if (findReview) {
     await Review.findOneAndDelete({ _id: findReview._id });
@@ -44,7 +44,7 @@ router.post('/:id/reviews', async (req, res) => {
 
   if (review) {
     const newReview = new Review({
-      author: id,
+      author: req.session.user,
       placeName: req.params.id,
       review,
       pecularities,
@@ -61,9 +61,9 @@ router.post('/:id/reviews', async (req, res) => {
 });
 
 router.patch('/:id/share', async (req, res) => {
-  const { friend, user } = req.body;
+  const { friend } = req.body;
   const { id } = req.params;
-  const findUser = await User.findById(user);
+  const findUser = await User.findById(req.session.user);
 
   try {
     const usersFriend = await User.findOne({ username: friend });
@@ -77,7 +77,7 @@ router.patch('/:id/share', async (req, res) => {
     await usersFriend.save();
 
     findUser.points += 10;
-
+    findUser.invitations--;
     await findUser.save();
     res
       .status(200)
@@ -139,11 +139,7 @@ router.put('/new', async (req, res) => {
 });
 
 router.post('/check', async (req, res) => {
-  const {
-    latitude,
-    longitude,
-    userID
-  } = req.body;
+  const { latitude, longitude } = req.body;
 
   const fixLat = latitude.toFixed(6);
   const minLat = Number((+fixLat - 0.01).toFixed(6));
@@ -153,7 +149,8 @@ router.post('/check', async (req, res) => {
   const minLong = Number((+fixLong - 0.01).toFixed(6));
   const maxLong = Number((+fixLong + 0.01).toFixed(6));
 
-  if (req.body) {                // Поиск мета с учетом погрешности
+  if (req.body) {
+    // Поиск мета с учетом погрешности
     const place = await Place.find({
       latitude: {
         $gte: minLat,
@@ -165,41 +162,43 @@ router.post('/check', async (req, res) => {
       },
     });
 
-    if(place.length === 1){
-
-      try{
-        const curUser = await User.findById(userID);
+    if (place.length === 1) {
+      try {
+        const curUser = await User.findById(req.session.user);
         const visitedPlace = curUser.visitedPlaces.find((el) => {
-          if(el) {
+          if (el) {
             return el.toString() === place[0]._id.toString();
           }
-        })
-        if(visitedPlace === undefined) {
-          await User.findByIdAndUpdate(userID, {$push: {visitedPlaces: place[0]._id}});
-          res.json({message: 'Посещение засчитано'});
+        });
+        if (visitedPlace === undefined) {
+          await User.findByIdAndUpdate(req.session.user, {
+            $push: { visitedPlaces: place[0]._id },
+          });
+          res.json({ message: 'Посещение засчитано' });
 
           const shareNewPlaceArr = await Place.find({
             secrecy: {
-              $lte: curUser.rating
-            }
-          })
-          const Arr1 = curUser.places.map(el => (el).toString());
-          const Arr2 = shareNewPlaceArr.map(el => (el._id).toString())
-          const compArr = Arr1
-                  .filter(x => !Arr2.includes(x))
-                  .concat(Arr2.filter(x => !Arr1.includes(x)));
-          
-          const addRandomSharePlace = compArr[Math.floor(Math.random()*compArr.length)];
-          await User.findByIdAndUpdate(userID, {$push: {places: addRandomSharePlace}});
-        } else 
-          res.json({message: 'Вы уже посещали это место'});
-        }
-      catch (error) {
+              $lte: curUser.rating,
+            },
+          });
+          const Arr1 = curUser.places.map((el) => el.toString());
+          const Arr2 = shareNewPlaceArr.map((el) => el._id.toString());
+          const compArr = Arr1.filter((x) => !Arr2.includes(x)).concat(
+            Arr2.filter((x) => !Arr1.includes(x))
+          );
+
+          const addRandomSharePlace =
+            compArr[Math.floor(Math.random() * compArr.length)];
+          await User.findByIdAndUpdate(req.session.user, {
+            $push: { places: addRandomSharePlace },
+          }).exec();
+        } else res.json({ message: 'Вы уже посещали это место' });
+      } catch (error) {
         console.log(error);
       }
     }
-  } else{
-    res.json({message: 'Не можем точно определить ваше местоположение'})
+  } else {
+    res.json({ message: 'Не можем точно определить ваше местоположение' });
   }
 });
 

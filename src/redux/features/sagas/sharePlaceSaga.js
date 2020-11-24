@@ -10,6 +10,7 @@ async function sharePlace(friend, placeID) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ friend, user }),
+    credentials: 'include',
   });
   const data = await res.json();
   return data;

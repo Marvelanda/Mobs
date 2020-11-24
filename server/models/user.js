@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema({
   ],
   rating: { type: Number, default: 1 },
   points: { type: Number, default: 0 },
+  invitations: { type: Number, default: 3 },
 });
 
 UserSchema.methods.checkScore = async function () {
