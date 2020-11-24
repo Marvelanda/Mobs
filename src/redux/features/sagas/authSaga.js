@@ -1,6 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { newUserName } from '../Places/authSlice';
-import { GETUSER} from '../../types/users';
+import { GETUSER } from '../../types/users';
 
 async function getUser(email, password) {
   try {
@@ -10,11 +10,11 @@ async function getUser(email, password) {
       headers: {
         'Content-Type': 'application/json',
       },
+      credentials: 'include',
     });
     const json = await response.json();
 
     if (json.status) {
-
       localStorage.setItem('user', json.userid);
     }
     return json;
@@ -38,5 +38,3 @@ export function* userWorker({ email, password }) {
 export function* userWatcher() {
   yield takeEvery(GETUSER, userWorker);
 }
-
-
