@@ -6,13 +6,13 @@ import { getRandomFive } from '../helpers/randomFive.js';
 
 const router = express.Router();
 
-// const serializeUser = (user) => {
-//   return {
-//     username: user.username,
-//     id: user._id,
-//     email: user.email,
-//   };
-// };
+const serializeUser = (user) => {
+  return {
+    username: user.username,
+    id: user._id,
+    email: user.email,
+  };
+};
 
 router.post('/signup', async (req, res) => {
   const UserByUsername = await User.findOne({ username: req.body.username });
@@ -44,6 +44,7 @@ router.post('/signin', async (req, res) => {
       const validPass = await bcrypt.compare(req.body.password, userPassword);
       if (validPass) {
         // req.session.user = UserByEmail._id;
+
 
         res.json({ status: true, userid: UserByEmail.id });
       } else {

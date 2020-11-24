@@ -8,6 +8,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const { userID } = req.body;
   try {
+    
     const userInfo = await User.findById(userID).populate('places');
     const list = userInfo.places;
 
