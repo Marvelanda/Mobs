@@ -20,6 +20,7 @@ async function getPlaces() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ id: user }),
+    credentials: 'include',
   });
   const data = await resp.json();
   return data;
@@ -63,6 +64,7 @@ async function addPlace(
       geometry,
       description,
     }),
+    credentials: 'include',
   });
   const data = await resp.json();
   return data;
@@ -108,6 +110,7 @@ async function addRating(id, stars) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ stars }),
+    credentials: 'include',
   });
   const data = await resp.json();
   return data;
@@ -121,19 +124,20 @@ export function* ratingWatcher() {
   yield takeEvery(ADDPLACERATING, ratingWorker);
 }
 
-async function checkUserPlace(latitude, longitude, user ) {
+async function checkUserPlace(latitude, longitude, user) {
   const resp = await fetch(`http://localhost:8080/places/check`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ latitude, longitude, userID: user}),
+    body: JSON.stringify({ latitude, longitude, userID: user }),
+    credentials: 'include',
   });
   const data = await resp.json();
   return data;
 }
 
-export function* checkPlaceWorker({latitude, longitude, user}) {
+export function* checkPlaceWorker({ latitude, longitude, user }) {
   const response = yield call(() => checkUserPlace(latitude, longitude, user));
   yield put(checkPlace(response));
   console.log(response);

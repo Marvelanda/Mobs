@@ -1,5 +1,4 @@
 import express from 'express';
-import isAuth from '../middleware/auth.js';
 import Place from '../models/place.js';
 import Review from '../models/review.js';
 import User from '../models/user.js';
@@ -9,6 +8,7 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   const { id } = req.body;
+
   try {
     const userInfo = await User.findById(id).populate('places');
     const list = userInfo.places;
@@ -77,7 +77,7 @@ router.patch('/:id/share', async (req, res) => {
     await usersFriend.save();
 
     findUser.points += 10;
-
+    findUser.invitations--;
     await findUser.save();
     res
       .status(200)
@@ -139,11 +139,7 @@ router.put('/new', async (req, res) => {
 });
 
 router.post('/check', async (req, res) => {
-  const {
-    latitude,
-    longitude,
-    userID
-  } = req.body;
+  const { latitude, longitude, userID } = req.body;
 
   const fixLat = latitude.toFixed(6);
   const minLat = Number((+fixLat - 0.01).toFixed(6));
@@ -153,7 +149,8 @@ router.post('/check', async (req, res) => {
   const minLong = Number((+fixLong - 0.01).toFixed(6));
   const maxLong = Number((+fixLong + 0.01).toFixed(6));
 
-  if (req.body) {                // Поиск мета с учетом погрешности
+  if (req.body) {
+    // Поиск мета с учетом погрешности
     const place = await Place.find({
       latitude: {
         $gte: minLat,
@@ -165,14 +162,14 @@ router.post('/check', async (req, res) => {
       },
     });
 
-    if(place.length === 1){
-
-      try{
+    if (place.length === 1) {
+      try {
         const curUser = await User.findById(userID);
         const visitedPlace = curUser.visitedPlaces.find((el) => {
-          if(el) {
+          if (el) {
             return el.toString() === place[0]._id.toString();
           }
+
         })
         if(visitedPlace === undefined) {
           await User.findByIdAndUpdate(userID, {$push: {visitedPlaces: place[0]._id}});
@@ -200,6 +197,20 @@ router.post('/check', async (req, res) => {
     }
   } else{
     res.json({message: 'Не можем точно определить ваше местоположение'})
+
+        if (visitedPlace === undefined) {
+          await User.findByIdAndUpdate(userID, {
+            $push: { visitedPlaces: place[0]._id },
+          });
+          res.send('Посещение засчитано').end();
+        } else res.send('Вы уже посещали это место').end();
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  } else {
+    res.send('Не можем точно определить ваше местоположение').end();
+
   }
 });
 

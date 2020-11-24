@@ -32,7 +32,9 @@ export const placeSlice = createSlice({
     },
 
     checkPlace: (state, action) => {
+
       state.message = action.payload.message;
+
     },
   },
 });
@@ -90,7 +92,7 @@ export const checkPlaceSaga = (latitude, longitude, user) => {
     type: CHECKPLACE,
     latitude,
     longitude,
-    user
+    user,
   };
 };
 
