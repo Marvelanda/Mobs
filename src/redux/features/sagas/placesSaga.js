@@ -14,9 +14,9 @@ import {
 
 async function getPlaces() {
   const resp = await fetch('http://localhost:8080/places', {
-      method: 'GET',
-      credentials: 'include',
-    })
+    method: 'GET',
+    credentials: 'include',
+  });
   const data = await resp.json();
   return data;
 }
@@ -128,7 +128,7 @@ async function checkUserPlace(latitude, longitude, user) {
     body: JSON.stringify({ latitude, longitude, userID: user }),
     credentials: 'include',
   });
-  const data = await resp.text();
+  const data = await resp.json();
   return data;
 }
 

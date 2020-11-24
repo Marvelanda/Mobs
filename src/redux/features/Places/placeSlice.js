@@ -32,7 +32,9 @@ export const placeSlice = createSlice({
     },
 
     checkPlace: (state, action) => {
-      state.message = action.payload;
+
+      state.message = action.payload.message;
+
     },
   },
 });

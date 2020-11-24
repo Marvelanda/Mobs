@@ -29,7 +29,7 @@ router.post('/signup', async (req, res) => {
     });
     await newUser.save();
 
-    req.session.user = serializeUser(newUser);
+    req.session.user = newUser._id;
 
     const againNewUser = await User.findOne({ email: req.body.email });
     res.json({
@@ -49,7 +49,8 @@ router.post('/signin', async (req, res) => {
       const userPassword = UserByEmail.password;
       const validPass = await bcrypt.compare(req.body.password, userPassword);
       if (validPass) {
-        req.session.user = serializeUser(UserByEmail);
+        req.session.user = UserByEmail._id;
+
         res.json({ status: true, userid: req.session.user.id });
       } else {
         res.json({ error: 'Неправильный логин или пароль!', status: false });
