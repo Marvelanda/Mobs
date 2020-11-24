@@ -121,19 +121,22 @@ export function* ratingWatcher() {
   yield takeEvery(ADDPLACERATING, ratingWorker);
 }
 
-async function checkUserPlace(latitude, longitude) {
+async function checkUserPlace(latitude, longitude, user ) {
   const resp = await fetch(`http://localhost:8080/places/check`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ latitude, longitude }),
+    body: JSON.stringify({ latitude, longitude, userID: user}),
   });
+  const data = await resp.text();
+  return data;
 }
 
-export function* checkPlaceWorker({ latitude, longitude }) {
-  const response = yield call(() => checkUserPlace(latitude, longitude));
+export function* checkPlaceWorker({latitude, longitude, user}) {
+  const response = yield call(() => checkUserPlace(latitude, longitude, user));
   yield put(checkPlace(response));
+  console.log(response);
 }
 
 export function* checkPlaceWatcher() {

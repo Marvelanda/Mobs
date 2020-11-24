@@ -6,11 +6,12 @@ import style from './style.module.css';
 function CheckUserPlace() {
   
   const dispatch = useDispatch();
+  const user = localStorage.user
 
   const checkPlace = () => {
     function componentDidMount() {
       navigator.geolocation.getCurrentPosition(function(position) {
-        dispatch(checkPlaceSaga(position.coords.latitude, position.coords.longitude));
+        dispatch(checkPlaceSaga(position.coords.latitude, position.coords.longitude, user));
       });
     }
     componentDidMount()
