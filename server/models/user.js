@@ -36,6 +36,7 @@ const UserSchema = new mongoose.Schema({
     },
   ],
   rating: Number,
+  points: Number,
 });
 
 export default mongoose.model('User', UserSchema);
