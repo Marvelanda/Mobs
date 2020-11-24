@@ -54,14 +54,11 @@ UserSchema.methods.checkScore = async function () {
 UserSchema.methods.findReview = async function (id) {
   const reviews = await this.model('Review').find({ author: this._id });
   if (reviews) {
-    reviews.map((item) => {
-      if (item.placeName._id.toString() === id) {
-        return item;
-      } else {
-        return null;
-      }
+    const review = reviews.find((item) => {
+      return item.placeName._id.toString() === id;
     });
-    return reviews[0];
+
+    return review;
   }
 };
 
