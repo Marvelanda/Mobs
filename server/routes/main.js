@@ -4,9 +4,8 @@ import User from '../models/user.js';
 import { getRandomFive } from '../helpers/randomFive.js';
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-  const { userId } = req.body;
-
+router.get('/', async (req, res) => {
+  const userId = req.session.user;
   if (userId) {
     const user = await User.findById(userId).populate('places');
     res.status(200).json(user.places);

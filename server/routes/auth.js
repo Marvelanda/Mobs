@@ -19,7 +19,6 @@ router.post('/signup', async (req, res) => {
   const UserByEmail = await User.findOne({ email: req.body.email });
 
   if (UserByUsername || UserByEmail) {
-
     res.json({ exist: true, done: false });
   } else {
     let newUser = new User({
@@ -30,9 +29,15 @@ router.post('/signup', async (req, res) => {
     });
     await newUser.save();
 
-    // req.session.user = serializeUser(newUser);
+    req.session.user = serializeUser(newUser);
+
     const againNewUser = await User.findOne({ email: req.body.email });
-    res.json({ exist: false, done: true, userid: againNewUser.id, status: true,  });
+    res.json({
+      exist: false,
+      done: true,
+      userid: againNewUser.id,
+      status: true,
+    });
   }
 });
 
@@ -43,9 +48,7 @@ router.post('/signin', async (req, res) => {
       const userPassword = UserByEmail.password;
       const validPass = await bcrypt.compare(req.body.password, userPassword);
       if (validPass) {
-
-        // req.session.user = UserByEmail._id;
-
+        req.session.user = serializeUser(newUser);
         res.json({ status: true, userid: UserByEmail.id });
       } else {
         res.json({ error: 'Неправильный логин или пароль!', status: false });
