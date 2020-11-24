@@ -11,7 +11,6 @@ export const authSlice = createSlice({
   },
   reducers: {
     newUserName: (state, action) => {
-      console.log(action.payload);
       state.userName = action.payload.userName;
       state.status = action.payload.status;
       state.error = action.payload.error;
