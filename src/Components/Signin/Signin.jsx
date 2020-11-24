@@ -21,11 +21,6 @@ function Signin() {
   const doFetch = async (e) => {
     e.preventDefault();
     dispatch(getUser(email, password));
-    // if (!user) {
-    //   setMessage(
-    //     'Такого пользователя не существует или вы ввели неверные данные'
-    //   );
-    // }
   };
 
   useEffect(() => {

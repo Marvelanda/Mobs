@@ -1,11 +1,12 @@
 import express from 'express';
+import isAuth from '../middleware/auth.js';
 import Place from '../models/place.js';
 import Review from '../models/review.js';
 import User from '../models/user.js';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/', isAuth, async (req, res) => {
   const { userID } = req.body;
   try {
     const userInfo = await User.findById(userID).populate('places');
