@@ -100,7 +100,11 @@ router.put('/new', async (req, res) => {
     placeName,
     placeUrl,
     placePhotoUrl,
-    info: { address, tel: phone, workingHours },
+    info: {
+      address,
+      tel: phone,
+      workingHours
+    },
     category,
     rating,
     geometry,
@@ -115,7 +119,45 @@ router.put('/new', async (req, res) => {
   }
 });
 
-router.post('/check', (req, res) => {
+router.post('/check', async (req, res) => {
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..');
+  const {
+    latitude,
+    longitude
+  } = req.body;
+
+  const fixLat = latitude.toFixed(6)
+  const minLat = Number((+fixLat - 0.01).toFixed(6));
+  const maxLat = Number((+fixLat + 0.01).toFixed(6));
+
+  const fixLong = longitude.toFixed(6)
+  const minLong = Number((+fixLong - 0.01).toFixed(6));
+  const maxLong = Number((+fixLong + 0.01).toFixed(6));
+
+  if (req.body) {
+    const place = await Place.find({
+        latitude: {
+          $gte: minLat,
+          $lte: maxLat
+        },
+        longitude: {
+          $gte: minLong,
+          $lte: maxLong
+        },
+    });
+    console.log(place);
+
+  //   if(place.length === 1){
+      
+  //     res.sendStatus(200)
+  //   }
+  // } else{
+  //   res.send('Не можем точно определить ваше местоположение')
+  }
+
+
+
+
   res.send('ответ по ручке checkPlace').end();
 });
 
