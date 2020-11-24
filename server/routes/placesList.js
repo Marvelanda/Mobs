@@ -6,11 +6,10 @@ import Raiting from '../models/raiting.js';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
-  const { id } = req.body;
-
+router.get('/', async (req, res) => {
+  console.log(req.session.user);
   try {
-    const userInfo = await User.findById(id).populate('places');
+    const userInfo = await User.findById(req.session.user).populate('places');
     const list = userInfo.places;
 
     if (list.length) {
