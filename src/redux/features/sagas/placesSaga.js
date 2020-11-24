@@ -13,7 +13,10 @@ import {
 } from '../../types/placesTypes';
 
 async function getPlaces() {
-  const resp = await fetch('http://localhost:8080/places')
+  const resp = await fetch('http://localhost:8080/places', {
+      method: 'GET',
+      credentials: 'include',
+    })
   const data = await resp.json();
   return data;
 }
