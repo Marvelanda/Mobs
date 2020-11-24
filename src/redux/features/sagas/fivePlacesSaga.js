@@ -6,11 +6,8 @@ async function getFivePlaces() {
   const user = localStorage.user;
 
   const resp = await fetch('http://localhost:8080', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ userId: user }),
+    method: 'GET',
+    credentials: 'include',
   });
   const data = await resp.json();
   return data;

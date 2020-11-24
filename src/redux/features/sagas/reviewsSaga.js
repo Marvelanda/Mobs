@@ -26,6 +26,7 @@ async function addReview(review, pecularities, id) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ review, pecularities, id: user }),
+    credentials: 'include',
   });
   const data = await resp.json();
   return data;
