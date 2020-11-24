@@ -11,29 +11,28 @@ function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const [anotherTry, setAnotherTry] = useState(true)
+  // const [message, setMessage] = useState(null);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const history = useHistory();
-  const user = useSelector((state) => state.auth.userName)
-
+  const user = useSelector((state) => state.auth.status);
+  const error = useSelector((state) => state.auth.error);
+  console.log(error);
   const doFetch = async (e) => {
     e.preventDefault();
-    dispatch(getUser(email, password))
-    if (user) {
-      setAnotherTry(true)
-    
-    } else {
-      setAnotherTry(false)
-    }
+    dispatch(getUser(email, password));
+    // if (!user) {
+    //   setMessage(
+    //     'Такого пользователя не существует или вы ввели неверные данные'
+    //   );
+    // }
   };
 
   useEffect(() => {
     if (user) {
-      history.push('/')
+      history.push('/');
     }
-  }, [user])
-
+  }, [user]);
 
   const emailHandler = (evt) => {
     setEmail(evt.target.value);
@@ -64,13 +63,7 @@ function Signin() {
             placeholder='Password'
           />
         </div>
-        {anotherTry ? (
-          ''
-        ) : (
-          <p>
-            Такого пользователя не существует или вы ввели неверные данные :---O
-          </p>
-        )}
+        {error ? <p>{error}</p> : null}
         <button type='submit' className='button' onClick={doFetch}>
           Войти
         </button>

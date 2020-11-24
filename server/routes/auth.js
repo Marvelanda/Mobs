@@ -6,10 +6,17 @@ import { getRandomFive } from '../helpers/randomFive.js';
 
 const router = express.Router();
 
+// const serializeUser = (user) => {
+//   return {
+//     username: user.username,
+//     id: user._id,
+//     email: user.email,
+//   };
+// };
+
 router.post('/signup', async (req, res) => {
   const UserByUsername = await User.findOne({ username: req.body.username });
   const UserByEmail = await User.findOne({ email: req.body.email });
-  const list = await Place.find().lean().exec();
 
   if (UserByUsername || UserByEmail) {
     
@@ -22,7 +29,8 @@ router.post('/signup', async (req, res) => {
       places: req.body.fivePlaces,
     });
     await newUser.save();
-   
+
+    // req.session.user = serializeUser(newUser);
     const againNewUser = await User.findOne({ email: req.body.email });
     res.json({ exist: false, done: true, userid: againNewUser.id });
   }
@@ -33,19 +41,22 @@ router.post('/signin', async (req, res) => {
     const UserByEmail = await User.findOne({ email: req.body.email });
     if (UserByEmail) {
       const userPassword = UserByEmail.password;
-      if (
-        UserByEmail.email == req.body.email &&
-        (await bcrypt.compare(req.body.password, userPassword))
-      ) {
-        res.json({ auth: true, userid: UserByEmail.id });
+      const validPass = await bcrypt.compare(req.body.password, userPassword);
+      if (validPass) {
+        // req.session.user = UserByEmail._id;
+
+        res.json({ status: true, userid: UserByEmail.id });
       } else {
-        res.json({ auth: false });
+        res.json({ error: 'Непрравильный логин или пароль!', status: false });
       }
     } else {
-      res.json({ auth: false })
+      res.json({
+        error: 'Пользователь не найден. Пожалйста, зарегистрируйтесь!',
+        status: false,
+      });
     }
   } else {
-    res.json({ auth: false })
+    res.json({ error: 'Поля не могут быть пустыми', status: false });
   }
 });
 

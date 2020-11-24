@@ -116,26 +116,23 @@ export function* ratingWorker({ id, stars }) {
   const response = yield call(() => addRating(id, stars));
   yield put(addPlaceRating(response));
 }
-
 export function* ratingWatcher() {
   yield takeEvery(ADDPLACERATING, ratingWorker);
 }
+  
 
-async function checkUserPlace() {
+async function checkUserPlace(latitude, longitude ) {
   const resp = await fetch(`http://localhost:8080/places/check`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({}),
+    body: JSON.stringify({ latitude, longitude }),
   });
-
-  const data = await resp.text();
-  return console.log(data);
 }
 
-export function* checkPlaceWorker() {
-  const response = yield call(() => checkUserPlace());
+export function* checkPlaceWorker({latitude, longitude}) {
+  const response = yield call(() => checkUserPlace(latitude, longitude));
   yield put(checkPlace(response));
 }
 
