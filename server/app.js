@@ -1,3 +1,5 @@
+// dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -5,6 +7,8 @@ import connectMongo from 'connect-mongo';
 import mainRouter from './routes/main.js';
 import authRouter from './routes/auth.js';
 import placesRouter from './routes/placesList.js';
+// import session from 'express-session';
+// import sessionFileStore from 'session-file-store';
 
 import dotenv from 'dotenv';
 
@@ -16,6 +20,24 @@ mongoose.connect(process.env.DB, {
 });
 
 const app = express();
+
+// app.set('session cookie name', 'sid');
+// const FileStore = sessionFileStore(session);
+// app.use(
+//   session({
+//     name: app.get('session cookie name'),
+//     secret: process.env.SESSION_SECRET,
+//     store: new FileStore({
+//       secret: process.env.SESSION_SECRET,
+//     }),
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       httpOnly: false,
+//       maxAge: 7000 * 60 * 60 * 24,
+//     },
+//   })
+// );
 app.use(express.static('public'));
 app.use(cors());
 app.use(

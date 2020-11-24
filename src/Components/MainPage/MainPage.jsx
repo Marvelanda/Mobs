@@ -13,7 +13,7 @@ import { Link } from 'react-router-dom';
 function MainPage() {
   const dispatch = useDispatch();
 
-  const user = useSelector((state) => state.auth.userName);
+  const user = useSelector((state) => state.auth.status);
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   useEffect(() => {
@@ -56,7 +56,7 @@ function MainPage() {
             }}
           >
             <Modal open={isOpen} onClose={onClose}>
-              {localStorage.length ? (
+              {user ? (
                 <div className={modalClass}>
                   <h2>{modalInfo.placeName}</h2>
                   <p className={style.description}>Часы работы:</p>

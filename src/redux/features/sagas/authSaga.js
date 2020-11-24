@@ -12,7 +12,7 @@ async function getUser(email, password) {
       },
     });
     const json = await response.json();
-    if (json.auth) {
+    if (json.status) {
       localStorage.setItem('user', json.userid);
     }
     return json;
@@ -23,8 +23,14 @@ async function getUser(email, password) {
 
 export function* userWorker({ email, password }) {
   const user = yield call(getUser, email, password);
-  console.log(user);
-  yield put(newUserName(user.userid));
+
+  yield put(
+    newUserName({
+      userName: user.userid,
+      status: user.status,
+      error: user.error,
+    })
+  );
 }
 
 export function* userWatcher() {
