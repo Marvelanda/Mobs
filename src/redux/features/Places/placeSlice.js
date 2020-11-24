@@ -33,7 +33,6 @@ export const placeSlice = createSlice({
     checkPlace: (state, action) => {
       state.places = action.payload;
     },
-
   },
 });
 
@@ -44,10 +43,9 @@ export const {
   checkPlace,
 } = placeSlice.actions;
 
-export const getPlacesListSaga = (userID) => {
+export const getPlacesListSaga = () => {
   return {
     type: GETPLACESSAGA,
-    userID,
   };
 };
 
