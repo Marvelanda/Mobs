@@ -13,15 +13,7 @@ import {
 } from '../../types/placesTypes';
 
 async function getPlaces() {
-  const user = localStorage.user;
-  const resp = await fetch('http://localhost:8080/places', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ id: user }),
-    credentials: 'include',
-  });
+  const resp = await fetch('http://localhost:8080/places')
   const data = await resp.json();
   return data;
 }
