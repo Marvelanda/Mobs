@@ -129,11 +129,14 @@ async function checkUserPlace(latitude, longitude, user ) {
     },
     body: JSON.stringify({ latitude, longitude, userID: user}),
   });
+  const data = await resp.text();
+  return data;
 }
 
 export function* checkPlaceWorker({latitude, longitude, user}) {
   const response = yield call(() => checkUserPlace(latitude, longitude, user));
   yield put(checkPlace(response));
+  console.log(response);
 }
 
 export function* checkPlaceWatcher() {
