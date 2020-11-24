@@ -19,13 +19,13 @@ export function* reviewsWatcher() {
 
 async function addReview(review, pecularities, id) {
   const user = localStorage.user;
-
+  console.log(user);
   const resp = await fetch(`http://localhost:8080/places/${id}/reviews`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ review, pecularities, userId: user }),
+    body: JSON.stringify({ review, pecularities, id: user }),
   });
   const data = await resp.json();
   return data;

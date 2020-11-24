@@ -35,8 +35,19 @@ const UserSchema = new mongoose.Schema({
       ref: 'Place',
     },
   ],
-  rating: Number,
-  points: Number,
+  rating: { type: Number, default: 1 },
+  points: { type: Number, default: 0 },
 });
+
+UserSchema.methods.checkScore = async function () {
+  if (this.points > 99) {
+    this.rating = 2;
+  } else if (this.points > 249) {
+    this.rating = 3;
+  } else {
+    this.rating = 1;
+  }
+  return await this.save();
+};
 
 export default mongoose.model('User', UserSchema);
