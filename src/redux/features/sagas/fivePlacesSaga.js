@@ -5,7 +5,7 @@ import { GET_FIVE_PLACES } from '../../types/placesTypes';
 async function getFivePlaces() {
   const user = localStorage.user;
 
-  const resp = await fetch('http://localhost:8080', {
+  const resp = await fetch('http://192.168.1.206:8080', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

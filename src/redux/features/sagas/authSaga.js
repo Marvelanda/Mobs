@@ -4,7 +4,7 @@ import { GETUSER} from '../../types/users';
 
 async function getUser(email, password) {
   try {
-    const response = await fetch('http://localhost:8080/auth/signin', {
+    const response = await fetch('http://192.168.1.206:8080/auth/signin', {
       method: 'POST',
       body: JSON.stringify({ password, email }),
       headers: {

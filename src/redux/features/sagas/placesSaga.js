@@ -14,7 +14,7 @@ import {
 
 async function getPlaces() {
   const user = localStorage.user;
-  const resp = await fetch('http://localhost:8080/places', {
+  const resp = await fetch('http://192.168.1.206:8080/places', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ async function addPlace(
   geometry,
   description
 ) {
-  const resp = await fetch(`http://localhost:8080/places/new`, {
+  const resp = await fetch(`http://192.168.1.206:8080/places/new`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ export function* addNewPlaceWatcher() {
 }
 
 async function addRating(id, stars) {
-  const resp = await fetch(`http://localhost:8080/places/${id}/ratings`, {
+  const resp = await fetch(`http://192.168.1.206:8080/places/${id}/ratings`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ export function* ratingWatcher() {
 }
 
 async function checkUserPlace(latitude, longitude, user ) {
-  const resp = await fetch(`http://localhost:8080/places/check`, {
+  const resp = await fetch(`http://192.168.1.206:8080/places/check`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
