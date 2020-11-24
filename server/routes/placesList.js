@@ -120,10 +120,10 @@ router.put('/new', async (req, res) => {
 });
 
 router.post('/check', async (req, res) => {
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..');
   const {
     latitude,
-    longitude
+    longitude,
+    userID
   } = req.body;
 
   const fixLat = latitude.toFixed(6)
@@ -134,7 +134,10 @@ router.post('/check', async (req, res) => {
   const minLong = Number((+fixLong - 0.01).toFixed(6));
   const maxLong = Number((+fixLong + 0.01).toFixed(6));
 
-  if (req.body) {
+  console.log('>>>>>>>>>>Получил данные с фронта ', fixLat, fixLong, userID);
+
+
+  if (req.body) {                // Поиск мета с учетом погрешности
     const place = await Place.find({
         latitude: {
           $gte: minLat,
@@ -145,20 +148,28 @@ router.post('/check', async (req, res) => {
           $lte: maxLong
         },
     });
-    console.log(place);
 
-  //   if(place.length === 1){
-      
-  //     res.sendStatus(200)
-  //   }
-  // } else{
-  //   res.send('Не можем точно определить ваше местоположение')
+    if(place.length === 1){
+      console.log('>>>>>>>>>>>>>> Нашел одно место');
+      console.log(place[0]);
+      try{
+        const curUser = await User.findById(userID);
+        console.log('curent User', curUser);
+        const visitedPlace = curUser.visitedPlaces.find(el => el === place[0]._id)
+        console.log('visitedPlaces of User', visitedPlace);
+        if(visitedPlace === undefined || visitedPlace.length > 1) {
+          console.log('место не в массиве посещенных');
+          await User.findByIdAndUpdate(userID, {$push: {visitedPlaces: place[0]._id}});
+        } else 
+          res.send('Вы уже посещали это место')
+        }
+      catch (error) {
+        console.log(error);
+      }
+    }
+  } else{
+    res.send('Не можем точно определить ваше местоположение')
   }
-
-
-
-
-  res.send('ответ по ручке checkPlace').end();
 });
 
 export default router;

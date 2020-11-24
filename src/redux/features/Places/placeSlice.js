@@ -86,11 +86,12 @@ export const addNewPlaceSaga = (
   };
 };
 
-export const checkPlaceSaga = (latitude, longitude) => {
+export const checkPlaceSaga = (latitude, longitude, user) => {
   return {
     type: CHECKPLACE,
     latitude,
     longitude,
+    user
   };
 };
 
