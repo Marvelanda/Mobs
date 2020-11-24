@@ -12,6 +12,7 @@ export const placeSlice = createSlice({
   name: 'places',
   initialState: {
     places: [],
+    message: '',
   },
   reducers: {
     placesReducer: (state, action) => {
@@ -31,7 +32,7 @@ export const placeSlice = createSlice({
     },
 
     checkPlace: (state, action) => {
-      state.places = action.payload;
+      state.message = action.payload;
     },
   },
 });
@@ -89,7 +90,7 @@ export const checkPlaceSaga = (latitude, longitude, user) => {
     type: CHECKPLACE,
     latitude,
     longitude,
-    user
+    user,
   };
 };
 

@@ -2,7 +2,7 @@ import style from './style.module.css';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser, setStatus } from '../../redux/features/Places/authSlice';
+import { removeUser, setStatus } from '../../redux/features/Places/authSlice';
 
 function Header() {
   const dispatch = useDispatch();
@@ -11,7 +11,7 @@ function Header() {
 
   const logout = () => {
     localStorage.clear();
-    dispatch(logoutUser());
+    dispatch(removeUser());
   };
 
   useEffect(() => {

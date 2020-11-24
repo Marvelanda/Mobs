@@ -42,14 +42,15 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/signin', async (req, res) => {
+  console.log(req.body.email, req.body.password);
   if (req.body.email && req.body.password) {
     const UserByEmail = await User.findOne({ email: req.body.email });
     if (UserByEmail) {
       const userPassword = UserByEmail.password;
       const validPass = await bcrypt.compare(req.body.password, userPassword);
       if (validPass) {
-        req.session.user = serializeUser(newUser);
-        res.json({ status: true, userid: UserByEmail.id });
+        req.session.user = serializeUser(UserByEmail);
+        res.json({ status: true, userid: req.session.user.id });
       } else {
         res.json({ error: 'Неправильный логин или пароль!', status: false });
       }
@@ -62,6 +63,16 @@ router.post('/signin', async (req, res) => {
   } else {
     res.json({ error: 'Пожалуйста, заполните все поля!', status: false });
   }
+});
+
+router.get('/logout', (req, res) => {
+  req.session.destroy(function (err) {
+    if (err) throw new Error(err);
+    res.clearCookie(req.app.get('session cookie name'));
+    res.json({
+      status: false,
+    });
+  });
 });
 
 export default router;

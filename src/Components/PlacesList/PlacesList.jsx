@@ -8,7 +8,6 @@ function PlacesList() {
   const dispatch = useDispatch();
 
   const places = useSelector((state) => state.places.places);
-
   useEffect(() => {
     dispatch(getPlacesListSaga());
   }, []);
@@ -16,7 +15,7 @@ function PlacesList() {
   return (
     <div className={style.container}>
       <ul className={style.list}>
-        {places &&
+        {places.length &&
           places.map((el) => {
             return <Place key={el._id} {...el} />;
           })}
