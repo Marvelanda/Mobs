@@ -6,7 +6,10 @@ import {
   addPlaceRatingSaga,
 } from '../../redux/features/Places/placeSlice';
 import { getReviewsListSaga } from '../../redux/features/Places/reviewSlice';
-import { sharePlaceSaga } from '../../redux/features/Places/sharePlaceSlice';
+import {
+  sharePlaceSaga,
+  changeShareStatus,
+} from '../../redux/features/Places/sharePlaceSlice';
 import { Link, useParams } from 'react-router-dom';
 import Review from '../Review/Review';
 import SwiperCore, {
@@ -56,8 +59,11 @@ function DetailedPlace() {
     e.preventDefault();
     if (value.trim()) {
       dispatch(sharePlaceSaga(value.trim(), id));
+      setValue('');
+      setTimeout(() => dispatch(changeShareStatus()), 3000);
     }
   };
+
   const starsHandler = () => {
     dispatch(addPlaceRatingSaga(id, stars));
     setStars(0);
@@ -140,7 +146,7 @@ function DetailedPlace() {
                   placeholder='Введите username друга'
                 ></input>
                 <button type='submit'>Поделиться местом</button>
-                <div>{shareStatus.message}</div>
+                {shareStatus && <div>{shareStatus}</div>}
               </form>
             </div>
           </div>

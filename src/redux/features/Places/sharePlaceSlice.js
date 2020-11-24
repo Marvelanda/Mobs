@@ -4,24 +4,31 @@ import { SHARE_PLACE_SAGA } from '../../types/placesTypes';
 
 export const sharePlaceSlice = createSlice({
   name: 'sharedPlace',
-  initialState:{
-    shareStatus: '', 
+  initialState: {
+    shareStatus: '',
   },
   reducers: {
     shareStatusReducer: (state, action) => {
       state.shareStatus = action.payload;
-    }
-  }
-})
+    },
 
-export const { shareStatusReducer } = sharePlaceSlice.actions;
+    changeShareStatus: (state, action) => {
+      state.shareStatus = '';
+    },
+  },
+});
+
+export const {
+  shareStatusReducer,
+  changeShareStatus,
+} = sharePlaceSlice.actions;
 
 export const sharePlaceSaga = (username, placeID) => {
   return {
     type: SHARE_PLACE_SAGA,
     username,
-    placeID
-  }
-}
+    placeID,
+  };
+};
 
-export default sharePlaceSlice.reducer
+export default sharePlaceSlice.reducer;
