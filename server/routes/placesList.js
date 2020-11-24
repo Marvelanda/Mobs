@@ -7,9 +7,9 @@ import User from '../models/user.js';
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { userID } = req.body;
+  const { id } = req.body;
   try {
-    const userInfo = await User.findById(userID).populate('places');
+    const userInfo = await User.findById(id).populate('places');
     const list = userInfo.places;
 
     if (list.length) {
@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
       res.sendStatus('List is empty');
     }
   } catch (error) {
-    res.sendStatus(503);
+    console.log(error);
   }
 });
 
@@ -30,17 +30,20 @@ router.get('/:id/reviews', async (req, res) => {
 });
 
 router.post('/:id/reviews', async (req, res) => {
-  const { review, pecularities, userId } = req.body;
+  const { review, pecularities, id } = req.body;
+  const user = await User.findById(id);
 
   if (review) {
     const newReview = new Review({
-      author: userId,
+      author: id,
       placeName: req.params.id,
       review,
       pecularities,
     });
     try {
       await newReview.save();
+      user.checkScore();
+      console.log(user);
     } catch (err) {
       console.log(err);
     }
