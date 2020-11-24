@@ -3,6 +3,7 @@ import isAuth from '../middleware/auth.js';
 import Place from '../models/place.js';
 import Review from '../models/review.js';
 import User from '../models/user.js';
+import Raiting from '../models/raiting.js';
 
 const router = express.Router();
 
