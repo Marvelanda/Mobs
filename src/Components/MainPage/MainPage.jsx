@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
+import mainCoin from '../../images/mapIcons/mainCoin.gif';
+import mainQuestion from '../../images/mapIcons/mainQuestion.gif';
 import style from './style.module.css';
-import { getRandomFive, myArray } from '../../helpers/randomFive';
 import Modal from './Modal';
 import { useHistory } from 'react-router-dom';
-import image from '../../img/5003977.jpeg';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
-import { question, coin } from './placemarks';
 import { Link } from 'react-router-dom';
 
 function MainPage() {
@@ -88,7 +87,7 @@ function MainPage() {
                 geometry={el.geometry}
                 options={{
                   iconLayout: 'default#image',
-                  iconImageHref: localStorage.length ? coin : question,
+                  iconImageHref: localStorage.length ? mainCoin : mainQuestion,
                   iconImageSize: [96, 90],
                   iconImageOffset: [-5, -38],
                 }}

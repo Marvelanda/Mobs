@@ -1,2 +1,0 @@
-export const question = 'https://psv4.userapi.com/c856532/u17278978/docs/d1/19c59137d3c8/new_qsymb.gif?extra=AupMw014gGOdNSjoQadstIukFNJCoxlz7gMS-On1JwlrNTH3ekpSliAAxJMHvXfp3m52mcDZU8e7NncrKVCFR8RX28F8b62JS9xm1RBAzZIFVQvCAcR4ARR_qlpdZm2CM95zw9ph0x8UhgWS_WSz5w'
-export const coin = 'https://psv4.userapi.com/c856224/u17278978/docs/d15/185bf466c97a/ezgif_com-gif-maker_1.gif?extra=J6gcTylR1SwI6VCZV9Gu0kBCEqcHK68c0e1toix1XGurnZO-64FEclhIXKUA4u21V8IhZ3_2xQbO8EjgpHdRiWdEmiD3HBJpY8uSRqVxu2u44PSVHIDkNam5iW6AUOYqMUrSUf-pai94V21-HvDvSQ'
