@@ -32,6 +32,14 @@ router.get('/:id/reviews', async (req, res) => {
 router.post('/:id/reviews', async (req, res) => {
   const { review, pecularities, id } = req.body;
   const user = await User.findById(id);
+  const findReview = await user.findReview(req.params.id);
+
+  if (findReview) {
+    await Review.findOneAndDelete({ _id: findReview._id });
+  } else {
+    user.points += 3;
+    await user.save();
+  }
 
   if (review) {
     const newReview = new Review({
@@ -43,7 +51,6 @@ router.post('/:id/reviews', async (req, res) => {
     try {
       await newReview.save();
       user.checkScore();
-      console.log(user);
     } catch (err) {
       console.log(err);
     }

@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Review from '../models/review.js';
 
 const UserSchema = new mongoose.Schema({
   // Имя пользователя
@@ -48,6 +49,20 @@ UserSchema.methods.checkScore = async function () {
     this.rating = 1;
   }
   return await this.save();
+};
+
+UserSchema.methods.findReview = async function (id) {
+  const reviews = await this.model('Review').find({ author: this._id });
+  if (reviews) {
+    reviews.map((item) => {
+      if (item.placeName._id.toString() === id) {
+        return item;
+      } else {
+        return null;
+      }
+    });
+    return reviews[0];
+  }
 };
 
 export default mongoose.model('User', UserSchema);

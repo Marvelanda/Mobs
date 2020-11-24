@@ -27,6 +27,7 @@ import StarRatingComponent from 'react-star-rating-component';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
 
 function DetailedPlace() {
+  console.log('Detailed Place');
   const [stars, setStars] = useState(0);
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -41,22 +42,22 @@ function DetailedPlace() {
   const reviews = useSelector((state) => state.reviews.reviews);
 
   const shareStatus = useSelector((state) => state.sharedPlace.shareStatus);
-  
+
   useEffect(() => {
     dispatch(getPlacesListSaga());
   }, []);
-  
+
   useEffect(() => {
     dispatch(getReviewsListSaga(id));
-  }, []);
-  
+  }, [reviews.length]);
+
   // для формы-делёжки
   const submitHandler = (e) => {
     e.preventDefault();
     if (value.trim()) {
-      dispatch(sharePlaceSaga(value.trim(), id))
+      dispatch(sharePlaceSaga(value.trim(), id));
     }
-  }
+  };
   const starsHandler = () => {
     dispatch(addPlaceRatingSaga(id, stars));
     setStars(0);
@@ -134,8 +135,11 @@ function DetailedPlace() {
               <h3>Часы работы:</h3>
               <p>{place.info.workingHours}</p>
               <form onSubmit={submitHandler}>
-                <input onChange={(e) => setValue(e.target.value)} placeholder="Введите username друга"></input>
-                <button type="submit">Поделиться местом</button>
+                <input
+                  onChange={(e) => setValue(e.target.value)}
+                  placeholder='Введите username друга'
+                ></input>
+                <button type='submit'>Поделиться местом</button>
                 <div>{shareStatus.message}</div>
               </form>
             </div>
