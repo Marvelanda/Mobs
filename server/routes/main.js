@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const userId = req.session.user;
+  console.log(userId);
   if (userId) {
     const user = await User.findById(userId).populate('places');
     res.status(200).json(user.places);
