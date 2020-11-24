@@ -6,19 +6,20 @@ import { getRandomFive } from '../helpers/randomFive.js';
 
 const router = express.Router();
 
-// const serializeUser = (user) => {
-//   return {
-//     username: user.username,
-//     id: user._id,
-//     email: user.email,
-//   };
-// };
+const serializeUser = (user) => {
+  return {
+    username: user.username,
+    id: user._id,
+    email: user.email,
+  };
+};
 
 router.post('/signup', async (req, res) => {
   const UserByUsername = await User.findOne({ username: req.body.username });
   const UserByEmail = await User.findOne({ email: req.body.email });
 
   if (UserByUsername || UserByEmail) {
+    
     res.json({ exist: true, done: false });
   } else {
     let newUser = new User({
@@ -42,6 +43,9 @@ router.post('/signin', async (req, res) => {
       const userPassword = UserByEmail.password;
       const validPass = await bcrypt.compare(req.body.password, userPassword);
       if (validPass) {
+
+        // req.session.user = UserByEmail._id;
+
         res.json({ status: true, userid: UserByEmail.id });
       } else {
         res.json({ error: 'Неправильный логин или пароль!', status: false });
