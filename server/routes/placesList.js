@@ -63,6 +63,7 @@ router.post('/:id/reviews', async (req, res) => {
 router.patch('/:id/share', async (req, res) => {
   const { friend, user } = req.body;
   const { id } = req.params;
+  console.log('>>>>>>>>>>>>>', friend, user, id);
   const findUser = await User.findById(user);
 
   try {
