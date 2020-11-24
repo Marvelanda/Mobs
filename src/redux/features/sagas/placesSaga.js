@@ -13,7 +13,6 @@ import {
 } from '../../types/placesTypes';
 
 async function getPlaces() {
-  const user = localStorage.user;
   const resp = await fetch('http://localhost:8080/places', {
     method: 'GET',
     credentials: 'include',

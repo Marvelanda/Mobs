@@ -138,7 +138,7 @@ router.put('/new', async (req, res) => {
 });
 
 router.post('/check', async (req, res) => {
-  const { latitude, longitude, userID } = req.body;
+  const { latitude, longitude } = req.body;
 
   const fixLat = latitude.toFixed(6);
   const minLat = Number((+fixLat - 0.01).toFixed(6));
@@ -163,53 +163,41 @@ router.post('/check', async (req, res) => {
 
     if (place.length === 1) {
       try {
-        const curUser = await User.findById(userID);
+        const curUser = await User.findById(req.session.user);
         const visitedPlace = curUser.visitedPlaces.find((el) => {
           if (el) {
             return el.toString() === place[0]._id.toString();
           }
-
-        })
-        if(visitedPlace === undefined) {
-          await User.findByIdAndUpdate(userID, {$push: {visitedPlaces: place[0]._id}});
-          res.json({message: 'Посещение засчитано'});
+        });
+        if (visitedPlace === undefined) {
+          await User.findByIdAndUpdate(req.session.user, {
+            $push: { visitedPlaces: place[0]._id },
+          });
+          res.json({ message: 'Посещение засчитано' });
 
           const shareNewPlaceArr = await Place.find({
             secrecy: {
-              $lte: curUser.rating
-            }
-          })
-          const Arr1 = curUser.places.map(el => (el).toString());
-          const Arr2 = shareNewPlaceArr.map(el => (el._id).toString())
-          const compArr = Arr1
-                  .filter(x => !Arr2.includes(x))
-                  .concat(Arr2.filter(x => !Arr1.includes(x)));
-          
-          const addRandomSharePlace = compArr[Math.floor(Math.random()*compArr.length)];
-          await User.findByIdAndUpdate(userID, {$push: {places: addRandomSharePlace}});
-        } else 
-          res.json({message: 'Вы уже посещали это место'});
-        }
-      catch (error) {
-        console.log(error);
-      }
-    }
-  } else{
-    res.json({message: 'Не можем точно определить ваше местоположение'})
-
-        if (visitedPlace === undefined) {
-          await User.findByIdAndUpdate(userID, {
-            $push: { visitedPlaces: place[0]._id },
+              $lte: curUser.rating,
+            },
           });
-          res.send('Посещение засчитано').end();
-        } else res.send('Вы уже посещали это место').end();
+          const Arr1 = curUser.places.map((el) => el.toString());
+          const Arr2 = shareNewPlaceArr.map((el) => el._id.toString());
+          const compArr = Arr1.filter((x) => !Arr2.includes(x)).concat(
+            Arr2.filter((x) => !Arr1.includes(x))
+          );
+
+          const addRandomSharePlace =
+            compArr[Math.floor(Math.random() * compArr.length)];
+          await User.findByIdAndUpdate(req.session.user, {
+            $push: { places: addRandomSharePlace },
+          }).exec();
+        } else res.json({ message: 'Вы уже посещали это место' });
       } catch (error) {
         console.log(error);
       }
     }
   } else {
-    res.send('Не можем точно определить ваше местоположение').end();
-
+    res.json({ message: 'Не можем точно определить ваше местоположение' });
   }
 });
 
