@@ -42,6 +42,10 @@ function DetailedPlace() {
     return item._id === id;
   });
 
+  const visited = useSelector((state) => state.places.visited).find((item) => {
+    return item === id;
+  });
+
   const reviews = useSelector((state) => state.reviews.reviews);
 
   const shareStatus = useSelector((state) => state.sharedPlace.shareStatus);
@@ -153,11 +157,15 @@ function DetailedPlace() {
           <div className={`${style.container}`}>
             <div className={`${style.reviews_container} ${style.blur}`}>
               <h2 className={style.review_heading}>Отзывы</h2>
-              <Link to={`/places/${id}/reviews`}>
-                <button className='button'>Написать отзыв</button>
-              </Link>
             </div>
           </div>
+          {visited ? (
+            <Link to={`/places/${id}/reviews`}>
+              <button className='button'>Написать отзыв</button>
+            </Link>
+          ) : (
+            <p>Чтобы оставить отзыв, необходимо его посетить!</p>
+          )}
           <div className={`${style.container} ${style.blur}`}>
             <ul className={style.center}>
               {reviews.length ? (
