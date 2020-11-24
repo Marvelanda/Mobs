@@ -12,20 +12,21 @@ import {
   CHECKPLACE,
 } from '../../types/placesTypes';
 
-async function getPlaces(userID) {
+async function getPlaces() {
+  const user = localStorage.user;
   const resp = await fetch('http://localhost:8080/places', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ userID }),
+    body: JSON.stringify({ id: user }),
   });
   const data = await resp.json();
   return data;
 }
 
-export function* placesWorker({ userID }) {
-  const newList = yield call(getPlaces, userID);
+export function* placesWorker() {
+  const newList = yield call(() => getPlaces());
   yield put(placesReducer(newList));
 }
 
@@ -119,7 +120,6 @@ export function* ratingWorker({ id, stars }) {
 export function* ratingWatcher() {
   yield takeEvery(ADDPLACERATING, ratingWorker);
 }
-  
 
 async function checkUserPlace(latitude, longitude, user ) {
   const resp = await fetch(`http://localhost:8080/places/check`, {

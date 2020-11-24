@@ -39,7 +39,7 @@ const PlaceSchema = new mongoose.Schema({
   visitors: Number,
   geometry: Array,
   latitude: Number,
-  longitude: Number
+  longitude: Number,
 });
 
 PlaceSchema.methods.getReviews = async function () {
@@ -49,12 +49,14 @@ PlaceSchema.methods.getReviews = async function () {
     .lean();
 
   const mappedReviews = reviews.map((item) => {
-    return {
-      _id: item._id,
-      author: item.author.username,
-      review: item.review,
-      pecularities: item.pecularities,
-    };
+    if (item) {
+      return {
+        _id: item._id,
+        author: item.author.username,
+        review: item.review,
+        pecularities: item.pecularities,
+      };
+    }
   });
 
   return mappedReviews;

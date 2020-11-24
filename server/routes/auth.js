@@ -6,24 +6,25 @@ import { getRandomFive } from '../helpers/randomFive.js';
 
 const router = express.Router();
 
-// const serializeUser = (user) => {
-//   return {
-//     username: user.username,
-//     id: user._id,
-//     email: user.email,
-//   };
-// };
+const serializeUser = (user) => {
+  return {
+    username: user.username,
+    id: user._id,
+    email: user.email,
+  };
+};
 
 router.post('/signup', async (req, res) => {
-  const UserByUsername = await User.findOne({ username: req.body.username });
+  const UserByUsername = await User.findOne({ username: req.body.userName });
   const UserByEmail = await User.findOne({ email: req.body.email });
 
   if (UserByUsername || UserByEmail) {
+
     res.json({ exist: true, done: false });
   } else {
     let newUser = new User({
       email: req.body.email,
-      username: req.body.username,
+      username: req.body.userName,
       password: await bcrypt.hash(req.body.password, 10),
       places: req.body.fivePlaces,
     });
@@ -31,7 +32,7 @@ router.post('/signup', async (req, res) => {
 
     // req.session.user = serializeUser(newUser);
     const againNewUser = await User.findOne({ email: req.body.email });
-    res.json({ exist: false, done: true, userid: againNewUser.id });
+    res.json({ exist: false, done: true, userid: againNewUser.id, status: true,  });
   }
 });
 
@@ -42,20 +43,21 @@ router.post('/signin', async (req, res) => {
       const userPassword = UserByEmail.password;
       const validPass = await bcrypt.compare(req.body.password, userPassword);
       if (validPass) {
+
         // req.session.user = UserByEmail._id;
 
         res.json({ status: true, userid: UserByEmail.id });
       } else {
-        res.json({ error: 'Непрравильный логин или пароль!', status: false });
+        res.json({ error: 'Неправильный логин или пароль!', status: false });
       }
     } else {
       res.json({
-        error: 'Пользователь не найден. Пожалйста, зарегистрируйтесь!',
+        error: 'Пользователь не найден. Пожалуйста, зарегистрируйтесь!',
         status: false,
       });
     }
   } else {
-    res.json({ error: 'Поля не могут быть пустыми', status: false });
+    res.json({ error: 'Пожалуйста, заполните все поля!', status: false });
   }
 });
 

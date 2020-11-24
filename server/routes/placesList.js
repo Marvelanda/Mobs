@@ -1,4 +1,5 @@
 import express from 'express';
+import isAuth from '../middleware/auth.js';
 import Place from '../models/place.js';
 import Review from '../models/review.js';
 import User from '../models/user.js';
@@ -6,9 +7,9 @@ import User from '../models/user.js';
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const { userID } = req.body;
+  const { id } = req.body;
   try {
-    const userInfo = await User.findById(userID).populate('places');
+    const userInfo = await User.findById(id).populate('places');
     const list = userInfo.places;
 
     if (list.length) {
@@ -17,7 +18,7 @@ router.post('/', async (req, res) => {
       res.sendStatus('List is empty');
     }
   } catch (error) {
-    res.sendStatus(503);
+    console.log(error);
   }
 });
 
@@ -29,17 +30,20 @@ router.get('/:id/reviews', async (req, res) => {
 });
 
 router.post('/:id/reviews', async (req, res) => {
-  const { review, pecularities, userId } = req.body;
+  const { review, pecularities, id } = req.body;
+  const user = await User.findById(id);
 
   if (review) {
     const newReview = new Review({
-      author: userId,
+      author: id,
       placeName: req.params.id,
       review,
       pecularities,
     });
     try {
       await newReview.save();
+      user.checkScore();
+      console.log(user);
     } catch (err) {
       console.log(err);
     }
@@ -103,7 +107,7 @@ router.put('/new', async (req, res) => {
     info: {
       address,
       tel: phone,
-      workingHours
+      workingHours,
     },
     category,
     rating,
@@ -126,11 +130,11 @@ router.post('/check', async (req, res) => {
     userID
   } = req.body;
 
-  const fixLat = latitude.toFixed(6)
+  const fixLat = latitude.toFixed(6);
   const minLat = Number((+fixLat - 0.01).toFixed(6));
   const maxLat = Number((+fixLat + 0.01).toFixed(6));
 
-  const fixLong = longitude.toFixed(6)
+  const fixLong = longitude.toFixed(6);
   const minLong = Number((+fixLong - 0.01).toFixed(6));
   const maxLong = Number((+fixLong + 0.01).toFixed(6));
 
@@ -139,14 +143,14 @@ router.post('/check', async (req, res) => {
 
   if (req.body) {                // Поиск мета с учетом погрешности
     const place = await Place.find({
-        latitude: {
-          $gte: minLat,
-          $lte: maxLat
-        },
-        longitude: {
-          $gte: minLong,
-          $lte: maxLong
-        },
+      latitude: {
+        $gte: minLat,
+        $lte: maxLat,
+      },
+      longitude: {
+        $gte: minLong,
+        $lte: maxLong,
+      },
     });
 
     if(place.length === 1){

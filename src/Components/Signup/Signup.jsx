@@ -1,39 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './style.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { newUserName } from '../../redux/features/Places/authSlice';
+import { addUser } from '../../redux/features/Places/authSlice';
+import { useHistory } from 'react-router-dom';
+
 
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUserName] = useState('');
   const [exist, setExist] = useState(false);
-
+  const user = useSelector((state) => state.auth.userName)
   const dispatch = useDispatch();
-
+  const history = useHistory()
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   const doFetch = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('http://localhost:8080/auth/signup', {
-        method: 'POST',
-        body: JSON.stringify({ username, password, email, fivePlaces }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const json = await response.json();
-      setExist(json.exist);
-      if (json.done) {
-        dispatch(newUserName(username));
-        localStorage.setItem('user', json.userid);
-      }
-      console.log(json);
-    } catch (error) {
-      console.error('Ошибка:', error);
-    }
+    dispatch(addUser(email, username, password, fivePlaces))
   };
+
+  useEffect(() => {
+    if (user) {
+      history.push('/');
+    }
+  }, [user]);
 
   return (
     <div className={`${style.container}`}>
