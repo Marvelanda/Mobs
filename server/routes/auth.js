@@ -19,6 +19,7 @@ router.post('/signup', async (req, res) => {
   const UserByEmail = await User.findOne({ email: req.body.email });
 
   if (UserByUsername || UserByEmail) {
+    
     res.json({ exist: true, done: false });
   } else {
     let newUser = new User({

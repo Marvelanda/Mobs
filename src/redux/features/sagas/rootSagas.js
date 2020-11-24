@@ -6,6 +6,7 @@ import { placesWatcher, addNewPlaceWatcher, ratingWatcher, checkPlaceWatcher } f
 import { reviewsWatcher, addReviewWatcher } from './reviewsSaga';
 import { fivePlacesWatcher } from './fivePlacesSaga';
 import {userWatcher} from './authSaga'
+import {registrationWatcher} from './registrationSaga'
 import {sharePlaceWatcher} from './sharePlaceSaga'
 export default function* rootSaga() {
   yield all([
@@ -16,6 +17,7 @@ export default function* rootSaga() {
     reviewsWatcher(),
     sharePlaceWatcher(),
     userWatcher(),
+    registrationWatcher(),
     ratingWatcher(),
     checkPlaceWatcher()
   ]);
