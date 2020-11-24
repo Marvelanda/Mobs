@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { GETUSER, ADDUSER } from '../../types/users'
+import { GETUSER, ADDUSER, REMOVEUSER } from '../../types/users';
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -21,6 +21,7 @@ export const authSlice = createSlice({
     },
 
     logoutUser: (state, action) => {
+      console.log(action.payload);
       state.userName = '';
       state.status = false;
     },
@@ -42,6 +43,12 @@ export const addUser = (userName, email, password, fivePlaces) => {
     email,
     password,
     fivePlaces,
+  };
+};
+
+export const removeUser = () => {
+  return {
+    type: REMOVEUSER,
   };
 };
 
