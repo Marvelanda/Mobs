@@ -12,6 +12,7 @@ router.post('/signup', async (req, res) => {
   const list = await Place.find().lean().exec();
 
   if (UserByUsername || UserByEmail) {
+    
     res.json({ exist: true, done: false });
   } else {
     let newUser = new User({
@@ -21,7 +22,7 @@ router.post('/signup', async (req, res) => {
       places: req.body.fivePlaces,
     });
     await newUser.save();
-
+   
     const againNewUser = await User.findOne({ email: req.body.email });
     res.json({ exist: false, done: true, userid: againNewUser.id });
   }
