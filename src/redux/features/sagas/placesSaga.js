@@ -129,7 +129,7 @@ async function checkUserPlace(latitude, longitude, user ) {
     },
     body: JSON.stringify({ latitude, longitude, userID: user}),
   });
-  const data = await resp.text();
+  const data = await resp.json();
   return data;
 }
 

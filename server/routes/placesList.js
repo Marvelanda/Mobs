@@ -176,16 +176,30 @@ router.post('/check', async (req, res) => {
         })
         if(visitedPlace === undefined) {
           await User.findByIdAndUpdate(userID, {$push: {visitedPlaces: place[0]._id}});
-          res.send('Посещение засчитано').end();
+          res.json({message: 'Посещение засчитано'});
+
+          const shareNewPlaceArr = await Place.find({
+            secrecy: {
+              $lte: curUser.rating
+            }
+          })
+          const Arr1 = curUser.places.map(el => (el).toString());
+          const Arr2 = shareNewPlaceArr.map(el => (el._id).toString())
+          const compArr = Arr1
+                  .filter(x => !Arr2.includes(x))
+                  .concat(Arr2.filter(x => !Arr1.includes(x)));
+          
+          const addRandomSharePlace = compArr[Math.floor(Math.random()*compArr.length)];
+          await User.findByIdAndUpdate(userID, {$push: {places: addRandomSharePlace}});
         } else 
-          res.send('Вы уже посещали это место').end()
+          res.json({message: 'Вы уже посещали это место'});
         }
       catch (error) {
         console.log(error);
       }
     }
   } else{
-    res.send('Не можем точно определить ваше местоположение').end()
+    res.json({message: 'Не можем точно определить ваше местоположение'})
   }
 });
 
