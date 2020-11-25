@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser, setStatus } from '../../redux/features/Places/authSlice';
+<<<<<<< HEAD
 import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
 import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
+=======
+import ProgressBar from '../ProgressBar/ProgressBar';
+>>>>>>> d12840db759fa04a705947ef910da008674f8cae
 
 function Header() {
   const dispatch = useDispatch();

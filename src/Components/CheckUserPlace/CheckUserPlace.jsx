@@ -26,7 +26,12 @@ function CheckUserPlace({onClick:onOpenPlaceMessage}) {
 
   return (
     <div className={style.placeCheckBtn}>
+<<<<<<< HEAD
       <Link onClick={() => checkPlace(message)}>Посетить</Link>
+=======
+      <button onClick={checkPlace}>Засчитать посещение</button>
+  { message && <div className='text'>{message}</div> }
+>>>>>>> d12840db759fa04a705947ef910da008674f8cae
     </div>
   )
 }
