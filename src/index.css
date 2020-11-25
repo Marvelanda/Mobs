@@ -23,27 +23,26 @@ a {
 
 .button {
   cursor: pointer;
-  font-family: 'Bernier';
+  font-family: 'Cormorant Unicase', serif;
   font-weight: normal;
   font-size: 15px;
   line-height: 15px;
   text-align: center;
   text-transform: uppercase;
-  color: #ffffff;
-  background: #deb242;
-  box-shadow: -5px -5px 18px 1px #918f8d;
+  color: #000000;
+  background: #ffd200;
   border-radius: 2px;
   width: 200px;
-  height: 51px;
+  height: 41px;
   border-color: transparent;
   margin-top: 30px;
   align-self: center;
 }
 
 .text {
-  color: rgb(75, 39, 158);
+  color: white;
   text-align: center;
-  font-family: 'Almendra', serif;
+  font-family: 'Cormorant Unicase', serif;
 }
 
 .form {
@@ -53,8 +52,7 @@ a {
   flex-direction: column;
   margin-top: 29px;
   padding: 30px 20px 25px;
-  border: 2px solid rgba(0, 0, 0, 0.363);
-  background-color: #c8a9d6;
+  border: 2px solid rgba(255, 255, 255, 0.363);
 }
 
 .description-clue {
@@ -74,7 +72,7 @@ input[text] {
 }
 
 input::placeholder {
-  color: rgb(75, 39, 158);
+  color: rgb(119, 119, 119);
   text-align: center;
 }
 

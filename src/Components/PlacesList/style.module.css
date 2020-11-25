@@ -1,13 +1,23 @@
 .container {
   width: 100vw;
+  height: 100vh;
+  background-image: url('../../img/22fc202843aec437eaf85816416c0e73.jpg');
+  display: flex;
 }
 
 .list {
   padding: 0;
-  margin: 0 auto;
-  display: flex;
-  width: 80%;
   margin-top: 100px;
+  margin-left: 100px;
+  display: flex;
+  justify-content: flex-start;
+  width: 55%;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.vl {
+  margin-top: 15vh;
+  border-left: 6px solid rgb(255, 255, 255);
+  height: 90vh;
 }
