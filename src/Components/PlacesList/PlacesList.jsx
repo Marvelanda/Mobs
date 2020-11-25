@@ -20,6 +20,7 @@ function PlacesList() {
             return <Place key={el._id} {...el} />;
           })}
       </ul>
+      <div class={style.vl}></div>
     </div>
   );
 }

@@ -11,8 +11,6 @@ function Signin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const [message, setMessage] = useState(null);
-
   const dispatch = useDispatch();
   const history = useHistory();
   const user = useSelector((state) => state.auth.status);
@@ -46,7 +44,7 @@ function Signin() {
             onChange={emailHandler}
             type='email'
             value={email}
-            placeholder='Email address'
+            placeholder='Email'
           />
         </div>
         <div className='input-clue text'>
@@ -55,7 +53,7 @@ function Signin() {
             onChange={passwordHandler}
             type='password'
             value={password}
-            placeholder='Password'
+            placeholder='Пароль'
           />
         </div>
         {error ? <p>{error}</p> : null}
