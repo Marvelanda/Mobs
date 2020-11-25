@@ -23,7 +23,7 @@
 .container {
   padding-top: 50px;
   display: flex;
-  z-index: 99999;
+  z-index: 1;
 }
 
 .heading {
@@ -33,6 +33,7 @@
   color: rgb(255, 255, 255);
   margin-bottom: 15px;
 }
+
 .small-headers {
   margin-top: 15px;
   color: #ffd200;
@@ -47,7 +48,7 @@
 
 .container:first-of-type {
   margin-top: 100px;
-  height: 40%;
+  height: 50%;
 }
 
 .container:last-of-type {
@@ -75,7 +76,10 @@
 }
 
 .description:nth-child(2) {
-  margin-left: -90px;
+  padding-top: 10px;
+  width: 600px;
+  background-color: rgba(177, 177, 177, 0.13);
+  backdrop-filter: blur(3px);
   margin-top: 50px;
 }
 
@@ -85,7 +89,6 @@
 
 .reviews_container {
   width: 100%;
-  margin-top: 80px;
   height: fit-content;
   display: flex;
   justify-content: center;
@@ -107,7 +110,7 @@
   flex-direction: column;
   align-items: flex-end;
   margin-top: 20px;
-  margin-right: 50px;
+  margin-right: 100px;
 }
 
 .rating {
@@ -139,7 +142,46 @@
   margin-top: 30px;
 }
 
+.add-friend-form {
+  margin-top: 30px;
+}
+
 .share-input {
   width: 300px;
   height: 43px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  z-index: 9999;
+  font-family: 'Cormorant Unicase', serif;
+}
+
+.modalContentWr {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background: white;
+  color: black;
+  height: 250px;
+  width: 480px;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.modalContentWr div {
+  margin-bottom: 10px;
+}
+
+.modalContentWr input {
+  width: 350px;
 }

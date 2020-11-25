@@ -47,9 +47,11 @@ function Header() {
 
               </li> */}
 
-              </li>
-                <li key='checkUserPlace' className={`${style['navigation-list__item']}`}>
-               <CheckUserPlace />
+              <li
+                key='checkUserPlace'
+                className={`${style['navigation-list__item']}`}
+              >
+                <CheckUserPlace />
               </li>
 
               <li
