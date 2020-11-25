@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
 import { act } from 'react-dom/test-utils';
 
 import {
@@ -14,6 +14,10 @@ export const placeSlice = createSlice({
     places: [],
     message: '',
     visited: [],
+    checkPlaceModalOpened: false,
+    isOpenPlaceMark: false,
+    modalClass: '',
+    modalPlaceMarkInfo: {},
   },
   reducers: {
     placesReducer: (state, action) => {
@@ -37,6 +41,25 @@ export const placeSlice = createSlice({
     checkPlace: (state, action) => {
       state.message = action.payload.message;
     },
+    checkPlaceOpenModal: (state, action) => {
+      state.checkPlaceModalOpened = action.payload;
+    },
+    
+    setModalCheckPlace: (state, action) => {
+      state.modalPlaceMarkInfo = action.payload;
+    },
+
+    openPlaceMark: (state, action) => {
+      state.isOpenPlaceMark = action.payload;
+    },
+
+    setModalClass: (state, action) => {
+      state.modalClass = action.payload;
+    },
+
+    setModalPlaceMarkInfo: (state, action) => {
+      state.modalPlaceMarkInfo = action.payload;
+    },
   },
 });
 
@@ -45,6 +68,11 @@ export const {
   addNewPlace,
   addPlaceRating,
   checkPlace,
+  checkPlaceOpenModal,
+  setModalCheckPlace,
+  openPlaceMark,
+  setModalClass,
+  setModalPlaceMarkInfo
 } = placeSlice.actions;
 
 export const getPlacesListSaga = () => {

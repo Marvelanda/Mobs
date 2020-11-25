@@ -1,11 +1,10 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { checkPlaceSaga } from '../../redux/features/Places/placeSlice';
+import { Link } from 'react-router-dom';
 import style from './style.module.css';
 
 function CheckUserPlace({onClick:onOpenPlaceMessage}) {
-
-  const message = useSelector((state) => state.places.message)
   
   const dispatch = useDispatch();
   const user = localStorage.user
@@ -23,8 +22,7 @@ function CheckUserPlace({onClick:onOpenPlaceMessage}) {
 
   return (
     <div className={style.placeCheckBtn}>
-      <button onClick={checkPlace}  openMessage>Засчитать посещение</button>
-  { message && <div className='text'>{message}</div> }
+      <Link onClick={checkPlace}>Посетить</Link>
     </div>
   )
 }

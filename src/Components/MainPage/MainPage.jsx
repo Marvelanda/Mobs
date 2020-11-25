@@ -8,12 +8,15 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
 import { Link } from 'react-router-dom';
+import { checkPlaceOpenModal, setModalCheckPlace, openPlaceMark, setModalClass, setModalPlaceMarkInfo } from '../../redux/features/Places/placeSlice'
+
 
 function MainPage() {
   const dispatch = useDispatch();
 
+  const checkPlaceModalIsOpened = useSelector((state) => state.places.checkPlaceModalOpened)
   const message = useSelector((state) => state.places.message)
-
+  console.log(message);
   const user = useSelector((state) => state.auth.status);
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
@@ -21,29 +24,40 @@ function MainPage() {
     dispatch(getFivePlacesSaga());
   }, []);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [modalClass, setClass] = useState('');
-  const [modalInfo, setModalInfo] = useState({});
-
+  const isOpenPlaceMark = useSelector((state) => state.places.isOpenPlaceMark)
+  const modalClass = useSelector((state) => state.places.modalClass)
+  const modalPlaceMarkInfo = useSelector((state) => state.places.modalPlaceMarkInfo)
   const history = useHistory();
-
+  
   const onClosePlaceMark = () => {
-    setClass('animate__animated animate__rollOut');
-    setTimeout(() => setIsOpen(false), 500);
+    dispatch(setModalClass('animate__animated animate__rollOut'));
+    setTimeout(() => dispatch(openPlaceMark(false)), 500);
   };
-
+  
   const onOpenPlaceMark = (el) => {
-    setClass('animate__animated animate__rollIn');
-    setIsOpen(true);
-    setModalInfo(el);
-    (() => console.log(modalInfo.info?.workingHours))();
+    console.log('!!!!', el);
+    dispatch(setModalClass('animate__animated animate__rollIn'));
+    dispatch(openPlaceMark(true));
+    dispatch(setModalPlaceMarkInfo(el));
   };
+  console.log('>>>>>>>>>>>>>>>.', modalPlaceMarkInfo);
 
   const onOpenPlaceMessage = () => {
-    setClass('animate__animated animate__rollIn');
-    setIsOpen(true);
+    dispatch(setModalClass('animate__animated animate__rollIn'));
+    dispatch(openPlaceMark(true));
   }
 
+    const isOpenCheckUserPlace = () => {
+    dispatch(setModalClass('animate__animated animate__rollIn'));
+    dispatch(checkPlaceOpenModal(true))
+    dispatch(setModalPlaceMarkInfo());
+  };
+
+    const onCloseCheckUserPlace = () => {
+    dispatch(setModalClass('animate__animated animate__rollOut'));
+    setTimeout(() => dispatch(checkPlaceOpenModal(false)), 500);
+  };
+  
   return (
     <YMaps>
       <div className={style.map}>
@@ -61,15 +75,15 @@ function MainPage() {
               ],
             }}
           >
-            <Modal open={isOpen} onClose={onClosePlaceMark}>
+            <Modal open={isOpenPlaceMark} onClose={onClosePlaceMark}>
               {user ? (
                 <div className={modalClass}>
-                  <h2>{modalInfo.placeName}</h2>
+                  <h2>{modalPlaceMarkInfo.placeName}</h2>
                   <p className={style.description}>Часы работы:</p>
                   <p className={style.description}>
-                    {modalInfo.info?.workingHours}
+                    {modalPlaceMarkInfo.info?.workingHours}
                   </p>
-                  <img src={modalInfo.placePhotoUrl} alt='foto' width='250px' />
+                  <img src={modalPlaceMarkInfo.placePhotoUrl} alt='foto' width='250px' />
                 </div>
               ) : (
                 <div className={modalClass}>
@@ -82,6 +96,14 @@ function MainPage() {
                   </h2>
                 </div>
               )}
+            </Modal>
+
+            <Modal open={checkPlaceModalIsOpened} onClose={onCloseCheckUserPlace}>
+              {
+                <div className={modalClass}>
+                <h2>{message}</h2>
+                </div>
+              }
             </Modal>
 
             <ZoomControl options={{ float: 'right' }} />
