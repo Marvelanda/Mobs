@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
 import mainCoin from '../../images/mapIcons/mainCoin.gif';
-import mainQuestion from '../../images/mapIcons/mainQuestion.gif';
+import mainQuestion from '../../images/mapIcons/brightQuestion.gif';
 import style from './style.module.css';
 import Modal from './Modal';
 import { useHistory } from 'react-router-dom';
