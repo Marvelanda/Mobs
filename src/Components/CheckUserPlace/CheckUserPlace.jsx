@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkPlaceSaga } from '../../redux/features/Places/placeSlice';
 import style from './style.module.css';
 
-function CheckUserPlace() {
+function CheckUserPlace({onClick:onOpenPlaceMessage}) {
 
   const message = useSelector((state) => state.places.message)
   
@@ -23,7 +23,7 @@ function CheckUserPlace() {
 
   return (
     <div className={style.placeCheckBtn}>
-      <button onClick={checkPlace}>Засчитать посещение</button>
+      <button onClick={checkPlace}  openMessage>Засчитать посещение</button>
   { message && <div className='text'>{message}</div> }
     </div>
   )

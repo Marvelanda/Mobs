@@ -26,6 +26,7 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import 'swiper/components/effect-coverflow/effect-coverflow.scss';
 import StarRatingComponent from 'react-star-rating-component';
+import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
 
@@ -100,6 +101,7 @@ function DetailedPlace() {
                 </div>
 
                 <button onClick={starsHandler}>Поставить оценку</button>
+          
               </div>
 
               <div className={style.images}>
@@ -155,17 +157,23 @@ function DetailedPlace() {
             </div>
           </div>
           <div className={`${style.container}`}>
-            <div className={`${style.reviews_container} ${style.blur}`}>
+            <div
+              className={
+                visited
+                  ? `${style.reviews_container} ${style.blur}`
+                  : `${style.reviews_container} ${style.blur}`
+              }
+            >
               <h2 className={style.review_heading}>Отзывы</h2>
+              {visited && (
+                <Link to={`/places/${id}/reviews`}>
+                  <button className={`button ${style.margin}`}>
+                    Написать отзыв
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
-          {visited ? (
-            <Link to={`/places/${id}/reviews`}>
-              <button className='button'>Написать отзыв</button>
-            </Link>
-          ) : (
-            <p>Чтобы оставить отзыв, необходимо его посетить!</p>
-          )}
           <div className={`${style.container} ${style.blur}`}>
             <ul className={style.center}>
               {reviews.length ? (
