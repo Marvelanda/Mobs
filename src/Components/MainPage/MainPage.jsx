@@ -17,7 +17,7 @@ function MainPage() {
 
   useEffect(() => {
     dispatch(getFivePlacesSaga());
-  }, [user]);
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [modalClass, setClass] = useState('');
@@ -25,12 +25,12 @@ function MainPage() {
 
   const history = useHistory();
 
-  const onClose = () => {
+  const onClosePlaceMark = () => {
     setClass('animate__animated animate__rollOut');
     setTimeout(() => setIsOpen(false), 500);
   };
 
-  const onOpen = (el) => {
+  const onOpenPlaceMark = (el) => {
     setClass('animate__animated animate__rollIn');
     setIsOpen(true);
     setModalInfo(el);
@@ -54,7 +54,7 @@ function MainPage() {
               ],
             }}
           >
-            <Modal open={isOpen} onClose={onClose}>
+            <Modal open={isOpen} onClose={onClosePlaceMark}>
               {user ? (
                 <div className={modalClass}>
                   <h2>{modalInfo.placeName}</h2>
@@ -82,7 +82,7 @@ function MainPage() {
             {fivePlaces.map((el, i) => (
               <Placemark
                 className='placeMark'
-                onClick={() => onOpen(el)}
+                onClick={() => onOpenPlaceMark(el)}
                 key={i}
                 geometry={el.geometry}
                 options={{
