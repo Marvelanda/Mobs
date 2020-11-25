@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser, setStatus } from '../../redux/features/Places/authSlice';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
+import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
 
 function Header() {
   const dispatch = useDispatch();
@@ -43,6 +45,9 @@ function Header() {
               </li>
               <li key='profile' className={`${style['navigation-list__item']}`}>
                 <Link to='/profile'>Профиль</Link>
+              </li>
+                <li key='checkUserPlace' className={`${style['navigation-list__item']}`}>
+               <CheckUserPlace />
               </li>
               <li
                 key='logout'
