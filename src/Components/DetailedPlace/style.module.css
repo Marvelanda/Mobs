@@ -64,13 +64,9 @@
   padding: 25px 0;
 }
 
-.reviews_container h2 {
-  margin-right: 100px;
-}
-
 .reviews_container button {
   margin-top: 0;
-  margin-left: 100px;
+  margin-left: 200px;
 }
 
 .center {

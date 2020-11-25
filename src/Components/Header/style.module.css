@@ -1,5 +1,5 @@
 .header {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.075);
   backdrop-filter: blur(2px);
   position: fixed;
   top: 20px;
@@ -23,13 +23,25 @@
   justify-content: space-around;
 }
 
-.navigation-list__item a {
-  font-family: 'Almendra', serif;
+.navigation-list__item,
+.logo {
+  text-transform: uppercase;
   font-style: normal;
   font-weight: normal;
   font-size: 21px;
   line-height: 15px;
-  color: #000000;
+  color: #ffffff;
   margin-right: 47px;
   align-self: center;
+}
+
+.navigation-list__item a,
+.logo {
+  font-family: 'Almendra', serif;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.logo {
+  font-size: 35px;
 }
