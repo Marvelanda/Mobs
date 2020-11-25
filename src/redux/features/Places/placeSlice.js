@@ -15,6 +15,7 @@ export const placeSlice = createSlice({
     message: '',
     visited: [],
     checkPlaceModalOpened: false,
+    modalCheckPlaceInfo: '',
     isOpenPlaceMark: false,
     modalClass: '',
     modalPlaceMarkInfo: {},
@@ -46,7 +47,7 @@ export const placeSlice = createSlice({
     },
     
     setModalCheckPlace: (state, action) => {
-      state.modalPlaceMarkInfo = action.payload;
+      state.modalCheckPlaceInfo = action.payload;
     },
 
     openPlaceMark: (state, action) => {

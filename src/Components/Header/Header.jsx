@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser, setStatus } from '../../redux/features/Places/authSlice';
 import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
+import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
 
 function Header() {
   const dispatch = useDispatch();

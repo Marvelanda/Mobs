@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
 import { Link } from 'react-router-dom';
-import { checkPlaceOpenModal, setModalCheckPlace, openPlaceMark, setModalClass, setModalPlaceMarkInfo } from '../../redux/features/Places/placeSlice'
+import { checkPlaceOpenModal, openPlaceMark, setModalClass, setModalPlaceMarkInfo } from '../../redux/features/Places/placeSlice'
 
 
 function MainPage() {
@@ -22,11 +22,13 @@ function MainPage() {
 
   useEffect(() => {
     dispatch(getFivePlacesSaga());
-  }, []);
+    
+  }, [user]);
 
   const isOpenPlaceMark = useSelector((state) => state.places.isOpenPlaceMark)
   const modalClass = useSelector((state) => state.places.modalClass)
   const modalPlaceMarkInfo = useSelector((state) => state.places.modalPlaceMarkInfo)
+  console.log('!!!!!', modalPlaceMarkInfo);
   const history = useHistory();
   
   const onClosePlaceMark = () => {
@@ -47,11 +49,11 @@ function MainPage() {
     dispatch(openPlaceMark(true));
   }
 
-    const isOpenCheckUserPlace = () => {
-    dispatch(setModalClass('animate__animated animate__rollIn'));
-    dispatch(checkPlaceOpenModal(true))
-    dispatch(setModalPlaceMarkInfo());
-  };
+  //   const isOpenCheckUserPlace = () => {
+  //   dispatch(setModalClass('animate__animated animate__rollIn'));
+  //   dispatch(checkPlaceOpenModal(true))
+  //   dispatch(setModalPlaceMarkInfo());
+  // };
 
     const onCloseCheckUserPlace = () => {
     dispatch(setModalClass('animate__animated animate__rollOut'));
@@ -78,12 +80,12 @@ function MainPage() {
             <Modal open={isOpenPlaceMark} onClose={onClosePlaceMark}>
               {user ? (
                 <div className={modalClass}>
-                  <h2>{modalPlaceMarkInfo.placeName}</h2>
+                  <h2>{modalPlaceMarkInfo?.placeName}</h2>
                   <p className={style.description}>Часы работы:</p>
                   <p className={style.description}>
                     {modalPlaceMarkInfo.info?.workingHours}
                   </p>
-                  <img src={modalPlaceMarkInfo.placePhotoUrl} alt='foto' width='250px' />
+                  <img src={modalPlaceMarkInfo?.placePhotoUrl} alt='foto' width='250px' />
                 </div>
               ) : (
                 <div className={modalClass}>
@@ -97,7 +99,7 @@ function MainPage() {
                 </div>
               )}
             </Modal>
-
+                {console.log('FROM MODAL', checkPlaceModalIsOpened)}
             <Modal open={checkPlaceModalIsOpened} onClose={onCloseCheckUserPlace}>
               {
                 <div className={modalClass}>
