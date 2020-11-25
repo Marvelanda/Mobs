@@ -24,7 +24,6 @@ export const placeSlice = createSlice({
     placesReducer: (state, action) => {
       state.places = action.payload.list;
       state.visited = action.payload.visited;
-      console.log(state.visited);
     },
 
     addPlaceRating: (state, action) => {

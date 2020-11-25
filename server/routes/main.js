@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const userId = req.session.user;
-  console.log(userId);
   if (userId) {
     const user = await User.findById(userId).populate('places');
     res.status(200).json(user.places);
@@ -16,6 +15,14 @@ router.get('/', async (req, res) => {
 
     res.status(200).json(fivePlaces);
   }
+});
+
+router.get('/user/progress', async (req, res) => {
+  const userId = req.session.user;
+  const user = await User.findById(userId);
+  const points = user.points;
+  const rating = user.rating;
+  res.json({points, rating})
 });
 
 export default router;

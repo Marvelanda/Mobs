@@ -23,7 +23,6 @@ async function getPlaces() {
 
 export function* placesWorker() {
   const newList = yield call(() => getPlaces());
-  console.log(newList);
   yield put(placesReducer({ list: newList.list, visited: newList.visited }));
 }
 
