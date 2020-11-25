@@ -26,7 +26,7 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import 'swiper/components/effect-coverflow/effect-coverflow.scss';
 import StarRatingComponent from 'react-star-rating-component';
-import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
+import Modal from '../MainPage/Modal';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
 
@@ -38,6 +38,25 @@ function DetailedPlace() {
 
   // Для формы-делёжки с другом
   const [value, setValue] = useState('');
+
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalClass, setClass] = useState('');
+  const [modalInfo, setModalInfo] = useState({});
+
+
+  const onClose = () => {
+    setClass('animate__animated animate__rollOut');
+    setTimeout(() => setIsOpen(false), 500);
+  };
+
+  const onOpen = (message) => {
+
+    setClass('animate__animated animate__rollIn');
+    setIsOpen(true);
+    setModalInfo(message);
+    console.log('PEPE', message);
+  };
 
   const place = useSelector((state) => state.places.places).find((item) => {
     return item._id === id;
@@ -60,13 +79,12 @@ function DetailedPlace() {
   }, [reviews.length]);
 
   // для формы-делёжки
-  const submitHandler = (e) => {
+  const submitHandler = (e, message) => {
     e.preventDefault();
     if (value.trim()) {
       dispatch(sharePlaceSaga(value.trim(), id));
-      setValue('');
-      setTimeout(() => dispatch(changeShareStatus()), 3000);
     }
+    setTimeout(() => onOpen(message), 200) 
   };
 
   const starsHandler = () => {
@@ -147,6 +165,7 @@ function DetailedPlace() {
               <h3>Часы работы:</h3>
               <p>{place.info.workingHours}</p>
               <form onSubmit={submitHandler}>
+                <h3>Поделиться местом с другом</h3>
                 <input
                   onChange={(e) => setValue(e.target.value)}
                   placeholder='Введите username друга'
@@ -155,7 +174,16 @@ function DetailedPlace() {
                 {shareStatus && <div>{shareStatus}</div>}
               </form>
             </div>
+            <Modal open={isOpen} onClose={onClose}>
+              {
+                <div className={modalClass}>
+                <h2>{shareStatus}</h2>
+                </div>
+              }
+            </Modal>
+
           </div>
+
           <div className={`${style.container}`}>
             <div
               className={
