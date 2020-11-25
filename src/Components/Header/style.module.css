@@ -16,7 +16,7 @@
 }
 
 .navigation-list {
-  width: 1000px;
+  width: 80%;
   display: flex;
   justify-content: flex-end;
   list-style: none;

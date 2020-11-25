@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser, setStatus } from '../../redux/features/Places/authSlice';
-<<<<<<< HEAD
+
 import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
 import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
-=======
+
 import ProgressBar from '../ProgressBar/ProgressBar';
->>>>>>> d12840db759fa04a705947ef910da008674f8cae
 
 function Header() {
   const dispatch = useDispatch();
@@ -64,6 +63,13 @@ function Header() {
                 className={`${style['navigation-list__item']}`}
               >
                 <Link to='/'>Выйти</Link>
+              </li>
+
+              <li
+                key='progress'
+                className={`${style['navigation-list__item']}`}
+              >
+                <ProgressBar />
               </li>
             </>
           ) : (
