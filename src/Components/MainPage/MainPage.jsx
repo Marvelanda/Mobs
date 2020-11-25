@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom';
 function MainPage() {
   const dispatch = useDispatch();
 
+  const message = useSelector((state) => state.places.message)
+
   const user = useSelector((state) => state.auth.status);
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
@@ -36,6 +38,11 @@ function MainPage() {
     setModalInfo(el);
     (() => console.log(modalInfo.info?.workingHours))();
   };
+
+  const onOpenPlaceMessage = () => {
+    setClass('animate__animated animate__rollIn');
+    setIsOpen(true);
+  }
 
   return (
     <YMaps>
