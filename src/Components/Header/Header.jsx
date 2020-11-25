@@ -25,6 +25,7 @@ function Header() {
   return (
     <div className={`${style.header}`}>
       <nav className={`container ${style['header-container']}`}>
+        <li className={`${style.logo}`}>Mobs</li>
         <ul className={`${style['navigation-list']}`}>
           <li className={`${style['navigation-list__item']}`}>
             <Link key='main' to='/'>
