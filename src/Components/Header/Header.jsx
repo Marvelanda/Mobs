@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser, setStatus } from '../../redux/features/Places/authSlice';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 function Header() {
   const dispatch = useDispatch();

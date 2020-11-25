@@ -6,6 +6,7 @@ import rootSaga from './features/sagas/rootSagas';
 import authReducer from './features/Places/authSlice';
 import reviewsReducer from './features/Places/reviewSlice';
 import shareStatusReducer from './features/Places/sharePlaceSlice';
+import progressReducer  from './features/Places/progressSlice'
 const rootSagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
@@ -15,6 +16,7 @@ const store = configureStore({
     auth: authReducer,
     reviews: reviewsReducer,
     sharedPlace: shareStatusReducer,
+    progress: progressReducer,
   },
   middleware: [rootSagaMiddleware],
 });

@@ -1,5 +1,8 @@
 import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
 import style from './style.module.css';
+import ProgressBar from '../ProgressBar/ProgressBarNpm'
+import 'semantic-ui-css/semantic.min.css'
+import ProgressBarCopy from '../ProgressBar/ProgressBar'
 
 function Profile() {
   return (
