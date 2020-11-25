@@ -191,7 +191,9 @@ router.post('/check', async (req, res) => {
             compArr[Math.floor(Math.random() * compArr.length)];
           await User.findByIdAndUpdate(req.session.user, {
             $push: { places: addRandomSharePlace },
+            $inc: {points: 7} 
           }).exec();
+
         } else res.json({ message: 'Вы уже посещали это место' });
       } catch (error) {
         console.log(error);

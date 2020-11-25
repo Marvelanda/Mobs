@@ -3,7 +3,7 @@ import { reviewsReducer, addPlaceReview } from '../Places/reviewSlice';
 import { GETPLACESREVIEW, ADDPLACESREVIEW } from '../../types/placesTypes';
 
 async function getReviews(id) {
-  const resp = await fetch(`http://192.168.1.206:8080/places/${id}/reviews`);
+  const resp = await fetch(`http://localhost:8080/places/${id}/reviews`);
   const data = await resp.json();
   return data;
 }

@@ -4,7 +4,7 @@ import { SHARE_PLACE_SAGA } from '../../types/placesTypes';
 
 async function sharePlace(friend, placeID) {
   const user = localStorage.user;
-  const res = await fetch(`http://192.168.1.206:8080/places/${placeID}/share`, {
+  const res = await fetch(`http://localhost:8080/places/${placeID}/share`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

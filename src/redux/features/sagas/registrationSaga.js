@@ -4,7 +4,7 @@ import { ADDUSER } from '../../types/users';
 
 async function addUser(userName, email, password, fivePlaces) {
   try {
-    const response = await fetch('http://192.168.1.206:8080/auth/signup', {
+    const response = await fetch('http://localhost:8080/auth/signup', {
       method: 'POST',
       body: JSON.stringify({ userName, password, email, fivePlaces }),
       headers: {

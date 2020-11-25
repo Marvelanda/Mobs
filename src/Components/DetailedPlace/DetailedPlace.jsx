@@ -26,6 +26,7 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import 'swiper/components/effect-coverflow/effect-coverflow.scss';
 import StarRatingComponent from 'react-star-rating-component';
+import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
 
@@ -100,6 +101,7 @@ function DetailedPlace() {
                 </div>
 
                 <button onClick={starsHandler}>Поставить оценку</button>
+          
               </div>
 
               <div className={style.images}>

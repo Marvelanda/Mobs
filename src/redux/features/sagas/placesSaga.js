@@ -43,7 +43,7 @@ async function addPlace(
   geometry,
   description
 ) {
-  const resp = await fetch(`http://192.168.1.206:8080/places/new`, {
+  const resp = await fetch(`http://localhost:8080/places/new`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export function* addNewPlaceWatcher() {
 }
 
 async function addRating(id, stars) {
-  const resp = await fetch(`http://192.168.1.206:8080/places/${id}/ratings`, {
+  const resp = await fetch(`http://localhost:8080/places/${id}/ratings`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
