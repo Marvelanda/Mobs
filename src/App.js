@@ -36,9 +36,9 @@ function App() {
         <Route exact path='/places/:id'>
           <DetailedPlace />
         </Route>
-        <Route exact path='/profile'>
+        {/* <Route exact path='/profile'>
           <Profile />
-        </Route>
+        </Route> */}
         <Route exact path='/places/:id/reviews'>
           <AddReview />
         </Route>
@@ -46,7 +46,7 @@ function App() {
           <NotFound />
         </Route>
       </Switch>
-      <Footer></Footer>
+      {/* <Footer></Footer> */}
     </Router>
   );
 }

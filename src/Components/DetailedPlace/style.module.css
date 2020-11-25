@@ -1,25 +1,46 @@
 .section {
-  background-color: rgb(0, 0, 0);
+  color: white;
+  background-image: url('../../img/24ABJa.jpg');
   background-size: cover;
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: column;
+  position: relative;
+  font-family: 'Cormorant Unicase', serif;
+}
+
+.section-first-overlay {
+  content: '';
+  background-color: rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
 }
 
 .container {
+  padding-top: 50px;
   display: flex;
+  z-index: 99999;
 }
 
 .heading {
+  font-family: 'Cormorant Unicase', serif;
   text-align: center;
   font-size: 50px;
-  color: blueviolet;
+  color: rgb(255, 255, 255);
   margin-bottom: 15px;
+}
+.small-headers {
+  margin-top: 15px;
+  color: #ffd200;
+  font-family: 'Cormorant Unicase', serif;
 }
 
 .images {
-  margin-top: 30px;
+  margin-top: 50px;
   display: flex;
   justify-content: center;
 }
@@ -38,9 +59,8 @@
   align-items: center;
 }
 
-.blur {
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(2px);
+.text {
+  text-align: center;
 }
 
 .description {
@@ -50,13 +70,22 @@
   width: 50%;
 }
 
+.description img {
+  margin-top: 10px;
+}
+
+.description:nth-child(2) {
+  margin-left: -90px;
+  margin-top: 50px;
+}
+
 .items:first-of-type {
   margin-left: 0px;
 }
 
 .reviews_container {
   width: 100%;
-  margin-top: 3px;
+  margin-top: 80px;
   height: fit-content;
   display: flex;
   justify-content: center;
@@ -77,6 +106,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  margin-top: 20px;
   margin-right: 50px;
 }
 
@@ -90,4 +120,26 @@
 
 .rating-container button {
   margin: 0;
+}
+
+.button {
+  cursor: pointer;
+  font-family: 'Cormorant Unicase', serif;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 15px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+  background: #ffd200;
+  border-radius: 2px;
+  width: 180px;
+  height: 31px;
+  border-color: transparent;
+  margin-top: 30px;
+}
+
+.share-input {
+  width: 300px;
+  height: 43px;
 }

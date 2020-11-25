@@ -25,7 +25,7 @@ function Header() {
   return (
     <div className={`${style.header}`}>
       <nav className={`container ${style['header-container']}`}>
-        <li className={`${style.logo}`}>Mobs</li>
+        <img src='/img/MOBS.svg' alt='logo' width='250px' />
         <ul className={`${style['navigation-list']}`}>
           <li className={`${style['navigation-list__item']}`}>
             <Link key='main' to='/'>
@@ -40,9 +40,9 @@ function Header() {
               >
                 <Link to='/places'>Список мест</Link>
               </li>
-              <li key='profile' className={`${style['navigation-list__item']}`}>
+              {/* <li key='profile' className={`${style['navigation-list__item']}`}>
                 <Link to='/profile'>Профиль</Link>
-              </li>
+              </li> */}
               <li
                 key='logout'
                 onClick={logout}

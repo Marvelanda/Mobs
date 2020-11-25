@@ -4,20 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addUser } from '../../redux/features/Places/authSlice';
 import { useHistory } from 'react-router-dom';
 
-
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUserName] = useState('');
   const [exist, setExist] = useState(false);
-  const user = useSelector((state) => state.auth.userName)
+  const user = useSelector((state) => state.auth.userName);
   const dispatch = useDispatch();
-  const history = useHistory()
+  const history = useHistory();
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   const doFetch = async (e) => {
     e.preventDefault();
-    dispatch(addUser(email, username, password, fivePlaces))
+    dispatch(addUser(email, username, password, fivePlaces));
   };
 
   useEffect(() => {
@@ -34,7 +33,7 @@ function Signup() {
 
           <input
             type='text'
-            placeholder='Name'
+            placeholder='Имя'
             onChange={(e) => {
               setUserName(e.target.value);
             }}
@@ -56,7 +55,7 @@ function Signup() {
 
           <input
             type='password'
-            placeholder='Password'
+            placeholder='Пароль'
             onChange={(e) => {
               setPassword(e.target.value);
             }}

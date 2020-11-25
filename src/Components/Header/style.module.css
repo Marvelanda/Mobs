@@ -1,5 +1,5 @@
 .header {
-  background-color: rgba(255, 255, 255, 0.075);
+  background-color: rgba(43, 43, 43, 0.07);
   backdrop-filter: blur(2px);
   position: fixed;
   top: 20px;
@@ -8,7 +8,6 @@
 }
 
 .header-container {
-  padding-left: 100px;
   padding-right: 100px;
   height: 80px;
   display: flex;
@@ -17,18 +16,17 @@
 }
 
 .navigation-list {
-  width: 800px;
+  width: 1000px;
   display: flex;
+  justify-content: flex-end;
   list-style: none;
-  justify-content: space-around;
 }
 
 .navigation-list__item,
 .logo {
-  text-transform: uppercase;
   font-style: normal;
   font-weight: normal;
-  font-size: 21px;
+  font-size: 25px;
   line-height: 15px;
   color: #ffffff;
   margin-right: 47px;
@@ -37,11 +35,23 @@
 
 .navigation-list__item a,
 .logo {
-  font-family: 'Almendra', serif;
+  font-family: 'Cormorant Unicase', serif;
   font-weight: bold;
   color: #ffffff;
 }
 
+.navigation-list__item a {
+  margin-left: 30px;
+}
+
+.navigation-list__item a:hover {
+  color: #ffd200;
+  transition: color 0.5s;
+}
+
 .logo {
+  color: #ffd200;
+  transition: color 0.5s;
   font-size: 35px;
+  margin-right: 100px;
 }
