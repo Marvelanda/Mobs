@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Review from '../models/review.js';
 
 const UserSchema = new mongoose.Schema({
   // Имя пользователя

@@ -8,9 +8,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const { id } = req.session.user;
-console.log(req.session.user);
   try {
-    const userInfo = await User.findById(req.session.user).populate('places');
+    const userInfo = await User.findById(id).populate('places');
     const list = userInfo.places;
     const visited = userInfo.visitedPlaces;
 
