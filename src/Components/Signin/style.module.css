@@ -5,17 +5,44 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 90vh;
+  height: 100vh;
   background-blend-mode: hue;
   background-size: cover;
+}
+
+.container input {
+  width: 300px;
+  height: 50px;
+  text-transform: uppercase;
+  padding: 15px 50px;
+  margin: 5px;
+  background: black!important;
+  border: 1px solid #333333!important;
+  /* border-radius: 3px; */
+  color: #fff;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif!important;
+
 }
 
 .form {
   padding: 80px 60px;
 }
 
+
+.headTitle {
+  text-align: center;
+  font-size: 35px;
+  color: #ffd200;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+  margin-top: 0;
+
+
 .error {
   text-align: center;
   color: #ffffff;
   width: 250px;
+
 }

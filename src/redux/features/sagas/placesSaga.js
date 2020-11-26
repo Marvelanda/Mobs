@@ -5,6 +5,9 @@ import {
   addPlaceRating,
   checkPlace,
 } from '../Places/placeSlice';
+
+import { progressReducer } from '../Places/progressSlice';
+
 import {
   GETPLACESSAGA,
   ADDNEWPLACE,
@@ -135,7 +138,9 @@ async function checkUserPlace(latitude, longitude, user) {
 export function* checkPlaceWorker({ latitude, longitude, user }) {
   const response = yield call(() => checkUserPlace(latitude, longitude, user));
   yield put(checkPlace(response));
-  console.log(response);
+  if (response.points) {
+    yield put(progressReducer(response));
+  }
 }
 
 export function* checkPlaceWatcher() {

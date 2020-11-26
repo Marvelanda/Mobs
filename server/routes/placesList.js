@@ -53,12 +53,14 @@ router.post('/:id/reviews', async (req, res) => {
     });
     try {
       await newReview.save();
-      user.checkScore();
+      const checkRating = await user.checkScore();
     } catch (err) {
       console.log(err);
     }
 
-    res.status(200).json(newReview);
+    res
+      .status(200)
+      .json({ newReview, points: user.points, rating: checkRating });
   }
 });
 
@@ -191,7 +193,6 @@ router.post('/check', async (req, res) => {
           await User.findByIdAndUpdate(req.session.user, {
             $push: { visitedPlaces: place[0]._id },
           });
-          res.json({ message: 'Посещение засчитано' });
 
           const shareNewPlaceArr = await Place.find({
             secrecy: {
@@ -213,7 +214,14 @@ router.post('/check', async (req, res) => {
             $push: { places: addRandomSharePlace },
             $inc: { points: 7 },
           }).exec();
-          curUser.checkScore();
+          const checkRating = await curUser.checkScore();
+
+          const newPoints = curUser.points + 7;
+          res.json({
+            message: 'Посещение засчитано',
+            points: newPoints,
+            rating: checkRating,
+          });
         } else res.json({ message: 'Вы уже посещали это место' });
       } catch (error) {
         console.log(error);

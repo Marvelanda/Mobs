@@ -3,26 +3,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserRatingSaga } from '../../redux/features/Places/progressSlice';
 
 const ProgressBar = () => {
-  console.log('progress');
   const dispatch = useDispatch();
 
-  const points = useSelector((state) => state.progress.points);
-  console.log(points);
-  // const points = progress.points;
+  let points = useSelector((state) => state.progress.points);
+
+  if (points > 250) {
+    points = 250;
+  }
+
   const rating = useSelector((state) => state.progress.rating);
   const barwidth = 300;
 
   useEffect(() => {
     dispatch(getUserRatingSaga());
-  }, [points]);
+  }, []);
 
   const mainContainer = {
     width: `${barwidth}px`,
   };
 
   const containerStyles = {
-    padding: '1px 0 2px',
-    height: 25,
+    padding: '2px 0',
+    height: 30,
     width: `${100}%`,
     backgroundColor: '#e7007f',
     borderRadius: 50,
@@ -30,7 +32,7 @@ const ProgressBar = () => {
   };
 
   const fillerStyles = {
-    padding: '2px 0',
+    padding: '2px 0 0',
     height: '100%',
     width: `${points < 100 ? points : points / 2.5}%`,
     backgroundColor: '#ffcd00',
@@ -40,9 +42,10 @@ const ProgressBar = () => {
   };
 
   const labelStyles = {
-    padding: 1,
+    padding: '5px 0 0',
     color: 'black',
     fontWeight: 'bold',
+    fontSize: 20,
     width: `${barwidth}px`,
     textAlign: 'center',
   };

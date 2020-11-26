@@ -38,8 +38,10 @@ function Signin() {
   return (
     <div className={`${style.container}`}>
       <form className={`${style.form} form animate__animated animate__fadeIn`}>
+      <h3 className={`${style.headTitle}`}>Вход</h3>
+
         <div className='input-clue text'>
-          <p className='description-clue'>Введите e-mail</p>
+          {/* <p className='description-clue'>Введите e-mail</p> */}
           <input
             onChange={emailHandler}
             type='email'
@@ -48,7 +50,7 @@ function Signin() {
           />
         </div>
         <div className='input-clue text'>
-          <p className='description-clue'>Введите пароль</p>
+          {/* <p className='description-clue'>Введите пароль</p> */}
           <input
             onChange={passwordHandler}
             type='password'
