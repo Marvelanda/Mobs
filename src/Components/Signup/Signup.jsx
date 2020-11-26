@@ -28,8 +28,9 @@ function Signup() {
   return (
     <div className={`${style.container}`}>
       <form className='form animate__animated animate__fadeIn'>
+        <h3 className={`${style.headTitle}`}>Регистрация</h3>
         <div className='input-clue text'>
-          <p className='description-clue'>Введите имя</p>
+          {/* <p className='description-clue'>Введите имя</p> */}
 
           <input
             type='text'
@@ -40,7 +41,7 @@ function Signup() {
           />
         </div>
         <div className='input-clue text'>
-          <p className='description-clue'>Введите e-mail</p>
+          {/* <p className='description-clue'>Введите e-mail</p> */}
 
           <input
             type='email'
@@ -51,7 +52,7 @@ function Signup() {
           />
         </div>
         <div className='input-clue text'>
-          <p className='description-clue'>Введите пароль</p>
+          {/* <p className='description-clue'>Введите пароль</p> */}
 
           <input
             type='password'
@@ -61,16 +62,16 @@ function Signup() {
             }}
           />
         </div>
+        <button type='submit' className='button' onClick={doFetch}>
+          Зарегистрироваться
+        </button>
         <label
           className={`description-clue ${style['description-checkbox']} text`}
         >
           <input type='checkbox' required />
           {exist ? <p>Такой email или имя пользователя существует!!!</p> : ''}
-          <span>Я согласен на обработку персональных данных</span>
+          <span className="iAgree">Я согласен на обработку персональных данных</span>
         </label>
-        <button type='submit' className='button' onClick={doFetch}>
-          Зарегистрироваться
-        </button>
       </form>
     </div>
   );

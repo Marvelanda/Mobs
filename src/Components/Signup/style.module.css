@@ -1,14 +1,45 @@
 .container {
-  background-image: url('../../img/SNj0ha9Zqc4.jpg');
+  background-image: url('../../img/GAVGAV.gif');
+background-position: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 95vh;
+  height: 100vh;
   background-blend-mode: hue;
-  background-size: cover;
-  margin-top: 20px;
+  background-size: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  filter: contrast(1.1);
 }
+
+.container input {
+  width: 300px;
+  height: 50px;
+  text-transform: uppercase;
+  padding: 15px 50px;
+  margin: 5px;
+  background: black!important;
+  border: 1px solid #333333!important;
+  /* border-radius: 3px; */
+  color: #fff;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif!important;
+
+}
+
+
+
+/* .container input [type="email"] {
+  width: 250px;
+  height: 30px;
+  padding: 15px;
+  margin: 5px;
+  background: black;
+  border: 1px solid #333333;
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+} */
 
 .description-checkbox > input[type='checkbox'] {
   width: 1px;
@@ -38,4 +69,16 @@
 .description-checkbox {
   margin-top: 10px;
   margin-left: -13px;
+  font-size: 12px;
+
+}
+
+.headTitle {
+  text-align: center;
+  font-size: 35px;
+  color: #ffd200;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 50px;
+  margin-top: 0;
 }
