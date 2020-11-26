@@ -77,9 +77,11 @@ function DetailedPlace() {
   // для формы-делёжки
   const submitHandler = (e, message) => {
     e.preventDefault();
+
     dispatch(sharePlaceSaga(value.trim(), id));
 
-    const timerId = setTimeout(() => onOpen(message), 200);
+
+    setTimeout(() => onOpen(message), 200);
     dispatch(changeShareStatus());
     setValue('');
   };
