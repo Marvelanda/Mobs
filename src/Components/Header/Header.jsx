@@ -1,18 +1,17 @@
 import style from './style.module.css';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser, setStatus } from '../../redux/features/Places/authSlice';
 
 import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
-import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
 
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.status);
-  const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
+  // const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   const logout = () => {
     localStorage.clear();
