@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUserRatingSaga } from "../../redux/features/Places/progressSlice";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserRatingSaga } from '../../redux/features/Places/progressSlice';
 
 const ProgressBar = () => {
+  console.log('progress');
   const dispatch = useDispatch();
 
   const progress = useSelector((state) => state.progress);
@@ -13,37 +14,36 @@ const ProgressBar = () => {
   useEffect(() => {
     dispatch(getUserRatingSaga());
   }, []);
-  
+
   const mainContainer = {
-    width: `${barwidth}px`
-  }
+    width: `${barwidth}px`,
+  };
 
   const containerStyles = {
-    height: 20,
+    padding: '1px 0 2px',
+    height: 25,
     width: `${100}%`,
-    backgroundColor: "#e0e0de",
+    backgroundColor: '#e7007f',
     borderRadius: 50,
     margin: 50,
-
-  }
+  };
 
   const fillerStyles = {
     height: '100%',
     width: `${points < 100 ? points : points / 2.5}%`,
-    backgroundColor: 'black',
+    backgroundColor: '#ffcd00',
     transition: 'width 1s ease-in-out',
     borderRadius: 'inherit',
-    float: 'left'
-  }
+    float: 'left',
+  };
 
   const labelStyles = {
     padding: 1,
-    color: 'grey',
+    color: 'black',
     fontWeight: 'bold',
     width: `${barwidth}px`,
-    'text-align': 'center'
-  }
-
+    textAlign: 'center',
+  };
 
   return (
     <div style={mainContainer}>

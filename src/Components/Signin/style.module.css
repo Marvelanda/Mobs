@@ -13,3 +13,9 @@
 .form {
   padding: 80px 60px;
 }
+
+.error {
+  text-align: center;
+  color: #ffffff;
+  width: 250px;
+}

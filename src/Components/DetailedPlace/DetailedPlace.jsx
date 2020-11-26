@@ -144,6 +144,7 @@ function DetailedPlace() {
                           <img
                             src={place.placePhotoUrl[0]}
                             alt='img'
+                            height='200px'
                             width='250px'
                           />
                         </SwiperSlide>
@@ -151,6 +152,7 @@ function DetailedPlace() {
                           <img
                             src={place.placePhotoUrl[1]}
                             alt='img'
+                            height='200px'
                             width='250px'
                           />
                         </SwiperSlide>
@@ -158,7 +160,8 @@ function DetailedPlace() {
                           <img
                             src={place.placePhotoUrl[2]}
                             alt='img'
-                            width='250px'
+                            height='200px'
+                            width='230px'
                           />
                         </SwiperSlide>
                       </>
@@ -193,7 +196,6 @@ function DetailedPlace() {
                   <button className='button' type='submit'>
                     Поделиться местом
                   </button>
-                  {/* {shareStatus && <div>{shareStatus}</div>} */}
                 </form>
               </div>
 
