@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { USERRATING } from '../../types/users'
+import { USERRATING } from '../../types/users';
 
 export const userRatingSlice = createSlice({
   name: 'progress',
   initialState: {
     points: 0,
-    rating: 1
+    rating: 1,
   },
   reducers: {
     progressReducer: (state, action) => {
@@ -15,9 +15,7 @@ export const userRatingSlice = createSlice({
   },
 });
 
-export const {
-  progressReducer,
-} = userRatingSlice.actions;
+export const { progressReducer } = userRatingSlice.actions;
 
 export const getUserRatingSaga = () => {
   return {

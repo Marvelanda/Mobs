@@ -9,8 +9,7 @@ const ModalDetails = ({ open, children, onClose }) => {
       {open && (
         <div className={style.modal}>
           <div className={style.modalContentWr}>
-            <div onClick={onClose} className={style.closeButton}></div>
-            <div className={style.text}>{children}</div>
+            <div>{children}</div>
           </div>
         </div>
       )}

@@ -58,7 +58,11 @@ function Signin() {
             placeholder='Пароль'
           />
         </div>
-        {error ? <p>{error}</p> : null}
+        {error ? (
+          <div className='input-clue text'>
+            <p className={style.error}>{error}</p>
+          </div>
+        ) : null}
         <button type='submit' className='button' onClick={doFetch}>
           Войти
         </button>

@@ -1,6 +1,16 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+@font-face {
+  font-family: 'myFont';
+  src: url('./Fonts/4.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
+
 body {
+  font-family: 'myFont';
   margin: 0;
   background-color: black;
   font-family: 'Montserrat', sans-serif!important;
@@ -28,10 +38,12 @@ a {
 
 .button {
   cursor: pointer;
+
   /* font-family: 'Cormorant Unicase', serif; */
   font-family: 'Montserrat', sans-serif!important;
   padding: 15px 50px;
   font-weight: 500;
+
   font-size: 15px;
   line-height: 15px;
   text-align: center;
@@ -50,7 +62,6 @@ a {
 .text {
   color: white;
   text-align: center;
-  /* font-family: 'Cormorant Unicase', serif; */
 }
 
 .form {

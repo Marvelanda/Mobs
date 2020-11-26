@@ -29,6 +29,7 @@
   padding: 80px 60px;
 }
 
+
 .headTitle {
   text-align: center;
   font-size: 35px;
@@ -37,5 +38,11 @@
   text-transform: uppercase;
   margin-bottom: 50px;
   margin-top: 0;
+
+
+.error {
+  text-align: center;
+  color: #ffffff;
+  width: 250px;
 
 }

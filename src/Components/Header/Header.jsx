@@ -1,6 +1,6 @@
 import style from './style.module.css';
 import { Link } from 'react-router-dom';
-import { useEffect} from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeUser, setStatus } from '../../redux/features/Places/authSlice';
 
@@ -11,7 +11,6 @@ import ProgressBar from '../ProgressBar/ProgressBar';
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.status);
-  // const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   const logout = () => {
     localStorage.clear();
@@ -44,11 +43,6 @@ function Header() {
               >
                 <Link to='/places'>Список мест</Link>
               </li>
-              {/* <li key='profile' className={`${style['navigation-list__item']}`}>
-                <Link to='/profile'>Профиль</Link>
-
-              </li> */}
-
               <li
                 key='checkUserPlace'
                 className={`${style['navigation-list__item']}`}

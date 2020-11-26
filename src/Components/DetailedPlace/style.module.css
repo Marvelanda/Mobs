@@ -71,16 +71,18 @@
   width: 50%;
 }
 
-.description img {
-  margin-top: 10px;
-}
-
 .description:nth-child(2) {
+  margin-left: 50px;
   padding-top: 10px;
-  width: 600px;
+  width: 550px;
   background-color: rgba(177, 177, 177, 0.13);
   backdrop-filter: blur(3px);
   margin-top: 50px;
+}
+
+.about {
+  margin: 0 auto;
+  max-width: 75%;
 }
 
 .items:first-of-type {
@@ -143,7 +145,7 @@
 }
 
 .add-friend-form {
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .share-input {
@@ -168,6 +170,7 @@
 
 .modalContentWr {
   display: flex;
+  justify-content: center;
   align-items: center;
   text-align: center;
   background: white;
@@ -178,8 +181,8 @@
   border-radius: 8px;
 }
 
-.modalContentWr div {
-  margin-bottom: 10px;
+.modalContentWr h2 {
+  margin-top: 20px;
 }
 
 .modalContentWr input {
@@ -193,4 +196,13 @@
   width: 25px;
   height: 25px;
   background-image: url('../../img/cancel.svg');
+}
+
+.instagram {
+  margin-top: 15px;
+}
+
+.swiper {
+  width: 400px;
+  height: 267px;
 }
