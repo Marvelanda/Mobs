@@ -8,6 +8,7 @@ import {
 import { getReviewsListSaga } from '../../redux/features/Places/reviewSlice';
 import {
   sharePlaceSaga,
+  changeShareStatus,
 } from '../../redux/features/Places/sharePlaceSlice';
 import { Link, useParams } from 'react-router-dom';
 import Review from '../Review/Review';
