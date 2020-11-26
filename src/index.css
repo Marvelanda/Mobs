@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 @font-face {
   font-family: 'myFont';
   src: url('./Fonts/4.ttf') format('truetype');
@@ -5,14 +8,18 @@
   font-weight: normal;
 }
 
+
 body {
   font-family: 'myFont';
   margin: 0;
   background-color: black;
+  font-family: 'Montserrat', sans-serif!important;
+
 }
 
 * {
   box-sizing: border-box;
+  outline: none;
 }
 
 p,
@@ -31,7 +38,12 @@ a {
 
 .button {
   cursor: pointer;
-  font-weight: normal;
+
+  /* font-family: 'Cormorant Unicase', serif; */
+  font-family: 'Montserrat', sans-serif!important;
+  padding: 15px 50px;
+  font-weight: 500;
+
   font-size: 15px;
   line-height: 15px;
   text-align: center;
@@ -39,11 +51,12 @@ a {
   color: #000000;
   background: #ffd200;
   border-radius: 2px;
-  width: 200px;
-  height: 41px;
+  /* width: 200px;
+  height: 41px; */
   border-color: transparent;
   margin-top: 30px;
   align-self: center;
+  width: 300px;
 }
 
 .text {
@@ -52,13 +65,15 @@ a {
 }
 
 .form {
-  margin-top: 120px;
-  border-radius: 2px;
-  display: flex;
-  flex-direction: column;
-  margin-top: 29px;
-  padding: 30px 20px 25px;
-  border: 2px solid rgba(255, 255, 255, 0.363);
+  backdrop-filter: blur(3px);
+    background-color: #0000006e;
+    margin-top: 120px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 29px;
+    padding: 50px 100px;
+    border: 1px solid #333333;
 }
 
 .description-clue {
@@ -70,6 +85,7 @@ input[text] {
   border-radius: 2px;
   padding: 5px 40px;
 }
+
 
 .input-clue {
   margin-right: 10px;
@@ -117,4 +133,25 @@ input::placeholder {
 
 .stars {
   font-size: 30px;
+}
+
+
+input:-internal-autofill-selected {
+  width: 250px;
+  height: 30px;
+  padding: 15px 50px;
+  margin: 5px;
+  background: black!important;
+  border: 1px solid #333333!important;
+  border-radius: 3px;
+  color: #fff;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif!important;
+
+}
+
+.iAgree {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

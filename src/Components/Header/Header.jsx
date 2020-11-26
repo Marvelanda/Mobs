@@ -28,7 +28,7 @@ function Header() {
   return (
     <div className={`${style.header}`}>
       <nav className={`container ${style['header-container']}`}>
-        <img src='/img/MOBS.svg' alt='logo' width='250px' />
+        <img src='/img/MOBS.svg' alt='logo' width='200px' />
         <ul className={`${style['navigation-list']}`}>
           <li className={`${style['navigation-list__item']}`}>
             <Link key='main' to='/'>
