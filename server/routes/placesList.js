@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   const { id } = req.session.user;
-console.log(req.session.user);
+  console.log(req.session.user);
   try {
     const userInfo = await User.findById(req.session.user).populate('places');
     const list = userInfo.places;
@@ -66,28 +66,33 @@ router.patch('/:id/share', async (req, res) => {
   const { friend } = req.body;
   const { id } = req.params;
   const findUser = await User.findById(req.session.user);
+  console.log('friend', friend);
+  if (friend) {
+    try {
+      const usersFriend = await User.findOne({ username: friend });
+      const result = usersFriend.places.find((item) => item == id);
+      if (result) {
+        return res
+          .status(400)
+          .json({ message: 'Пользователю уже доступно данное заведение' });
+      }
+      usersFriend.places.push(id);
+      await usersFriend.save();
 
-  try {
-    const usersFriend = await User.findOne({ username: friend });
-    const result = usersFriend.places.find((item) => item == id);
-    if (result) {
-      return res
+      findUser.points += 10;
+      findUser.invitations--;
+      await findUser.save();
+      res
+        .status(200)
+        .json({ message: 'Теперь это заведение доступно вашему другу' });
+    } catch (error) {
+      res
         .status(400)
-        .json({ message: 'Пользователю уже доступно данное заведение' });
+        .json({ message: 'Пользователя с таким username не существует' });
     }
-    usersFriend.places.push(id);
-    await usersFriend.save();
-
-    findUser.points += 10;
-    findUser.invitations--;
-    await findUser.save();
-    res
-      .status(200)
-      .json({ message: 'Теперь это заведение доступно вашему другу' });
-  } catch (error) {
-    res
-      .status(400)
-      .json({ message: 'Пользователя с таким username не существует' });
+  } else {
+    console.log('here');
+    res.status(400).json({ message: 'Пожалуйста заполните поле' });
   }
 });
 
@@ -193,9 +198,8 @@ router.post('/check', async (req, res) => {
             compArr[Math.floor(Math.random() * compArr.length)];
           await User.findByIdAndUpdate(req.session.user, {
             $push: { places: addRandomSharePlace },
-            $inc: {points: 7} 
+            $inc: { points: 7 },
           }).exec();
-
         } else res.json({ message: 'Вы уже посещали это место' });
       } catch (error) {
         console.log(error);

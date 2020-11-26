@@ -7,7 +7,7 @@ const ModalDetails = ({ open, children, onClose }) => {
   return ReactDom.createPortal(
     <>
       {open && (
-        <div onClick={onClose} className={style.modal}>
+        <div className={style.modal}>
           <div className={style.modalContentWr}>
             <div onClick={onClose} className={style.closeButton}></div>
             <div className={style.text}>{children}</div>
@@ -15,7 +15,7 @@ const ModalDetails = ({ open, children, onClose }) => {
         </div>
       )}
     </>,
-    document.getElementById('portal')
+    document.getElementById('portal-detailed')
   );
 };
 
