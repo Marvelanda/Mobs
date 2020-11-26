@@ -15,7 +15,7 @@ const ModalForAll = ({ open, children, onClose }) => {
         </div>
       )}
     </>,
-    document.getElementById('portal')
+    document.getElementById('portal-for-all')
   );
 };
 

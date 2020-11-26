@@ -55,12 +55,6 @@ function MainPage() {
     dispatch(openPlaceMark(true));
   };
 
-  //   const isOpenCheckUserPlace = () => {
-  //   dispatch(setModalClass('animate__animated animate__rollIn'));
-  //   dispatch(checkPlaceOpenModal(true))
-  //   dispatch(setModalPlaceMarkInfo());
-  // };
-
   const onCloseCheckUserPlace = () => {
     dispatch(setModalClass('animate__animated animate__rollOut'));
     setTimeout(() => dispatch(checkPlaceOpenModal(false)), 500);
@@ -85,18 +79,22 @@ function MainPage() {
           >
             <Modal open={isOpenPlaceMark} onClose={onClosePlaceMark}>
               {user ? (
-                <div className={modalClass}>
-                  <h2>{modalPlaceMarkInfo?.placeName}</h2>
-                  <p className={style.description}>Часы работы:</p>
-                  <p className={style.description}>
-                    {modalPlaceMarkInfo.info?.workingHours}
-                  </p>
-                  <img
-                    src={modalPlaceMarkInfo?.placePhotoUrl}
-                    alt='foto'
-                    width='250px'
-                  />
-                </div>
+                modalPlaceMarkInfo && (
+                  <div className={modalClass}>
+                    <h2>{modalPlaceMarkInfo.placeName}</h2>
+                    <p className={style.description}>Часы работы:</p>
+                    <p className={style.description}>
+                      {modalPlaceMarkInfo.info?.workingHours}
+                    </p>
+                    {modalPlaceMarkInfo.placePhotoUrl && (
+                      <img
+                        src={modalPlaceMarkInfo.placePhotoUrl[0]}
+                        alt='foto'
+                        width='250px'
+                      />
+                    )}
+                  </div>
+                )
               ) : (
                 <div className={modalClass}>
                   <h2>

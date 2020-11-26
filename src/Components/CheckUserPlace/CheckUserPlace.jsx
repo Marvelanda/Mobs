@@ -7,6 +7,7 @@ import {
   checkPlaceOpenModal,
   setModalClass,
   setModalCheckPlace,
+  openPlaceMark,
 } from '../../redux/features/Places/placeSlice';
 
 function CheckUserPlace({ onClick: onOpenPlaceMessage }) {
@@ -15,7 +16,8 @@ function CheckUserPlace({ onClick: onOpenPlaceMessage }) {
   const message = useSelector((state) => state.places.message);
 
   const checkPlace = (message) => {
-    console.log('ЧТО ПРОИСХОДИТ???');
+    dispatch(setModalClass('animate__animated animate__rollOut'));
+    setTimeout(() => dispatch(openPlaceMark(false)), 500);
     navigator.geolocation.getCurrentPosition(function (position) {
       dispatch(
         checkPlaceSaga(
