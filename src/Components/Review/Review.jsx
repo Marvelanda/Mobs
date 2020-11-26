@@ -1,6 +1,6 @@
 import style from './style.module.css';
 
-function Review({ author, review, pecularities }) {
+function Review({ author, review }) {
   return (
     <li className={`${style.reviews_container}`}>
       <p>{author}:</p>

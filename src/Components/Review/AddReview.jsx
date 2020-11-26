@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { addPlaceReviewSaga } from '../../redux/features/Places/reviewSlice';
-import StarRatingComponent from 'react-star-rating-component';
 import style from './style.module.css';
 
 function AddReview() {

@@ -7,7 +7,7 @@ const ModalDetails = ({ open, children, onClose }) => {
   return ReactDom.createPortal(
     <>
       {open && (
-        <div className={style.modal}>
+        <div onClick={onClose} className={style.modal}>
           <div className={style.modalContentWr}>
             <div>{children}</div>
           </div>

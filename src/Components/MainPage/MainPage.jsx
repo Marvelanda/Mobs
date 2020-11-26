@@ -38,7 +38,7 @@ function MainPage() {
   const modalPlaceMarkInfo = useSelector(
     (state) => state.places.modalPlaceMarkInfo
   );
-  console.log('HEY', modalPlaceMarkInfo);
+
   const onClosePlaceMark = () => {
     dispatch(setModalClass('animate__animated animate__rollOut'));
     setTimeout(() => dispatch(openPlaceMark(false)), 500);
@@ -115,15 +115,6 @@ function MainPage() {
                 </div>
               )}
             </Modal>
-
-            {/* <Modal open={checkPlaceModalIsOpened} onClose={onCloseCheckUserPlace}>
-              {
-                <div className={modalClass}>
-                <h2>{message}</h2>
-                </div>
-              }
-            </Modal> */}
-
             <ZoomControl options={{ float: 'right' }} />
 
             {fivePlaces.map((el, i) => (
