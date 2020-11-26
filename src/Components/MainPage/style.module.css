@@ -26,11 +26,10 @@
 .modalContentWr {
   display: inline-block;
   padding: 30px 20px 10px;
-  height: fit-content;
   position: relative;
   left: -10px;
-  width: 20vw;
-  height: 40vh;
+  width: 450px;
+  height: fit-content;
   font-size: 18px;
   line-height: 17px;
   color: #000000;
@@ -42,6 +41,10 @@
 
 .modalContentWr div {
   margin-bottom: 10px;
+}
+
+.modalContentWr img {
+  margin-top: 10px;
 }
 
 .description {
