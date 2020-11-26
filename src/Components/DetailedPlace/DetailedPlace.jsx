@@ -49,9 +49,9 @@ function DetailedPlace() {
   };
 
   const onOpen = (message) => {
+    setModalInfo(message);
     setClass('animate__animated animate__rollIn');
     setIsOpen(true);
-    setModalInfo(message);
   };
 
   const place = useSelector((state) => state.places.places).find((item) => {
@@ -77,9 +77,7 @@ function DetailedPlace() {
   // для формы-делёжки
   const submitHandler = (e, message) => {
     e.preventDefault();
-    if (value.trim()) {
-      dispatch(sharePlaceSaga(value.trim(), id));
-    }
+    dispatch(sharePlaceSaga(value.trim(), id));
 
     const timerId = setTimeout(() => onOpen(message), 200);
     dispatch(changeShareStatus());
@@ -171,14 +169,18 @@ function DetailedPlace() {
               </div>
               <div className={`${style.description} ${style.text}`}>
                 <h3 className={style['small-headers']}>Описание:</h3>
-                <p>{place.description}</p>
+                <p className={style.about}>{place.description}</p>
                 <h3 className={style['small-headers']}>
                   Контактная информация:
                 </h3>
                 <p>{place.info.address}</p>
                 <p>{place.info.tel}</p>
                 <a href={place.placeUrl}>
-                  <img width='35px' src='/img/instagram.svg' />
+                  <img
+                    className={style.instagram}
+                    width='35px'
+                    src='/img/instagram.svg'
+                  />
                 </a>
                 <h3 className={style['small-headers']}>Часы работы:</h3>
                 <p>{place.info.workingHours}</p>
@@ -201,8 +203,13 @@ function DetailedPlace() {
 
               <ModalDetails open={isOpen} onClose={onClose}>
                 {
-                  <div className={modalClass}>
-                    <h2>{shareStatus}</h2>
+                  <div>
+                    <div onClick={onClose} className={style.closeButton}></div>
+                    {shareStatus ? (
+                      <h2>{shareStatus}</h2>
+                    ) : (
+                      <h2 className={style.text}>Пожалуйста, заполните поле</h2>
+                    )}
                   </div>
                 }
               </ModalDetails>

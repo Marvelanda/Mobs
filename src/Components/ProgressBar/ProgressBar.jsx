@@ -6,14 +6,15 @@ const ProgressBar = () => {
   console.log('progress');
   const dispatch = useDispatch();
 
-  const progress = useSelector((state) => state.progress);
-  const points = progress.points;
-  const rating = progress.rating;
+  const points = useSelector((state) => state.progress.points);
+  console.log(points);
+  // const points = progress.points;
+  const rating = useSelector((state) => state.progress.rating);
   const barwidth = 300;
 
   useEffect(() => {
     dispatch(getUserRatingSaga());
-  }, []);
+  }, [points]);
 
   const mainContainer = {
     width: `${barwidth}px`,
@@ -29,6 +30,7 @@ const ProgressBar = () => {
   };
 
   const fillerStyles = {
+    padding: '2px 0',
     height: '100%',
     width: `${points < 100 ? points : points / 2.5}%`,
     backgroundColor: '#ffcd00',
