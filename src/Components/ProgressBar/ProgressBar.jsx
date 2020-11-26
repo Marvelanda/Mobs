@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserRatingSaga } from '../../redux/features/Places/progressSlice';
 
 const ProgressBar = () => {
-  console.log('progress');
   const dispatch = useDispatch();
 
-  const progress = useSelector((state) => state.progress);
-  const points = progress.points;
- 
-  const rating = progress.rating;
+  let points = useSelector((state) => state.progress.points);
+
+  if (points > 250) {
+    points = 250;
+  }
+
+  const rating = useSelector((state) => state.progress.rating);
   const barwidth = 300;
 
   useEffect(() => {
