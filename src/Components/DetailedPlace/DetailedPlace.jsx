@@ -31,23 +31,21 @@ import ModalDetails from './ModalDetails';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
 
 function DetailedPlace() {
-  const [stars, setStars] = useState(0);
-  const dispatch = useDispatch();
-  const { id } = useParams();
-
-  // Для формы-делёжки с другом
   const [value, setValue] = useState('');
+  const [stars, setStars] = useState(0);
 
   const [isOpen, setIsOpen] = useState(false);
   const [modalClass, setClass] = useState('');
   const [modalInfo, setModalInfo] = useState({});
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  // Для формы-делёжки с другом
 
   const onClose = () => {
     setClass('animate__animated animate__rollOut');
-    setValue('');
-    // setTimeout(() => {
-    //   setIsOpen(false);
-    // }, 500);
+
+    setIsOpen(false);
   };
 
   const onOpen = (message) => {
@@ -81,14 +79,12 @@ function DetailedPlace() {
     e.preventDefault();
     if (value.trim()) {
       dispatch(sharePlaceSaga(value.trim(), id));
-      console.log(value);
     }
 
     const timerId = setTimeout(() => onOpen(message), 200);
-    // dispatch(changeShareStatus());
-    // setValue('');
+    dispatch(changeShareStatus());
+    setValue('');
   };
-  console.log(value);
 
   const starsHandler = () => {
     dispatch(addPlaceRatingSaga(id, stars));
@@ -175,6 +171,7 @@ function DetailedPlace() {
                     type='text'
                     className={style['share-input']}
                     onChange={(e) => setValue(e.target.value)}
+                    value={value}
                     placeholder='Введите username друга'
                   ></input>
                   <button className='button' type='submit'>
@@ -183,15 +180,14 @@ function DetailedPlace() {
                   {/* {shareStatus && <div>{shareStatus}</div>} */}
                 </form>
               </div>
-              {value && shareStatus && (
-                <ModalDetails open={isOpen} onClose={onClose}>
-                  {
-                    <div className={modalClass}>
-                      <h2>{shareStatus}</h2>
-                    </div>
-                  }
-                </ModalDetails>
-              )}
+
+              <ModalDetails open={isOpen} onClose={onClose}>
+                {
+                  <div className={modalClass}>
+                    <h2>{shareStatus}</h2>
+                  </div>
+                }
+              </ModalDetails>
             </div>
 
             <div className={`${style.container}`}>

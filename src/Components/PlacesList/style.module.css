@@ -2,22 +2,17 @@
   width: 100vw;
   height: 100vh;
   background-image: url('../../img/22fc202843aec437eaf85816416c0e73.jpg');
+  background-size: cover;
   display: flex;
 }
 
 .list {
+  margin: 0 auto;
   padding: 0;
   margin-top: 100px;
   margin-left: 100px;
   display: flex;
-  justify-content: flex-start;
-  width: 55%;
   justify-content: center;
+  width: 80%;
   flex-wrap: wrap;
-}
-
-.vl {
-  margin-top: 15vh;
-  border-left: 6px solid rgb(255, 255, 255);
-  height: 90vh;
 }

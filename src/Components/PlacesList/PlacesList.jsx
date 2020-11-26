@@ -11,7 +11,7 @@ function PlacesList() {
   useEffect(() => {
     dispatch(getPlacesListSaga());
   }, []);
-
+  console.log(places);
   return (
     <div className={style.container}>
       <ul className={style.list}>
@@ -20,7 +20,6 @@ function PlacesList() {
             return <Place key={el._id} {...el} />;
           })}
       </ul>
-      <div class={style.vl}></div>
     </div>
   );
 }

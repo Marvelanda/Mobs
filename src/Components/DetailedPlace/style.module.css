@@ -185,3 +185,12 @@
 .modalContentWr input {
   width: 350px;
 }
+
+.closeButton {
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  width: 25px;
+  height: 25px;
+  background-image: url('../../img/cancel.svg');
+}

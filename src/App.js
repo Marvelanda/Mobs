@@ -5,7 +5,6 @@ import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import PlacesList from './Components/PlacesList/PlacesList';
 import MainPage from './Components/MainPage/MainPage';
-import Footer from './Components/Footer/Footer';
 import DetailedPlace from './Components/DetailedPlace/DetailedPlace';
 import AddNewPlace from './Components/AddNewPlace/AddNewPlace';
 import AddReview from './Components/Review/AddReview';

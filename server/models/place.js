@@ -12,9 +12,12 @@ const PlaceSchema = new mongoose.Schema({
     type: String,
     unique: true,
   },
+
+
   placePhotoUrl: {
     type: Array,
   },
+
   description: {
     type: String,
   },
