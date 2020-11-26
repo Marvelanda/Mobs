@@ -68,28 +68,22 @@ router.patch('/:id/share', async (req, res) => {
   const findUser = await User.findById(req.session.user);
   console.log('friend', friend);
   if (friend) {
-    try {
-      const usersFriend = await User.findOne({ username: friend });
-      const result = usersFriend.places.find((item) => item == id);
-      if (result) {
-        return res
-          .status(400)
-          .json({ message: 'Пользователю уже доступно данное заведение' });
-      }
-      usersFriend.places.push(id);
-      await usersFriend.save();
-
-      findUser.points += 10;
-      findUser.invitations--;
-      await findUser.save();
-      res
-        .status(200)
-        .json({ message: 'Теперь это заведение доступно вашему другу' });
-    } catch (error) {
-      res
+    const usersFriend = await User.findOne({ username: friend });
+    const result = usersFriend.places.find((item) => item == id);
+    if (result) {
+      return res
         .status(400)
-        .json({ message: 'Пользователя с таким username не существует' });
+        .json({ message: 'Пользователю уже доступно данное заведение' });
     }
+    usersFriend.places.push(id);
+    await usersFriend.save();
+
+    findUser.points += 10;
+    findUser.invitations--;
+    await findUser.save();
+    res
+      .status(200)
+      .json({ message: 'Теперь это заведение доступно вашему другу' });
   } else {
     console.log('here');
     res.status(400).json({ message: 'Пожалуйста заполните поле' });

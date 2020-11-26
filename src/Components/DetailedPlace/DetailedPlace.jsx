@@ -134,19 +134,35 @@ function DetailedPlace() {
                       rotate: 50,
                       stretch: 0,
                       depth: 80,
-                      modifier: 1,
+                      modifier: 4,
                       slideShadows: false,
                     }}
                   >
-                    <SwiperSlide>
-                      <img src={place.placePhotoUrl} alt='img' width='250px' />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src={place.placePhotoUrl} alt='img' width='250px' />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                      <img src={place.placePhotoUrl} alt='img' width='250px' />
-                    </SwiperSlide>
+                    {place.placePhotoUrl && (
+                      <>
+                        <SwiperSlide>
+                          <img
+                            src={place.placePhotoUrl[0]}
+                            alt='img'
+                            width='250px'
+                          />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                          <img
+                            src={place.placePhotoUrl[1]}
+                            alt='img'
+                            width='250px'
+                          />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                          <img
+                            src={place.placePhotoUrl[2]}
+                            alt='img'
+                            width='250px'
+                          />
+                        </SwiperSlide>
+                      </>
+                    )}
                   </Swiper>
                 </div>
               </div>
