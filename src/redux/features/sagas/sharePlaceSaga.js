@@ -1,5 +1,6 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { shareStatusReducer } from '../Places/sharePlaceSlice';
+import { progressReducer } from '../Places/progressSlice';
 import { SHARE_PLACE_SAGA } from '../../types/placesTypes';
 
 async function sharePlace(friend, placeID) {
@@ -17,8 +18,12 @@ async function sharePlace(friend, placeID) {
 
 export function* sharePlaceWorker({ username, placeID }) {
   const shareStatus = yield call(sharePlace, username, placeID);
+  console.log(shareStatus);
   if (shareStatus) {
     yield put(shareStatusReducer(shareStatus.message));
+    if (shareStatus.points) {
+      yield put(progressReducer(shareStatus));
+    }
   }
 }
 

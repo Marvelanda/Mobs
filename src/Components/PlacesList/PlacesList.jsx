@@ -11,7 +11,7 @@ function PlacesList() {
   useEffect(() => {
     dispatch(getPlacesListSaga());
   }, []);
-  console.log(places);
+
   return (
     <div className={style.container}>
       <ul className={style.list}>
