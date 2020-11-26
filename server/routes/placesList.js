@@ -188,7 +188,10 @@ router.post('/check', async (req, res) => {
               $lte: curUser.rating,
             },
           });
-          const Arr1 = curUser.places.map((el) => el.toString());
+
+          const Arr1 = curUser.places.map((el) => {
+            if (el) return el.toString();
+          });
           const Arr2 = shareNewPlaceArr.map((el) => el._id.toString());
           const compArr = Arr1.filter((x) => !Arr2.includes(x)).concat(
             Arr2.filter((x) => !Arr1.includes(x))
@@ -200,6 +203,7 @@ router.post('/check', async (req, res) => {
             $push: { places: addRandomSharePlace },
             $inc: { points: 7 },
           }).exec();
+          curUser.checkScore();
         } else res.json({ message: 'Вы уже посещали это место' });
       } catch (error) {
         console.log(error);

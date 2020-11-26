@@ -18,7 +18,9 @@ async function sharePlace(friend, placeID) {
 
 export function* sharePlaceWorker({ username, placeID }) {
   const shareStatus = yield call(sharePlace, username, placeID);
-  yield put(shareStatusReducer(shareStatus.message));
+  if (shareStatus) {
+    yield put(shareStatusReducer(shareStatus.message));
+  }
 }
 
 export function* sharePlaceWatcher() {
