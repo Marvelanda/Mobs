@@ -87,7 +87,6 @@ function MainPage() {
                       {modalPlaceMarkInfo.info?.workingHours}
                     </p>
                     {modalPlaceMarkInfo.placePhotoUrl && (
-                      // console.log(modalPlaceMarkInfo.placePhotoUrl[0])
                       <img
                         src={modalPlaceMarkInfo.placePhotoUrl[0]}
                         alt='foto'
