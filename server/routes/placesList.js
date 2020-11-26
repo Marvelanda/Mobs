@@ -66,9 +66,9 @@ router.patch('/:id/share', async (req, res) => {
   const { friend } = req.body;
   const { id } = req.params;
   const findUser = await User.findById(req.session.user);
+  const usersFriend = await User.findOne({ username: friend });
 
-  if (friend) {
-    const usersFriend = await User.findOne({ username: friend });
+  if (usersFriend && usersFriend !== null) {
     const result = usersFriend.places.find((item) => item == id);
     if (result) {
       return res
@@ -86,7 +86,7 @@ router.patch('/:id/share', async (req, res) => {
       .json({ message: 'Теперь это заведение доступно вашему другу' });
   } else {
     console.log('here');
-    res.status(400).json({ message: 'Пожалуйста заполните поле' });
+    return res.status(404).json({ message: 'Пользователя с таким username не существует' });
   }
 });
 
