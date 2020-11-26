@@ -3,6 +3,7 @@ import { shareStatusReducer } from '../Places/sharePlaceSlice';
 import { SHARE_PLACE_SAGA } from '../../types/placesTypes';
 
 async function sharePlace(friend, placeID) {
+   console.log('FROM SHARE SAGA ', friend);
   const res = await fetch(`http://localhost:8080/places/${placeID}/share`, {
     method: 'PATCH',
     headers: {
