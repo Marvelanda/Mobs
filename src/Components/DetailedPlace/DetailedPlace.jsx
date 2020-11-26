@@ -49,9 +49,9 @@ function DetailedPlace() {
   };
 
   const onOpen = (message) => {
+    setModalInfo(message);
     setClass('animate__animated animate__rollIn');
     setIsOpen(true);
-    setModalInfo(message);
   };
 
   const place = useSelector((state) => state.places.places).find((item) => {
@@ -77,11 +77,10 @@ function DetailedPlace() {
   // для формы-делёжки
   const submitHandler = (e, message) => {
     e.preventDefault();
-    if (value.trim()) {
-      dispatch(sharePlaceSaga(value.trim(), id));
-    }
+      console.log('!!!!!!!!->',value,'<-!!!!!!!!');
+      dispatch(sharePlaceSaga(value, id));
 
-    const timerId = setTimeout(() => onOpen(message), 200);
+    setTimeout(() => onOpen(message), 200);
     dispatch(changeShareStatus());
     setValue('');
   };

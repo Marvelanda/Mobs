@@ -66,6 +66,12 @@ router.patch('/:id/share', async (req, res) => {
   const { friend } = req.body;
   const { id } = req.params;
   const findUser = await User.findById(req.session.user);
+  console.log(findUser.invitations);
+  if ( findUser.invitations <= 0 ) {
+      return res
+        .status(400)
+        .json({ message: 'Вы пригласили уже достаточно друзей' })
+  }
   const usersFriend = await User.findOne({ username: friend });
 
   if (usersFriend && usersFriend !== null) {
