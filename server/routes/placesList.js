@@ -66,7 +66,7 @@ router.patch('/:id/share', async (req, res) => {
   const { friend } = req.body;
   const { id } = req.params;
   const findUser = await User.findById(req.session.user);
-  console.log('friend', friend);
+
   if (friend) {
     const usersFriend = await User.findOne({ username: friend });
     const result = usersFriend.places.find((item) => item == id);

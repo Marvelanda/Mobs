@@ -37,8 +37,6 @@ function MainPage() {
     (state) => state.places.modalPlaceMarkInfo
   );
 
-  console.log(modalPlaceMarkInfo);
-
   const onClosePlaceMark = () => {
     dispatch(setModalClass('animate__animated animate__rollOut'));
     setTimeout(() => dispatch(openPlaceMark(false)), 500);

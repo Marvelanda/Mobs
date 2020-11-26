@@ -9,7 +9,7 @@ function Place({ placePhotoUrl, placeName, _id }) {
         <Link to={`/places/${_id}`}>{placeName}</Link>
       </h2>
       <Link to={`/places/${_id}`}>
-        <img className={style.img} src={placePhotoUrl} alt='foto' />
+        <img className={style.img} src={placePhotoUrl[0]} alt='foto' />
       </Link>
     </li>
   );

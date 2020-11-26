@@ -1,7 +1,7 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-image: url('../../img/22fc202843aec437eaf85816416c0e73.jpg');
+  background-image: url('../../img/SNj0ha9Zqc4.jpg');
   background-size: cover;
   display: flex;
 }
@@ -13,6 +13,6 @@
   margin-left: 100px;
   display: flex;
   justify-content: center;
-  width: 80%;
+  width: 50%;
   flex-wrap: wrap;
 }
