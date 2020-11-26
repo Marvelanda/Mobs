@@ -7,9 +7,8 @@ import style from './style.module.css';
 function ProgressBar() {
   const dispatch = useDispatch();
 
-  const progress = useSelector((state) => state.progress);
-  const points = progress.points;
-  const rating = progress.rating;
+  const points = useSelector((state) => state.progress.points);
+  const rating = useSelector((state) => state.progress.rating);
 
   useEffect(() => {
     dispatch(getUserRatingSaga());

@@ -36,7 +36,7 @@ function MainPage() {
   const modalPlaceMarkInfo = useSelector(
     (state) => state.places.modalPlaceMarkInfo
   );
-
+  console.log('HEY', modalPlaceMarkInfo);
   const onClosePlaceMark = () => {
     dispatch(setModalClass('animate__animated animate__rollOut'));
     setTimeout(() => dispatch(openPlaceMark(false)), 500);
@@ -84,11 +84,19 @@ function MainPage() {
                     <p className={style.description}>
                       {modalPlaceMarkInfo.info?.workingHours}
                     </p>
+                    <p className={style.description}>Aдрес:</p>
+                    <p className={style.description}>
+                      {modalPlaceMarkInfo.info?.address}
+                    </p>
+                    <Link to={`/places/${modalPlaceMarkInfo._id}`}>
+                      <p>Подробнее</p>
+                    </Link>
                     {modalPlaceMarkInfo.placePhotoUrl && (
                       <img
                         src={modalPlaceMarkInfo.placePhotoUrl[0]}
                         alt='foto'
-                        width='250px'
+                        width='400px'
+                        height='267px'
                       />
                     )}
                   </div>
