@@ -12,7 +12,7 @@ export const placeSlice = createSlice({
   name: 'places',
   initialState: {
     places: [],
-    message: '',
+    message: 'Место не определено',
     visited: [],
     checkPlaceModalOpened: false,
     modalCheckPlaceInfo: '',
@@ -24,7 +24,6 @@ export const placeSlice = createSlice({
     placesReducer: (state, action) => {
       state.places = action.payload.list;
       state.visited = action.payload.visited;
-      console.log(state.visited);
     },
 
     addPlaceRating: (state, action) => {
@@ -45,7 +44,7 @@ export const placeSlice = createSlice({
     checkPlaceOpenModal: (state, action) => {
       state.checkPlaceModalOpened = action.payload;
     },
-    
+
     setModalCheckPlace: (state, action) => {
       state.modalCheckPlaceInfo = action.payload;
     },
@@ -73,7 +72,7 @@ export const {
   setModalCheckPlace,
   openPlaceMark,
   setModalClass,
-  setModalPlaceMarkInfo
+  setModalPlaceMarkInfo,
 } = placeSlice.actions;
 
 export const getPlacesListSaga = () => {

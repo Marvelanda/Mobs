@@ -26,36 +26,32 @@ import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import 'swiper/components/effect-coverflow/effect-coverflow.scss';
 import StarRatingComponent from 'react-star-rating-component';
-import Modal from '../MainPage/Modal';
+import ModalDetails from './ModalDetails';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]);
 
 function DetailedPlace() {
-  console.log('Detailed Place');
-  const [stars, setStars] = useState(0);
-  const dispatch = useDispatch();
-  const { id } = useParams();
-
-  // Для формы-делёжки с другом
   const [value, setValue] = useState('');
-
+  const [stars, setStars] = useState(0);
 
   const [isOpen, setIsOpen] = useState(false);
   const [modalClass, setClass] = useState('');
   const [modalInfo, setModalInfo] = useState({});
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
+  // Для формы-делёжки с другом
 
   const onClose = () => {
     setClass('animate__animated animate__rollOut');
-    setTimeout(() => setIsOpen(false), 500);
+
+    setIsOpen(false);
   };
 
   const onOpen = (message) => {
-
     setClass('animate__animated animate__rollIn');
     setIsOpen(true);
     setModalInfo(message);
-    console.log('PEPE', message);
   };
 
   const place = useSelector((state) => state.places.places).find((item) => {
@@ -84,7 +80,10 @@ function DetailedPlace() {
     if (value.trim()) {
       dispatch(sharePlaceSaga(value.trim(), id));
     }
-    setTimeout(() => onOpen(message), 200) 
+
+    const timerId = setTimeout(() => onOpen(message), 200);
+    dispatch(changeShareStatus());
+    setValue('');
   };
 
   const starsHandler = () => {
@@ -93,136 +92,163 @@ function DetailedPlace() {
   };
 
   return (
-    <div className={style.section}>
-      {place && (
-        <>
-          <div className={style.container}>
-            <div className={`${style.description} ${style.blur}`}>
-              <h1 className={`${style.heading}`}>{place.placeName}</h1>
+    <>
+      <div className={style.section}>
+        {place && (
+          <>
+            <div className={style.container}>
+              <div className={`${style.description} ${style.blur}`}>
+                <h1 className={`${style.heading}`}>{place.placeName}</h1>
 
-              <div className={style['rating-container']}>
-                <p className={style.rating}>Рейтинг: {place.rating} </p>
-                <div className={style.stars}>
-                  <StarRatingComponent
-                    name='rating'
-                    starCount={5}
-                    editing={true}
-                    value={stars}
-                    starColor={'yellow'}
-                    onStarClick={(nextValue, prevValue, name) =>
-                      setStars(nextValue)
-                    }
-                    onStarHover={(nextValue, prevValue, name) =>
-                      setStars(nextValue)
-                    }
-                  />
-                </div>
-
-                <button onClick={starsHandler}>Поставить оценку</button>
-          
-              </div>
-
-              <div className={style.images}>
-                <Swiper
-                  spaceBetween={0}
-                  slidesPerView={3}
-                  centeredSlides={true}
-                  loop={true}
-                  effect='coverflow'
-                  coverflowEffect={{
-                    rotate: 50,
-                    stretch: 0,
-                    depth: 80,
-                    modifier: 4,
-                    slideShadows: false,
-                  }}
-                >
-                  <SwiperSlide>
-                    <img src={place.placePhotoUrl} alt='img' width='150px' />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={place.placePhotoUrl} alt='img' width='150px' />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={place.placePhotoUrl} alt='img' width='150px' />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={place.placePhotoUrl} alt='img' width='150px' />
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <img src={place.placePhotoUrl} alt='img' width='150px' />
-                  </SwiperSlide>
-                </Swiper>
-              </div>
-            </div>
-            <div className={`${style.description} ${style.blur} text`}>
-              <h3>Описание:</h3>
-              <p>{place.description}</p>
-              <h3>Контактная информация:</h3>
-              <p>{place.info.address}</p>
-              <p>{place.info.tel}</p>
-              <p>{place.placeUrl}</p>
-              <h3>Часы работы:</h3>
-              <p>{place.info.workingHours}</p>
-              <form onSubmit={submitHandler}>
-                <h3>Поделиться местом с другом</h3>
-                <input
-                  onChange={(e) => setValue(e.target.value)}
-                  placeholder='Введите username друга'
-                ></input>
-                <button type='submit'>Поделиться местом</button>
-                {shareStatus && <div>{shareStatus}</div>}
-              </form>
-            </div>
-            <Modal open={isOpen} onClose={onClose}>
-              {
-                <div className={modalClass}>
-                <h2>{shareStatus}</h2>
-                </div>
-              }
-            </Modal>
-
-          </div>
-
-          <div className={`${style.container}`}>
-            <div
-              className={
-                visited
-                  ? `${style.reviews_container} ${style.blur}`
-                  : `${style.reviews_container} ${style.blur}`
-              }
-            >
-              <h2 className={style.review_heading}>Отзывы</h2>
-              {visited && (
-                <Link to={`/places/${id}/reviews`}>
-                  <button className={`button ${style.margin}`}>
-                    Написать отзыв
-                  </button>
-                </Link>
-              )}
-            </div>
-          </div>
-          <div className={`${style.container} ${style.blur}`}>
-            <ul className={style.center}>
-              {reviews.length ? (
-                reviews.map((item) => {
-                  return (
-                    <Review
-                      key={item._id}
-                      author={item.author}
-                      review={item.review}
-                      pecularities={item.pecularities}
+                <div className={style['rating-container']}>
+                  <p className={style.rating}>Рейтинг: {place.rating} </p>
+                  <div className={style.stars}>
+                    <StarRatingComponent
+                      name='rating'
+                      starCount={5}
+                      editing={true}
+                      value={stars}
+                      starColor={'yellow'}
+                      onStarClick={(nextValue, prevValue, name) =>
+                        setStars(nextValue)
+                      }
+                      onStarHover={(nextValue, prevValue, name) =>
+                        setStars(nextValue)
+                      }
                     />
-                  );
-                })
-              ) : (
-                <li>No reviews</li>
-              )}
-            </ul>
-          </div>
-        </>
-      )}
-    </div>
+                  </div>
+
+                  <button className={`${style.button}`} onClick={starsHandler}>
+                    Поставить оценку
+                  </button>
+                </div>
+
+                <div className={style.images}>
+                  <Swiper
+                    spaceBetween={50}
+                    slidesPerView={3}
+                    centeredSlides={true}
+                    loop={true}
+                    effect='coverflow'
+                    coverflowEffect={{
+                      rotate: 50,
+                      stretch: 0,
+                      depth: 80,
+                      modifier: 4,
+                      slideShadows: false,
+                    }}
+                  >
+                    {place.placePhotoUrl && (
+                      <>
+                        <SwiperSlide>
+                          <img
+                            src={place.placePhotoUrl[0]}
+                            alt='img'
+                            height='200px'
+                            width='250px'
+                          />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                          <img
+                            src={place.placePhotoUrl[1]}
+                            alt='img'
+                            height='200px'
+                            width='250px'
+                          />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                          <img
+                            src={place.placePhotoUrl[2]}
+                            alt='img'
+                            height='200px'
+                            width='230px'
+                          />
+                        </SwiperSlide>
+                      </>
+                    )}
+                  </Swiper>
+                </div>
+              </div>
+              <div className={`${style.description} ${style.text}`}>
+                <h3 className={style['small-headers']}>Описание:</h3>
+                <p>{place.description}</p>
+                <h3 className={style['small-headers']}>
+                  Контактная информация:
+                </h3>
+                <p>{place.info.address}</p>
+                <p>{place.info.tel}</p>
+                <a href={place.placeUrl}>
+                  <img width='35px' src='/img/instagram.svg' />
+                </a>
+                <h3 className={style['small-headers']}>Часы работы:</h3>
+                <p>{place.info.workingHours}</p>
+                <form
+                  className={style['add-friend-form']}
+                  onSubmit={submitHandler}
+                >
+                  <input
+                    type='text'
+                    className={style['share-input']}
+                    onChange={(e) => setValue(e.target.value)}
+                    value={value}
+                    placeholder='Введите username друга'
+                  ></input>
+                  <button className='button' type='submit'>
+                    Поделиться местом
+                  </button>
+                </form>
+              </div>
+
+              <ModalDetails open={isOpen} onClose={onClose}>
+                {
+                  <div className={modalClass}>
+                    <h2>{shareStatus}</h2>
+                  </div>
+                }
+              </ModalDetails>
+            </div>
+
+            <div className={`${style.container}`}>
+              <div
+                className={
+                  visited
+                    ? `${style.reviews_container}`
+                    : `${style.reviews_container}`
+                }
+              >
+                <h2 className={`${style.review_heading} text`}>Отзывы</h2>
+                {visited && (
+                  <Link to={`/places/${id}/reviews`}>
+                    <button className={`button ${style.margin}`}>
+                      Написать отзыв
+                    </button>
+                  </Link>
+                )}
+              </div>
+            </div>
+            <div className={`${style.container}`}>
+              <ul className={style.center}>
+                {reviews.length ? (
+                  reviews.map((item) => {
+                    return (
+                      <Review
+                        key={item._id}
+                        author={item.author}
+                        review={item.review}
+                        pecularities={item.pecularities}
+                      />
+                    );
+                  })
+                ) : (
+                  <li className={`text`}>No reviews</li>
+                )}
+              </ul>
+            </div>
+          </>
+        )}
+      </div>
+      <div className={style['section-first-overlay']}></div>
+    </>
   );
 }
 

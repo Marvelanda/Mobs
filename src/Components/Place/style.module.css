@@ -1,8 +1,19 @@
 .list-item {
   margin: 20px;
+  text-align: center;
+}
+.headers a {
+  color: white;
+  font-family: 'Cormorant Unicase', serif;
+  font-size: 30px;
+}
+
+.headers a:hover {
+  color: #f7f123;
+  transition: color 0.5s;
 }
 
 .img {
   width: 300px;
-  height: 200px;
+  height: 250px;
 }

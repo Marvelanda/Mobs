@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import { progressWatcher } from './progressSaga'
 
 import {
   placesWatcher,
@@ -25,6 +26,7 @@ export default function* rootSaga() {
     ratingWatcher(),
     checkPlaceWatcher(),
     logoutWatcher(),
+    progressWatcher()
   ]);
 
   // code after all-effect

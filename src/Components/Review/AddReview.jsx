@@ -32,7 +32,7 @@ function AddReview() {
 
   return (
     <div className={`${style.container}`}>
-      <form className='form' onSubmit={addReview}>
+      <form className='form text' onSubmit={addReview}>
         <p>Ваш отзыв:</p>
         <textarea
           className={style.textarea}
