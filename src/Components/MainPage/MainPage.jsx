@@ -135,7 +135,7 @@ function MainPage() {
                 options={{
                   iconLayout: 'default#image',
                   iconImageHref: localStorage.length ? (el.secrecy === 1 ? firstCoin : (el.secrecy === 2 ? secondCoin : thirdCoin)) : mainQuestion,
-                  iconImageSize: [96, 90],
+                  iconImageSize: [72, 67.5],
                   iconImageOffset: [-5, -38],
                 }}
               />
