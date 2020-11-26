@@ -99,28 +99,28 @@ function DetailedPlace() {
               <div className={`${style.description} ${style.blur}`}>
                 <h1 className={`${style.heading}`}>{place.placeName}</h1>
 
-                <div className={style['rating-container']}>
-                  <p className={style.rating}>Рейтинг: {place.rating} </p>
-                  <div className={style.stars}>
-                    <StarRatingComponent
-                      name='rating'
-                      starCount={5}
-                      editing={true}
-                      value={stars}
-                      starColor={'yellow'}
-                      onStarClick={(nextValue, prevValue, name) =>
-                        setStars(nextValue)
-                      }
-                      onStarHover={(nextValue, prevValue, name) =>
-                        setStars(nextValue)
-                      }
-                    />
-                  </div>
-
+              
+                {visited && (<div className={style['rating-container']}>
+                    <p className={style.rating}>Рейтинг: {place.rating} </p>
+                    <div className={style.stars}>
+                      <StarRatingComponent
+                        name='rating'
+                        starCount={5}
+                        editing={true}
+                        value={stars}
+                        starColor={'yellow'}
+                        onStarClick={(nextValue, prevValue, name) =>
+                          setStars(nextValue)
+                        }
+                        onStarHover={(nextValue, prevValue, name) =>
+                          setStars(nextValue)
+                        }
+                      />
+                    </div>
                   <button className={`${style.button}`} onClick={starsHandler}>
                     Поставить оценку
                   </button>
-                </div>
+                </div>)}
 
                 <div className={style.images}>
                   <Swiper
