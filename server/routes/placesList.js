@@ -54,13 +54,12 @@ router.post('/:id/reviews', async (req, res) => {
     try {
       await newReview.save();
       const checkRating = await user.checkScore();
+      res
+        .status(200)
+        .json({ newReview, points: user.points, rating: checkRating });
     } catch (err) {
       console.log(err);
     }
-
-    res
-      .status(200)
-      .json({ newReview, points: user.points, rating: checkRating });
   }
 });
 
@@ -69,13 +68,12 @@ router.patch('/:id/share', async (req, res) => {
   const { id } = req.params;
   const findUser = await User.findById(req.session.user);
   console.log(findUser.invitations);
-  if ( findUser.invitations <= 0 ) {
-      return res
-        .status(400)
-        .json({ message: 'Вы пригласили уже достаточно друзей' })
+  if (findUser.invitations <= 0) {
+    return res
+      .status(400)
+      .json({ message: 'Вы пригласили уже достаточно друзей' });
   }
   const usersFriend = await User.findOne({ username: friend });
-
 
   if (usersFriend && usersFriend !== null) {
     const result = usersFriend.places.find((item) => item == id);
@@ -84,25 +82,24 @@ router.patch('/:id/share', async (req, res) => {
         .status(400)
         .json({ message: 'Пользователю уже доступно данное заведение' });
     }
-  usersFriend.places.push(id);
-  await usersFriend.save();
+    usersFriend.places.push(id);
+    await usersFriend.save();
 
-  findUser.points += 10;
-  findUser.invitations--;
-  await findUser.save();
-  const checkRating = await findUser.checkScore();
+    findUser.points += 10;
+    findUser.invitations--;
+    await findUser.save();
+    const checkRating = await findUser.checkScore();
 
-  res.status(200).json({
-    message: 'Теперь это заведение доступно вашему другу',
-    points: findUser.points,
-    rating: checkRating,
-  });
+    res.status(200).json({
+      message: 'Теперь это заведение доступно вашему другу',
+      points: findUser.points,
+      rating: checkRating,
+    });
   } else {
-    console.log('here');
-    return res.status(404).json({ message: 'Пользователя с таким username не существует' });
-
+    return res
+      .status(404)
+      .json({ message: 'Пользователя с таким username не существует' });
   }
-
 });
 
 router.post('/:id/ratings', async (req, res) => {

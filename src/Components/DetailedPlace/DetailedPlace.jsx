@@ -111,9 +111,6 @@ function DetailedPlace() {
                       onStarClick={(nextValue, prevValue, name) =>
                         setStars(nextValue)
                       }
-                      onStarHover={(nextValue, prevValue, name) =>
-                        setStars(nextValue)
-                      }
                     />
                   </div>
 
@@ -133,7 +130,7 @@ function DetailedPlace() {
                       rotate: 50,
                       stretch: 0,
                       depth: 80,
-                      modifier: 5,
+                      modifier: 1,
                       slideShadows: false,
                     }}
                   >
@@ -202,7 +199,6 @@ function DetailedPlace() {
               <ModalDetails open={isOpen} onClose={onClose}>
                 {
                   <div>
-                    <div onClick={onClose} className={style.closeButton}></div>
                     {shareStatus ? (
                       <h2>{shareStatus}</h2>
                     ) : (
@@ -240,7 +236,6 @@ function DetailedPlace() {
                         key={item._id}
                         author={item.author}
                         review={item.review}
-                        pecularities={item.pecularities}
                       />
                     );
                   })
