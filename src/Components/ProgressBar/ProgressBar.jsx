@@ -8,6 +8,7 @@ const ProgressBar = () => {
 
   const progress = useSelector((state) => state.progress);
   const points = progress.points;
+ 
   const rating = progress.rating;
   const barwidth = 300;
 
