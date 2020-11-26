@@ -80,7 +80,6 @@ function DetailedPlace() {
 
     dispatch(sharePlaceSaga(value.trim(), id));
 
-
     setTimeout(() => onOpen(message), 200);
     dispatch(changeShareStatus());
     setValue('');
@@ -125,7 +124,7 @@ function DetailedPlace() {
 
                 <div className={style.images}>
                   <Swiper
-                    spaceBetween={50}
+                    spaceBetween={25}
                     slidesPerView={3}
                     centeredSlides={true}
                     loop={true}
@@ -134,7 +133,7 @@ function DetailedPlace() {
                       rotate: 50,
                       stretch: 0,
                       depth: 80,
-                      modifier: 4,
+                      modifier: 5,
                       slideShadows: false,
                     }}
                   >
@@ -142,26 +141,23 @@ function DetailedPlace() {
                       <>
                         <SwiperSlide>
                           <img
+                            className={style.swiper}
                             src={place.placePhotoUrl[0]}
                             alt='img'
-                            height='200px'
-                            width='250px'
                           />
                         </SwiperSlide>
                         <SwiperSlide>
                           <img
+                            className={style.swiper}
                             src={place.placePhotoUrl[1]}
                             alt='img'
-                            height='200px'
-                            width='250px'
                           />
                         </SwiperSlide>
                         <SwiperSlide>
                           <img
+                            className={style.swiper}
                             src={place.placePhotoUrl[2]}
                             alt='img'
-                            height='200px'
-                            width='230px'
                           />
                         </SwiperSlide>
                       </>
