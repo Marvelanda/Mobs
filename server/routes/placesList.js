@@ -65,8 +65,14 @@ router.post('/:id/reviews', async (req, res) => {
 
 router.patch('/:id/share', async (req, res) => {
   const { friend } = req.body;
+  if (!friend.length) {
+        return res
+      .status(400)
+      .json({ message: 'Пожалуйста, заполните поле' })
+  }
   const { id } = req.params;
   const findUser = await User.findById(req.session.user);
+<<<<<<< HEAD
   console.log(findUser.invitations);
   if (findUser.invitations <= 0) {
     return res
@@ -77,6 +83,26 @@ router.patch('/:id/share', async (req, res) => {
 
   if (usersFriend && usersFriend !== null) {
     const result = usersFriend.places.find((item) => item == id);
+=======
+  const findPlace = await Place.findById(id);
+  const usersFriend = await User.findOne({ username: friend });
+  
+  if (!usersFriend) {
+    return res
+      .status(400)
+      .json({ message: 'Пользователя с таким username не существует' })
+  } else if ( findUser.invitations <= 0 ) {
+      return res
+        .status(400)
+        .json({ message: 'Вы пригласили уже достаточно друзей' })
+  } else if (usersFriend.rating < findPlace.secrecy) {
+      return res
+        .status(400)
+        .json({ message: 'Ваш друг не может получить доступ к этому месту' })
+  }
+
+  const result = usersFriend.places.find((item) => item == id);
+>>>>>>> 27836df5712e3f96481da9846e271eb207af8c53
     if (result) {
       return res
         .status(400)
@@ -88,6 +114,7 @@ router.patch('/:id/share', async (req, res) => {
     findUser.points += 10;
     findUser.invitations--;
     await findUser.save();
+<<<<<<< HEAD
     const checkRating = await findUser.checkScore();
 
     res.status(200).json({
@@ -100,6 +127,12 @@ router.patch('/:id/share', async (req, res) => {
       .status(404)
       .json({ message: 'Пользователя с таким username не существует' });
   }
+=======
+    res
+      .status(200)
+      .json({ message: 'Теперь это заведение доступно вашему другу' });
+  
+>>>>>>> 27836df5712e3f96481da9846e271eb207af8c53
 });
 
 router.post('/:id/ratings', async (req, res) => {

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
-import mainCoin from '../../images/mapIcons/mainCoin.gif';
+import firstCoin from '../../images/mapIcons/bronzeCoin.gif';
+import secondCoin from '../../images/mapIcons/silverCoin.gif';
+import thirdCoin from '../../images/mapIcons/mainCoin.gif';
 import mainQuestion from '../../images/mapIcons/brightQuestion.gif';
 import style from './style.module.css';
 import Modal from './Modal';
@@ -123,8 +125,8 @@ function MainPage() {
                 geometry={el.geometry}
                 options={{
                   iconLayout: 'default#image',
-                  iconImageHref: localStorage.length ? mainCoin : mainQuestion,
-                  iconImageSize: [96, 90],
+                  iconImageHref: localStorage.length ? (el.secrecy === 1 ? firstCoin : (el.secrecy === 2 ? secondCoin : thirdCoin)) : mainQuestion,
+                  iconImageSize: [72, 67.5],
                   iconImageOffset: [-5, -38],
                 }}
               />
@@ -137,3 +139,4 @@ function MainPage() {
 }
 
 export default MainPage;
+
