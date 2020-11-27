@@ -8,6 +8,7 @@ function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUserName] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [exist, setExist] = useState(false);
   const user = useSelector((state) => state.auth.userName);
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function Signup() {
     if (user) {
       history.push('/');
     }
-  }, [user]);
+  }, [history, user]);
 
   return (
     <div className={`${style.container}`}>

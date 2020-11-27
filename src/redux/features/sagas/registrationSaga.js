@@ -17,7 +17,6 @@ async function addUser(userName, email, password, fivePlaces) {
     if (json.done) {
       localStorage.setItem('user', json.userid);
     }
-    console.log(json);
     return json;
   } catch (error) {
     console.error('Ошибка:', error);
@@ -26,7 +25,6 @@ async function addUser(userName, email, password, fivePlaces) {
 
 export function* registrationWorker({ email, userName, password, fivePlaces }) {
   const user = yield call(addUser, email, userName, password, fivePlaces);
-  console.log(user);
   yield put(
     newUserName({
       userName: user.userid,

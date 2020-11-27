@@ -16,7 +16,7 @@ const ProgressBar = () => {
 
   useEffect(() => {
     dispatch(getUserRatingSaga());
-  }, []);
+  }, [dispatch]);
 
   const mainContainer = {
     width: `${barwidth}px`,

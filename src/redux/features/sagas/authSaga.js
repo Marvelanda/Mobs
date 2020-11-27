@@ -54,7 +54,6 @@ async function fetchLogout() {
 
 export function* logoutWorker() {
   const user = yield call(fetchLogout);
-  console.log(user);
   yield put(
     logoutUser({
       status: user.status,
