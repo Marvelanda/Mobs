@@ -5,10 +5,11 @@ import style from './style.module.css';
 function Place({ placePhotoUrl, placeName, _id }) {
   return (
     <li className={style['list-item']}>
-      <h2 className={style.headers}>
-        <Link to={`/places/${_id}`}>{placeName}</Link>
-      </h2>
       <Link to={`/places/${_id}`}>
+
+      <h2 className={style.headers}>
+        {placeName}
+      </h2>
         <img className={style.img} src={placePhotoUrl[0]} alt='foto' />
       </Link>
     </li>

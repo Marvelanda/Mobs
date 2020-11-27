@@ -1,8 +1,8 @@
 .container {
   overflow-y: scroll;
   width: 100vw;
-  height: 100vh;
-  background-image: url('../../img/SNj0ha9Zqc4.jpg');
+  height: 90vh;
+  background-image: url('../../img/back.png');
   background-size: cover;
   display: flex;
 }
@@ -10,7 +10,7 @@
 .list {
   margin: 0 auto;
   padding: 0;
-  margin-top: 150px;
+  margin-top: 145px;
   margin-left: 200px;
   display: flex;
   justify-content: center;

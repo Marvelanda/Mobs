@@ -71,7 +71,7 @@ function App() {
           </div>
         }
       </ModalForAll>
-      {/* <Footer></Footer> */}
+      <footer><p>© <span>MOBS</span> LLC, 2020</p></footer>
     </Router>
   );
 }
