@@ -99,7 +99,7 @@ function DetailedPlace() {
               <div className={`${style.description} ${style.blur}`}>
                 <h1 className={`${style.heading}`}>{place.placeName}</h1>
 
-                {visited && (
+                {visited ? (
                   <div className={style['rating-container']}>
                     <p className={style.rating}>Рейтинг: {place.rating} </p>
                     <div className={style.stars}>
@@ -120,6 +120,10 @@ function DetailedPlace() {
                     >
                       Поставить оценку
                     </button>
+                  </div>
+                ) : (
+                  <div className={style['rating-container']}>
+                    <p className={style.rating}>Рейтинг: {place.rating} </p>
                   </div>
                 )}
 
