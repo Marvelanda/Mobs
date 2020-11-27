@@ -10,10 +10,14 @@ const fivePlacesSlice = createSlice({
     fivePlacesReducer(state, action) {
       state.fivePlaces = action.payload;
     },
+
+    addUsersPlace(state, action) {
+      state.fivePlaces.push(action.payload);
+    },
   },
 });
 
-export const { fivePlacesReducer } = fivePlacesSlice.actions;
+export const { fivePlacesReducer, addUsersPlace } = fivePlacesSlice.actions;
 
 export const getFivePlacesSaga = () => {
   return {
