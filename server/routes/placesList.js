@@ -206,17 +206,23 @@ router.post('/check', async (req, res) => {
 
           const addRandomSharePlace =
             compArr[Math.floor(Math.random() * compArr.length)];
+
           await User.findByIdAndUpdate(req.session.user, {
             $push: { places: addRandomSharePlace },
             $inc: { points: 7 },
           }).exec();
+
           const checkRating = await curUser.checkScore();
 
           const newPoints = curUser.points + 7;
+
+          const newPlace = await Place.findById(addRandomSharePlace);
+
           res.json({
             message: `Посещение в ${place[0].placeName} засчитано`,
             points: newPoints,
             rating: checkRating,
+            newPlace,
           });
         } else res.json({ message: 'Вы уже посещали это место' });
       } catch (error) {
