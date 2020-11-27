@@ -50,7 +50,6 @@
 
 .container:first-of-type {
   margin-top: 100px;
-  height: 50%;
 }
 
 .container:last-of-type {
@@ -71,21 +70,21 @@
   margin-top: 5px;
   padding: 75px 125px;
   width: 50%;
- 
-  height: 80vh;
+
   background-color: rgba(0, 0, 0, 0.103);
   backdrop-filter: blur(3px);
 }
 
-/* .description:nth-child(2) {
-  margin-left: 50px;
+.description:nth-child(2) {
+  margin-bottom: 20px;
+  /* margin-left: 50px;
   padding-top: 10px;
   padding-bottom: 30px;
   width: 550px;
   background-color: rgba(177, 177, 177, 0.13);
   backdrop-filter: blur(3px);
-  margin-top: 50px;
-} */
+  margin-top: 50px; */
+}
 
 .about {
   margin: 0 auto;
@@ -102,7 +101,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 25px 0;
 }
 
 .reviews_container button {
@@ -164,13 +162,12 @@
   /* margin: 25px; */
   padding: 15px 50px;
   margin: 25px;
-  background: black!important;
-  border: 1px solid #333333!important;
+  background: black !important;
+  border: 1px solid #333333 !important;
   /* border-radius: 3px; */
   color: #fff;
   text-align: center;
-  font-family: 'Montserrat', sans-serif!important;
-
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .modal {
