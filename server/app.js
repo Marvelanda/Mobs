@@ -11,6 +11,8 @@ import placesRouter from './routes/placesList.js';
 import session from 'express-session';
 import sessionFileStore from 'session-file-store';
 
+// const root = path.join(process.env.PWD, 'public')
+
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -58,5 +60,9 @@ app.use(
 app.use('/', mainRouter);
 app.use('/auth', authRouter);
 app.use('/places', placesRouter);
+
+app.get('*', (req, res) => {
+  res.sendFile('index.html', { root })
+})
 
 app.listen(process.env.port ?? 8080);
