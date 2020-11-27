@@ -214,7 +214,7 @@ router.post('/check', async (req, res) => {
 
           const newPoints = curUser.points + 7;
           res.json({
-            message: 'Посещение засчитано',
+            message: `Посещение в ${place[0].placeName} засчитано`,
             points: newPoints,
             rating: checkRating,
           });
