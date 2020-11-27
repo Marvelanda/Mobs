@@ -97,7 +97,6 @@ function MainPage() {
                 </div>
               )}
             </Modal>
-
             <ZoomControl options={{ float: 'right' }} />
 
             {fivePlaces.map((el, i) => (

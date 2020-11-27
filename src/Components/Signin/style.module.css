@@ -16,19 +16,17 @@
   text-transform: uppercase;
   padding: 15px 50px;
   margin: 5px;
-  background: black!important;
-  border: 1px solid #333333!important;
+  background: black !important;
+  border: 1px solid #333333 !important;
   /* border-radius: 3px; */
   color: #fff;
   text-align: center;
-  font-family: 'Montserrat', sans-serif!important;
-
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .form {
   padding: 80px 60px;
 }
-
 
 .headTitle {
   text-align: center;
@@ -41,8 +39,8 @@
 }
 
 .error {
+  margin: 0 auto;
   text-align: center;
   color: #ffffff;
   width: 250px;
-
 }

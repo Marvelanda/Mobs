@@ -11,7 +11,7 @@ export const placeSlice = createSlice({
   name: 'places',
   initialState: {
     places: [],
-    message: 'Место не определено',
+    message: '',
     visited: [],
     checkPlaceModalOpened: false,
     modalCheckPlaceInfo: '',
