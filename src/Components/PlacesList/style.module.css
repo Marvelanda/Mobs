@@ -1,6 +1,6 @@
 .container {
   overflow-y: scroll;
-  width: 100vw;
+  /* width: 100vw; */
   height: 90vh;
   background-image: url('../../img/back.png');
   background-size: cover;
@@ -9,13 +9,13 @@
 
 .list {
   margin: 0 auto;
-  padding: 0;
-  margin-top: 145px;
-  margin-left: 200px;
-  display: flex;
-  justify-content: center;
-  width: 50%;
-  flex-wrap: wrap;
+    padding: 0;
+    /* margin-top: 50px; */
+    margin: 125px 200px;
+    display: flex;
+    justify-content: center;
+    /* width: 50%; */
+    flex-wrap: wrap;
 }
 
 .list li:nth-child(odd) {
