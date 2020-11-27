@@ -155,3 +155,15 @@ input:-internal-autofill-selected {
   align-items: center;
   justify-content: center;
 }
+
+footer{
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+footer span {
+  color: #ffcf00;
+}

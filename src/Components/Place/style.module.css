@@ -2,18 +2,36 @@
   margin: 20px;
   text-align: center;
 }
+
+.list-item a {
+  color: #fff;
+}
+
+.list-item a:hover {
+  /* color: #fff; */
+  color: #ffca00;
+  transition: color 1.6s;
+
+
+}
+
 .headers a {
   color: white;
-  font-family: 'Cormorant Unicase', serif;
+  /* font-family: 'Cormorant Unicase', serif; */
   font-size: 30px;
 }
 
 .headers a:hover {
-  color: #f7f123;
+  color: #ffca00;
   transition: color 0.5s;
 }
 
 .img {
   width: 400px;
   height: 267px;
+  filter: grayscale(1);
+}
+.img:hover{
+  filter: grayscale(0);
+  transition: filter 1.6s;
 }

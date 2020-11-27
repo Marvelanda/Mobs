@@ -13,6 +13,7 @@ function PlacesList() {
   }, [dispatch]);
 
   return (
+    
     <div className={style.container}>
       <ul className={style.list}>
         {places.length &&
@@ -21,6 +22,7 @@ function PlacesList() {
           })}
       </ul>
     </div>
+    
   );
 }
 
