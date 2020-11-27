@@ -41,6 +41,7 @@
 }
 
 .images {
+  cursor: pointer;
   margin-top: 50px;
   display: flex;
   justify-content: center;
@@ -74,6 +75,7 @@
 .description:nth-child(2) {
   margin-left: 50px;
   padding-top: 10px;
+  padding-bottom: 30px;
   width: 550px;
   background-color: rgba(177, 177, 177, 0.13);
   backdrop-filter: blur(3px);

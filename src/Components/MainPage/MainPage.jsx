@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
-import mainCoin from '../../images/mapIcons/mainCoin.gif';
+import firstCoin from '../../images/mapIcons/bronzeCoin.gif';
+import secondCoin from '../../images/mapIcons/silverCoin.gif';
+import thirdCoin from '../../images/mapIcons/mainCoin.gif';
 import mainQuestion from '../../images/mapIcons/brightQuestion.gif';
 import style from './style.module.css';
 import Modal from './Modal';
@@ -36,7 +38,7 @@ function MainPage() {
   const modalPlaceMarkInfo = useSelector(
     (state) => state.places.modalPlaceMarkInfo
   );
-  console.log('HEY', modalPlaceMarkInfo);
+
   const onClosePlaceMark = () => {
     dispatch(setModalClass('animate__animated animate__rollOut'));
     setTimeout(() => dispatch(openPlaceMark(false)), 500);
@@ -113,15 +115,6 @@ function MainPage() {
                 </div>
               )}
             </Modal>
-
-            {/* <Modal open={checkPlaceModalIsOpened} onClose={onCloseCheckUserPlace}>
-              {
-                <div className={modalClass}>
-                <h2>{message}</h2>
-                </div>
-              }
-            </Modal> */}
-
             <ZoomControl options={{ float: 'right' }} />
 
             {fivePlaces.map((el, i) => (
@@ -132,8 +125,8 @@ function MainPage() {
                 geometry={el.geometry}
                 options={{
                   iconLayout: 'default#image',
-                  iconImageHref: localStorage.length ? mainCoin : mainQuestion,
-                  iconImageSize: [96, 90],
+                  iconImageHref: localStorage.length ? (el.secrecy === 1 ? firstCoin : (el.secrecy === 2 ? secondCoin : thirdCoin)) : mainQuestion,
+                  iconImageSize: [72, 67.5],
                   iconImageOffset: [-5, -38],
                 }}
               />
@@ -146,3 +139,4 @@ function MainPage() {
 }
 
 export default MainPage;
+

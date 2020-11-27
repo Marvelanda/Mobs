@@ -54,55 +54,54 @@ router.post('/:id/reviews', async (req, res) => {
     try {
       await newReview.save();
       const checkRating = await user.checkScore();
+      res
+        .status(200)
+        .json({ newReview, points: user.points, rating: checkRating });
     } catch (err) {
       console.log(err);
     }
-
-    res
-      .status(200)
-      .json({ newReview, points: user.points, rating: checkRating });
   }
 });
 
 router.patch('/:id/share', async (req, res) => {
   const { friend } = req.body;
+  if (!friend.length) {
+    return res.status(400).json({ message: 'Пожалуйста, заполните поле' });
+  }
   const { id } = req.params;
   const findUser = await User.findById(req.session.user);
-  console.log(findUser.invitations);
-  if ( findUser.invitations <= 0 ) {
-      return res
-        .status(400)
-        .json({ message: 'Вы пригласили уже достаточно друзей' })
-  }
+  const findPlace = await Place.findById(id);
   const usersFriend = await User.findOne({ username: friend });
 
+  if (!usersFriend) {
+    return res
+      .status(400)
+      .json({ message: 'Пользователя с таким username не существует' });
+  } else if (findUser.invitations <= 0) {
+    return res
+      .status(400)
+      .json({ message: 'Вы пригласили уже достаточно друзей' });
+  } else if (usersFriend.rating < findPlace.secrecy) {
+    return res
+      .status(400)
+      .json({ message: 'Ваш друг не может получить доступ к этому месту' });
+  }
 
-  if (usersFriend && usersFriend !== null) {
-    const result = usersFriend.places.find((item) => item == id);
-    if (result) {
-      return res
-        .status(400)
-        .json({ message: 'Пользователю уже доступно данное заведение' });
-    }
+  const result = usersFriend.places.find((item) => item == id);
+  if (result) {
+    return res
+      .status(400)
+      .json({ message: 'Пользователю уже доступно данное заведение' });
+  }
   usersFriend.places.push(id);
   await usersFriend.save();
 
   findUser.points += 10;
   findUser.invitations--;
   await findUser.save();
-  const checkRating = await findUser.checkScore();
-
-  res.status(200).json({
-    message: 'Теперь это заведение доступно вашему другу',
-    points: findUser.points,
-    rating: checkRating,
-  });
-  } else {
-    console.log('here');
-    return res.status(404).json({ message: 'Пользователя с таким username не существует' });
-
-  }
-
+  res
+    .status(200)
+    .json({ message: 'Теперь это заведение доступно вашему другу' });
 });
 
 router.post('/:id/ratings', async (req, res) => {
@@ -207,17 +206,23 @@ router.post('/check', async (req, res) => {
 
           const addRandomSharePlace =
             compArr[Math.floor(Math.random() * compArr.length)];
+
           await User.findByIdAndUpdate(req.session.user, {
             $push: { places: addRandomSharePlace },
             $inc: { points: 7 },
           }).exec();
+
           const checkRating = await curUser.checkScore();
 
           const newPoints = curUser.points + 7;
+
+          const newPlace = await Place.findById(addRandomSharePlace);
+
           res.json({
-            message: 'Посещение засчитано',
+            message: `Посещение в ${place[0].placeName} засчитано`,
             points: newPoints,
             rating: checkRating,
+            newPlace,
           });
         } else res.json({ message: 'Вы уже посещали это место' });
       } catch (error) {

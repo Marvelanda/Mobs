@@ -23,7 +23,7 @@ const ProgressBar = () => {
   };
 
   const containerStyles = {
-    padding: '2px 0',
+    padding: '2px 3px',
     height: 30,
     width: `${100}%`,
     backgroundColor: '#e7007f',

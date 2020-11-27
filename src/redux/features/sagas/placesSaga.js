@@ -7,6 +7,7 @@ import {
 } from '../Places/placeSlice';
 
 import { progressReducer } from '../Places/progressSlice';
+import { addUsersPlace } from '../Places/fivePlacesSlice';
 
 import {
   GETPLACESSAGA,
@@ -140,6 +141,7 @@ export function* checkPlaceWorker({ latitude, longitude, user }) {
   yield put(checkPlace(response));
   if (response.points) {
     yield put(progressReducer(response));
+    yield put(addUsersPlace(response.newPlace));
   }
 }
 
