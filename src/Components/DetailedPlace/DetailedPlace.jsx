@@ -182,7 +182,7 @@ function DetailedPlace() {
                 <p>{place.info.tel}</p>
                 <a href={place.placeUrl}>
                   <img
-                    alt="img"
+                    alt='img'
                     className={style.instagram}
                     width='35px'
                     src='/img/instagram.svg'
@@ -221,13 +221,7 @@ function DetailedPlace() {
             </div>
 
             <div className={`${style.container}`}>
-              <div
-                className={
-                  visited
-                    ? `${style.reviews_container}`
-                    : `${style.reviews_container}`
-                }
-              >
+              <div className={`${style.reviews_container}`}>
                 <h2 className={`${style.review_heading} text`}>Отзывы</h2>
                 {visited && (
                   <Link to={`/places/${id}/reviews`}>

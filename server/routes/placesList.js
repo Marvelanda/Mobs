@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
       res.sendStatus('List is empty');
     }
   } catch (error) {
-    (error);
+    error;
   }
 });
 
@@ -58,7 +58,7 @@ router.post('/:id/reviews', async (req, res) => {
         .status(200)
         .json({ newReview, points: user.points, rating: checkRating });
     } catch (err) {
-      (err);
+      err;
     }
   }
 });
@@ -99,9 +99,13 @@ router.patch('/:id/share', async (req, res) => {
   findUser.points += 10;
   findUser.invitations--;
   await findUser.save();
-  res
-    .status(200)
-    .json({ message: 'Теперь это заведение доступно вашему другу' });
+  const checkRating = await findUser.checkScore();
+
+  res.status(200).json({
+    message: 'Теперь это заведение доступно вашему другу',
+    points: findUser.points,
+    rating: checkRating,
+  });
 });
 
 router.post('/:id/ratings', async (req, res) => {
@@ -180,10 +184,11 @@ router.post('/check', async (req, res) => {
     if (place.length === 1) {
       try {
         const curUser = await User.findById(req.session.user);
-        if(!curUser.places.includes(place[0]._id)){
-          res.json({ message: 'Похоже, что данное местонедоступно для добавления' });
+        if (!curUser.places.includes(place[0]._id)) {
+          res.json({
+            message: 'Похоже, что данное место недоступно для добавления',
+          });
         } else {
-
           const visitedPlace = curUser.visitedPlaces.find((el) => {
             if (el) {
               return el.toString() === place[0]._id.toString();
@@ -193,43 +198,43 @@ router.post('/check', async (req, res) => {
             await User.findByIdAndUpdate(req.session.user, {
               $push: { visitedPlaces: place[0]._id },
             });
-            
+
             const shareNewPlaceArr = await Place.find({
               secrecy: {
                 $lte: curUser.rating,
               },
-          });
-          
-          const Arr1 = curUser.places.map((el) => {
-            if (el) return el.toString();
-          });
-          const Arr2 = shareNewPlaceArr.map((el) => el._id.toString());
-          const compArr = Arr1.filter((x) => !Arr2.includes(x)).concat(
-            Arr2.filter((x) => !Arr1.includes(x))
+            });
+
+            const Arr1 = curUser.places.map((el) => {
+              if (el) return el.toString();
+            });
+            const Arr2 = shareNewPlaceArr.map((el) => el._id.toString());
+            const compArr = Arr1.filter((x) => !Arr2.includes(x)).concat(
+              Arr2.filter((x) => !Arr1.includes(x))
             );
-            
-          const addRandomSharePlace =
-            compArr[Math.floor(Math.random() * compArr.length)];
 
-          await User.findByIdAndUpdate(req.session.user, {
-            $push: { places: addRandomSharePlace },
-            $inc: { points: 7 },
-          }).exec();
+            const addRandomSharePlace =
+              compArr[Math.floor(Math.random() * compArr.length)];
 
-          const checkRating = await curUser.checkScore();
-          
-          const newPoints = curUser.points + 7;
+            await User.findByIdAndUpdate(req.session.user, {
+              $push: { places: addRandomSharePlace },
+              $inc: { points: 7 },
+            }).exec();
 
-          const newPlace = await Place.findById(addRandomSharePlace);
+            const checkRating = await curUser.checkScore();
 
-          res.json({
-            message: `Посещение в ${place[0].placeName} засчитано`,
-            points: newPoints,
-            rating: checkRating,
-            newPlace,
-          });
-        } else res.json({ message: 'Вы уже посещали это место' });
-      }
+            const newPoints = curUser.points + 7;
+
+            const newPlace = await Place.findById(addRandomSharePlace);
+
+            res.json({
+              message: `Посещение в ${place[0].placeName} засчитано`,
+              points: newPoints,
+              rating: checkRating,
+              newPlace,
+            });
+          } else res.json({ message: 'Вы уже посещали это место' });
+        }
       } catch (error) {
         console.log(error);
       }
