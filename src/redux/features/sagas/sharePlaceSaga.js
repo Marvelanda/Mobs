@@ -4,7 +4,6 @@ import { progressReducer } from '../Places/progressSlice';
 import { SHARE_PLACE_SAGA } from '../../types/placesTypes';
 
 async function sharePlace(friend, placeID) {
-   console.log('FROM SHARE SAGA ', friend);
   const res = await fetch(`http://localhost:8080/places/${placeID}/share`, {
     method: 'PATCH',
     headers: {
@@ -19,7 +18,6 @@ async function sharePlace(friend, placeID) {
 
 export function* sharePlaceWorker({ username, placeID }) {
   const shareStatus = yield call(sharePlace, username, placeID);
-  console.log(shareStatus);
   if (shareStatus) {
     yield put(shareStatusReducer(shareStatus.message));
     if (shareStatus.points) {

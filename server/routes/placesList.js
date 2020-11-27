@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
       res.sendStatus('List is empty');
     }
   } catch (error) {
-    console.log(error);
+    (error);
   }
 });
 
@@ -58,7 +58,7 @@ router.post('/:id/reviews', async (req, res) => {
         .status(200)
         .json({ newReview, points: user.points, rating: checkRating });
     } catch (err) {
-      console.log(err);
+      (err);
     }
   }
 });
@@ -149,7 +149,7 @@ router.put('/new', async (req, res) => {
     const places = await Place.find();
     res.status(200).json(places);
   } catch (error) {
-    console.log(error);
+    (error);
   }
 });
 

@@ -20,11 +20,11 @@ import SwiperCore, {
   EffectCoverflow,
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/swiper.scss';
-// import 'swiper/components/navigation/navigation.scss';
-// import 'swiper/components/pagination/pagination.scss';
-// import 'swiper/components/scrollbar/scrollbar.scss';
-// import 'swiper/components/effect-coverflow/effect-coverflow.scss';
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import 'swiper/components/scrollbar/scrollbar.scss';
+import 'swiper/components/effect-coverflow/effect-coverflow.scss';
 import StarRatingComponent from 'react-star-rating-component';
 import ModalDetails from './ModalDetails';
 
@@ -35,7 +35,9 @@ function DetailedPlace() {
   const [stars, setStars] = useState(0);
 
   const [isOpen, setIsOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [modalClass, setClass] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [modalInfo, setModalInfo] = useState({});
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -68,11 +70,11 @@ function DetailedPlace() {
 
   useEffect(() => {
     dispatch(getPlacesListSaga());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getReviewsListSaga(id));
-  }, [reviews.length]);
+  }, [dispatch, id, reviews.length]);
 
   // для формы-делёжки
   const submitHandler = (e, message) => {
@@ -180,6 +182,7 @@ function DetailedPlace() {
                 <p>{place.info.tel}</p>
                 <a href={place.placeUrl}>
                   <img
+                    alt="img"
                     className={style.instagram}
                     width='35px'
                     src='/img/instagram.svg'

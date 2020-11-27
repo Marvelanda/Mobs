@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  font-family: 'Cormorant Unicase', serif;
+  /* font-family: 'Cormorant Unicase', serif; */
 }
 
 .section-first-overlay {
@@ -27,7 +27,7 @@
 }
 
 .heading {
-  font-family: 'Cormorant Unicase', serif;
+  /* font-family: 'Cormorant Unicase', serif; */
   text-align: center;
   font-size: 50px;
   color: rgb(255, 255, 255);
@@ -37,7 +37,7 @@
 .small-headers {
   margin-top: 15px;
   color: #ffd200;
-  font-family: 'Cormorant Unicase', serif;
+  /* font-family: 'Cormorant Unicase', serif; */
 }
 
 .images {
@@ -68,11 +68,15 @@
 .description {
   margin-left: 5px;
   margin-top: 5px;
-  height: 98%;
+  padding: 30px;
   width: 50%;
+ 
+  
+  background-color: rgba(0, 0, 0, 0.103);
+  backdrop-filter: blur(3px);
 }
 
-.description:nth-child(2) {
+/* .description:nth-child(2) {
   margin-left: 50px;
   padding-top: 10px;
   padding-bottom: 30px;
@@ -80,7 +84,7 @@
   background-color: rgba(177, 177, 177, 0.13);
   backdrop-filter: blur(3px);
   margin-top: 50px;
-}
+} */
 
 .about {
   margin: 0 auto;
@@ -131,7 +135,7 @@
 
 .button {
   cursor: pointer;
-  font-family: 'Cormorant Unicase', serif;
+  /* font-family: 'Cormorant Unicase', serif; */
   font-weight: normal;
   font-size: 15px;
   line-height: 15px;
@@ -167,7 +171,7 @@
   align-items: center;
   backdrop-filter: blur(3px);
   z-index: 9999;
-  font-family: 'Cormorant Unicase', serif;
+  /* font-family: 'Cormorant Unicase', serif; */
 }
 
 .modalContentWr {

@@ -10,7 +10,7 @@ function PlacesList() {
   const places = useSelector((state) => state.places.places);
   useEffect(() => {
     dispatch(getPlacesListSaga());
-  }, []);
+  }, [dispatch]);
 
   return (
     

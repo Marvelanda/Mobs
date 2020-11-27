@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { YMaps, Map, Placemark, ZoomControl } from 'react-yandex-maps';
 import firstCoin from '../../images/mapIcons/bronzeCoin.gif';
 import secondCoin from '../../images/mapIcons/silverCoin.gif';
@@ -6,12 +6,10 @@ import thirdCoin from '../../images/mapIcons/mainCoin.gif';
 import mainQuestion from '../../images/mapIcons/brightQuestion.gif';
 import style from './style.module.css';
 import Modal from './Modal';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFivePlacesSaga } from '../../redux/features/Places/fivePlacesSlice';
 import { Link } from 'react-router-dom';
 import {
-  checkPlaceOpenModal,
   openPlaceMark,
   setModalClass,
   setModalPlaceMarkInfo,
@@ -20,18 +18,12 @@ import {
 function MainPage() {
   const dispatch = useDispatch();
 
-  const checkPlaceModalIsOpened = useSelector(
-    (state) => state.places.checkPlaceModalOpened
-  );
-
-  const message = useSelector((state) => state.places.message);
-
   const user = useSelector((state) => state.auth.status);
   const fivePlaces = useSelector((state) => state.fivePlaces.fivePlaces);
 
   useEffect(() => {
     dispatch(getFivePlacesSaga());
-  }, [user]);
+  }, [dispatch, user]);
 
   const isOpenPlaceMark = useSelector((state) => state.places.isOpenPlaceMark);
   const modalClass = useSelector((state) => state.places.modalClass);
@@ -48,16 +40,6 @@ function MainPage() {
     dispatch(setModalClass('animate__animated animate__rollIn'));
     dispatch(openPlaceMark(true));
     dispatch(setModalPlaceMarkInfo(el));
-  };
-
-  const onOpenPlaceMessage = () => {
-    dispatch(setModalClass('animate__animated animate__rollIn'));
-    dispatch(openPlaceMark(true));
-  };
-
-  const onCloseCheckUserPlace = () => {
-    dispatch(setModalClass('animate__animated animate__rollOut'));
-    setTimeout(() => dispatch(checkPlaceOpenModal(false)), 500);
   };
 
   return (

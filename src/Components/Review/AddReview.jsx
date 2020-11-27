@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { addPlaceReviewSaga } from '../../redux/features/Places/reviewSlice';
 import style from './style.module.css';
@@ -11,8 +11,6 @@ function AddReview() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
-
-  const user = useSelector((state) => state.auth.userName);
 
   const handlerReview = (evt) => {
     setReview(evt.target.value);
