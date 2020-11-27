@@ -181,38 +181,42 @@ router.post('/check', async (req, res) => {
     if (place.length === 1) {
       try {
         const curUser = await User.findById(req.session.user);
-        const visitedPlace = curUser.visitedPlaces.find((el) => {
-          if (el) {
-            return el.toString() === place[0]._id.toString();
-          }
-        });
-        if (visitedPlace === undefined) {
-          await User.findByIdAndUpdate(req.session.user, {
-            $push: { visitedPlaces: place[0]._id },
-          });
+        if(!curUser.places.includes(place[0]._id)){
+          res.json({ message: 'Похоже, что данное местонедоступно для добавления' });
+        } else {
 
-          const shareNewPlaceArr = await Place.find({
-            secrecy: {
-              $lte: curUser.rating,
-            },
+          const visitedPlace = curUser.visitedPlaces.find((el) => {
+            if (el) {
+              return el.toString() === place[0]._id.toString();
+            }
           });
-
+          if (visitedPlace === undefined) {
+            await User.findByIdAndUpdate(req.session.user, {
+              $push: { visitedPlaces: place[0]._id },
+            });
+            
+            const shareNewPlaceArr = await Place.find({
+              secrecy: {
+                $lte: curUser.rating,
+              },
+          });
+          
           const Arr1 = curUser.places.map((el) => {
             if (el) return el.toString();
           });
           const Arr2 = shareNewPlaceArr.map((el) => el._id.toString());
           const compArr = Arr1.filter((x) => !Arr2.includes(x)).concat(
             Arr2.filter((x) => !Arr1.includes(x))
-          );
-
+            );
+            
           const addRandomSharePlace =
-            compArr[Math.floor(Math.random() * compArr.length)];
+          compArr[Math.floor(Math.random() * compArr.length)];
           await User.findByIdAndUpdate(req.session.user, {
             $push: { places: addRandomSharePlace },
             $inc: { points: 7 },
           }).exec();
           const checkRating = await curUser.checkScore();
-
+          
           const newPoints = curUser.points + 7;
           res.json({
             message: 'Посещение засчитано',
@@ -220,6 +224,7 @@ router.post('/check', async (req, res) => {
             rating: checkRating,
           });
         } else res.json({ message: 'Вы уже посещали это место' });
+      }
       } catch (error) {
         console.log(error);
       }
