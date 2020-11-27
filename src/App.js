@@ -1,6 +1,6 @@
 import Header from './Components/Header/Header';
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Signin from './Components/Signin/Signin';
 import Signup from './Components/Signup/Signup';
 import PlacesList from './Components/PlacesList/PlacesList';
@@ -71,7 +71,7 @@ function App() {
           </div>
         }
       </ModalForAll>
-      {/* <Footer></Footer> */}
+      <footer><p>© <span>MOBS</span> LLC, 2020</p></footer>
     </Router>
   );
 }

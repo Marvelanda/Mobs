@@ -1,13 +1,16 @@
 .container {
-  background-image: url('../../img/da2cd925bffd14af304889883503c2fa95defa14.jpg');
+  background-image: url('../../img/BIGBIG.gif');
 
+  background-position: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 90vh;
   background-blend-mode: hue;
-  background-size: cover;
+  background-size: 100%;
+  background-color: rgba(0, 0, 0, 0.45);
+  filter: contrast(1.1);
 }
 
 .container input {
@@ -16,19 +19,17 @@
   text-transform: uppercase;
   padding: 15px 50px;
   margin: 5px;
-  background: black!important;
-  border: 1px solid #333333!important;
+  background: black !important;
+  border: 1px solid #333333 !important;
   /* border-radius: 3px; */
   color: #fff;
   text-align: center;
-  font-family: 'Montserrat', sans-serif!important;
-
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .form {
   padding: 80px 60px;
 }
-
 
 .headTitle {
   text-align: center;
@@ -38,11 +39,11 @@
   text-transform: uppercase;
   margin-bottom: 50px;
   margin-top: 0;
-
 }
+
 .error {
+  margin: 0 auto;
   text-align: center;
   color: #ffffff;
   width: 250px;
-
 }

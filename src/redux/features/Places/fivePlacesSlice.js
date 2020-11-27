@@ -1,4 +1,4 @@
-import { createSlice, createAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { GET_FIVE_PLACES } from '../../types/placesTypes';
 
 const fivePlacesSlice = createSlice({
@@ -10,10 +10,14 @@ const fivePlacesSlice = createSlice({
     fivePlacesReducer(state, action) {
       state.fivePlaces = action.payload;
     },
+
+    addUsersPlace(state, action) {
+      state.fivePlaces.push(action.payload);
+    },
   },
 });
 
-export const { fivePlacesReducer } = fivePlacesSlice.actions;
+export const { fivePlacesReducer, addUsersPlace } = fivePlacesSlice.actions;
 
 export const getFivePlacesSaga = () => {
   return {

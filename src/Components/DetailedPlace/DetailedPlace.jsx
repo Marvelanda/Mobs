@@ -35,7 +35,9 @@ function DetailedPlace() {
   const [stars, setStars] = useState(0);
 
   const [isOpen, setIsOpen] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [modalClass, setClass] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [modalInfo, setModalInfo] = useState({});
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -68,11 +70,11 @@ function DetailedPlace() {
 
   useEffect(() => {
     dispatch(getPlacesListSaga());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getReviewsListSaga(id));
-  }, [reviews.length]);
+  }, [dispatch, id, reviews.length]);
 
   // для формы-делёжки
   const submitHandler = (e, message) => {
@@ -99,8 +101,8 @@ function DetailedPlace() {
               <div className={`${style.description} ${style.blur}`}>
                 <h1 className={`${style.heading}`}>{place.placeName}</h1>
 
-              
-                {visited && (<div className={style['rating-container']}>
+                {visited ? (
+                  <div className={style['rating-container']}>
                     <p className={style.rating}>Рейтинг: {place.rating} </p>
                     <div className={style.stars}>
                       <StarRatingComponent
@@ -112,15 +114,20 @@ function DetailedPlace() {
                         onStarClick={(nextValue, prevValue, name) =>
                           setStars(nextValue)
                         }
-                        onStarHover={(nextValue, prevValue, name) =>
-                          setStars(nextValue)
-                        }
                       />
                     </div>
-                  <button className={`${style.button}`} onClick={starsHandler}>
-                    Поставить оценку
-                  </button>
-                </div>)}
+                    <button
+                      className={`${style.button}`}
+                      onClick={starsHandler}
+                    >
+                      Поставить оценку
+                    </button>
+                  </div>
+                ) : (
+                  <div className={style['rating-container']}>
+                    <p className={style.rating}>Рейтинг: {place.rating} </p>
+                  </div>
+                )}
 
                 <div className={style.images}>
                   <Swiper
@@ -133,7 +140,7 @@ function DetailedPlace() {
                       rotate: 50,
                       stretch: 0,
                       depth: 80,
-                      modifier: 5,
+                      modifier: 1,
                       slideShadows: false,
                     }}
                   >
@@ -175,6 +182,7 @@ function DetailedPlace() {
                 <p>{place.info.tel}</p>
                 <a href={place.placeUrl}>
                   <img
+                    alt="img"
                     className={style.instagram}
                     width='35px'
                     src='/img/instagram.svg'
@@ -202,7 +210,6 @@ function DetailedPlace() {
               <ModalDetails open={isOpen} onClose={onClose}>
                 {
                   <div>
-                    <div onClick={onClose} className={style.closeButton}></div>
                     {shareStatus ? (
                       <h2>{shareStatus}</h2>
                     ) : (
@@ -240,7 +247,6 @@ function DetailedPlace() {
                         key={item._id}
                         author={item.author}
                         review={item.review}
-                        pecularities={item.pecularities}
                       />
                     );
                   })

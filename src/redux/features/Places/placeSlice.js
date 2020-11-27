@@ -1,5 +1,4 @@
-import { createAction, createSlice } from '@reduxjs/toolkit';
-import { act } from 'react-dom/test-utils';
+import { createSlice } from '@reduxjs/toolkit';
 
 import {
   GETPLACESSAGA,
@@ -12,7 +11,7 @@ export const placeSlice = createSlice({
   name: 'places',
   initialState: {
     places: [],
-    message: 'Место не определено',
+    message: '',
     visited: [],
     checkPlaceModalOpened: false,
     modalCheckPlaceInfo: '',

@@ -25,7 +25,7 @@ function Signin() {
     if (user) {
       history.push('/');
     }
-  }, [user]);
+  }, [history, user]);
 
   const emailHandler = (evt) => {
     setEmail(evt.target.value);

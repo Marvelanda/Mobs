@@ -16,7 +16,7 @@
 .modalContentWr {
   display: flex;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   background: white;
   color: black;
   height: 250px;

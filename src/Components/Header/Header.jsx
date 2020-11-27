@@ -21,9 +21,7 @@ function Header() {
     if (localStorage.length !== 0) {
       dispatch(setStatus());
     }
-  }, []);
-
-  console.log(user);
+  }, [dispatch]);
 
   return (
     <div className={`${style.header}`}>

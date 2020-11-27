@@ -10,9 +10,10 @@ function PlacesList() {
   const places = useSelector((state) => state.places.places);
   useEffect(() => {
     dispatch(getPlacesListSaga());
-  }, []);
+  }, [dispatch]);
 
   return (
+    
     <div className={style.container}>
       <ul className={style.list}>
         {places.length &&
@@ -21,6 +22,7 @@ function PlacesList() {
           })}
       </ul>
     </div>
+    
   );
 }
 

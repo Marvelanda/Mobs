@@ -16,19 +16,19 @@ const ProgressBar = () => {
 
   useEffect(() => {
     dispatch(getUserRatingSaga());
-  }, []);
+  }, [dispatch]);
 
   const mainContainer = {
     width: `${barwidth}px`,
   };
 
   const containerStyles = {
-    padding: '2px 0',
+    padding: '2px 3px',
     height: 30,
     width: `${100}%`,
     backgroundColor: '#e7007f',
     borderRadius: 50,
-    margin: 50,
+    
   };
 
   const fillerStyles = {

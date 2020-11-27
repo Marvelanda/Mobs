@@ -32,6 +32,7 @@ async function addReview(review, pecularities, id) {
 
 export function* addReviewWorker({ review, pecularities, id }) {
   const response = yield call(() => addReview(review, pecularities, id));
+  console.log(response);
   yield put(addPlaceReview({ response, id }));
 }
 
