@@ -8,9 +8,15 @@ import CheckUserPlace from '../CheckUserPlace/CheckUserPlace';
 
 import ProgressBar from '../ProgressBar/ProgressBar';
 
+import {
+  openPlaceMark,
+  checkPlaceOpenModal,
+} from '../../redux/features/Places/placeSlice';
+
 function Header() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.status);
+  const isOpenPlaceMark = useSelector((state) => state.places.isOpenPlaceMark);
 
   const logout = () => {
     localStorage.clear();
@@ -23,12 +29,20 @@ function Header() {
     }
   }, [dispatch]);
 
+  const closeModals = () => {
+    dispatch(openPlaceMark(false));
+    dispatch(checkPlaceOpenModal(false));
+  };
+
   return (
     <div className={`${style.header}`}>
       <nav className={`container ${style['header-container']}`}>
         <img src='/img/MOBS.svg' alt='logo' width='200px' />
         <ul className={`${style['navigation-list']}`}>
-          <li className={`${style['navigation-list__item']}`}>
+          <li
+            onClick={closeModals}
+            className={`${style['navigation-list__item']}`}
+          >
             <Link key='main' to='/'>
               Главная страница
             </Link>
@@ -36,6 +50,7 @@ function Header() {
           {user ? (
             <>
               <li
+                onClick={closeModals}
                 key='placesList'
                 className={`${style['navigation-list__item']}`}
               >
@@ -49,6 +64,7 @@ function Header() {
               </li>
 
               <li
+                onClick={closeModals}
                 key='logout'
                 onClick={logout}
                 className={`${style['navigation-list__item']}`}

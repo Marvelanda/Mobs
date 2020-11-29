@@ -73,7 +73,9 @@ function MainPage() {
                       {modalPlaceMarkInfo.info?.address}
                     </p>
                     <Link to={`/places/${modalPlaceMarkInfo._id}`}>
-                      <p>Подробнее</p>
+                      <p onClick={() => dispatch(openPlaceMark(false))}>
+                        Подробнее
+                      </p>
                     </Link>
                     {modalPlaceMarkInfo.placePhotoUrl && (
                       <img
@@ -87,11 +89,11 @@ function MainPage() {
                 )
               ) : (
                 <div className={modalClass}>
-                  <h2>
+                  <h2 onClick={() => dispatch(openPlaceMark(false))}>
                     <Link to='/signin'>Войдите</Link>
                   </h2>
                   <h2>или</h2>
-                  <h2>
+                  <h2 onClick={() => dispatch(openPlaceMark(false))}>
                     <Link to='/signup'> зарегистрируйтесь</Link>
                   </h2>
                 </div>
@@ -107,7 +109,13 @@ function MainPage() {
                 geometry={el.geometry}
                 options={{
                   iconLayout: 'default#image',
-                  iconImageHref: localStorage.length ? (el.secrecy === 1 ? firstCoin : (el.secrecy === 2 ? secondCoin : thirdCoin)) : mainQuestion,
+                  iconImageHref: localStorage.length
+                    ? el.secrecy === 1
+                      ? firstCoin
+                      : el.secrecy === 2
+                      ? secondCoin
+                      : thirdCoin
+                    : mainQuestion,
                   iconImageSize: [72, 67.5],
                   iconImageOffset: [-5, -38],
                 }}
@@ -121,4 +129,3 @@ function MainPage() {
 }
 
 export default MainPage;
-

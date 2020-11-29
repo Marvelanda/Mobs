@@ -140,7 +140,7 @@ function DetailedPlace() {
                       rotate: 50,
                       stretch: 0,
                       depth: 80,
-                      modifier: 1,
+                      modifier: 4,
                       slideShadows: false,
                     }}
                   >
@@ -180,7 +180,7 @@ function DetailedPlace() {
                 </h3>
                 <p>{place.info.address}</p>
                 <p>{place.info.tel}</p>
-                <a href={place.placeUrl}>
+                <a href={place.placeUrl} target='_blank'>
                   <img
                     alt='img'
                     className={style.instagram}
