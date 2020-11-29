@@ -24,11 +24,10 @@ const ProgressBar = () => {
 
   const containerStyles = {
     padding: '2px 3px',
-    height: 30,
+    height: 25,
     width: `${100}%`,
     backgroundColor: '#e7007f',
     borderRadius: 50,
-    
   };
 
   const fillerStyles = {
@@ -42,7 +41,7 @@ const ProgressBar = () => {
   };
 
   const labelStyles = {
-    padding: '5px 0 0',
+    padding: '2px 0 2px',
     color: 'black',
     fontWeight: 'bold',
     fontSize: 20,

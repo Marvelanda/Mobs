@@ -16,8 +16,7 @@ function CheckUserPlace({ onClick: onOpenPlaceMessage }) {
   const message = useSelector((state) => state.places.message);
 
   const checkPlace = (message) => {
-    dispatch(setModalClass('animate__animated animate__rollOut'));
-    setTimeout(() => dispatch(openPlaceMark(false)), 500);
+    dispatch(openPlaceMark(false));
     navigator.geolocation.getCurrentPosition(function (position) {
       dispatch(
         checkPlaceSaga(

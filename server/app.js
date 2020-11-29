@@ -62,7 +62,7 @@ app.use('/auth', authRouter);
 app.use('/places', placesRouter);
 
 app.get('*', (req, res) => {
-  res.sendFile('index.html', { root })
-})
+  res.sendFile('index.html', { root });
+});
 
 app.listen(process.env.port ?? 8080);
