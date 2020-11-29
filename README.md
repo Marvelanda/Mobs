@@ -58,7 +58,7 @@ MOBS — карта-путеводитель по скрытым местам М
 ### Наша команда:
 * [Виктор Наумов](https://github.com/jetpack024)
 * [Виктор Шевченко](https://github.com/tityocheck)
-* [Максим Чернощеков](https://github.com/maxche86)
+* [Максим Чернощёков](https://github.com/maxche86)
 * [Евгения Сыропятова](https://github.com/Marvelanda)
 
 ### Планы на будущие релизы:
