@@ -1,6 +1,28 @@
-.progressBar {
-  width: 200px;
+.mainContainer {
+  width: 300px;
 }
 
-.bar {
+.containerStyles {
+  padding: 2px 3px;
+  height: 25px;
+  width: 100%;
+  background-color: #e7007f;
+  border-radius: 50px;
+}
+
+.fillerStyles {
+  padding: 2px 0 0;
+  height: 100%;
+  background-color: #ffcd00;
+  border-radius: inherit;
+  float: left;
+}
+
+.labelStyles {
+  padding: 2px 0 2px;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  width: 300px;
+  text-align: center;
 }
